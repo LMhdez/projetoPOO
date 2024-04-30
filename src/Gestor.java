@@ -7,6 +7,6 @@ public class Gestor extends User {
 
     Gestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, boolean aUtilizadoresCriados) {
         super(aLogin, aPassword, aNome, aEmail, aAtivo, aUtilizadoresCriados);
-        
+
     }
 }

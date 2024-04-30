@@ -19,7 +19,7 @@ public class User {
       this.email = aEmail;
       this.ativo = aAtivo;
 
-    } else if (aUtilizadoresCriados && verifyEmail(aEmail) && verifyLogin(aLogin)) {
+    } else if (aUtilizadoresCriados && !verifyEmail(aEmail) && !verifyLogin(aLogin)) {
       this.login = aLogin;
       this.password = aPassword;
       this.nome = aNome;
