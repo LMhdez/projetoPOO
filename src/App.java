@@ -1,45 +1,38 @@
 import java.util.Scanner;
 
-// class User {
-//     protected String nome;
-//     protected String email;
-
-//     public User(String aNome, String aEmail) {
-//         this.nome = aNome;
-//         this.email = aEmail;
-//     }
-// }
-
-// class Gestor extends User {
-//     public Gestor(String nome, String email) {
-//         super(nome, email);
-//     }
-// }
-
 public class App {
     public static void main(String[] args) {
+
+        String login;
+        String password;
+        String nome;
+        String email;
+        boolean ativo;
 
         boolean utilizadoresCriados = false;
 
         if (!utilizadoresCriados) {
-            criarGestor();
+            login = leDados("Introduza o seu login: ");
+            password = leDados("Introduza a sua password: ");
+            nome = leDados("Introduza o seu nome: ");
+            email = leDados("Introduza o seu email: ");
+            ativo = true;
+            criarGestor(login, password, nome, email, ativo);
         }
     }
 
-    public static void criarGestor() {
-        Scanner scanner = new Scanner(System.in);
-        scanner.close();
+    private static String leDados(String aMensagem) {
+        System.out.println(aMensagem);
+        Scanner teclado = new Scanner(System.in);
+        String input = teclado.nextLine();
+        return input;
+    }
 
-        System.out.println("No Gestor");
+    public static void criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
 
-        System.out.print("Nome do gestor: ");
-        String nome = scanner.nextLine();
-
-        System.out.print("Email do gestor: ");
-        String email = scanner.nextLine();
-
-        Gestor gestor = new Gestor(nome, email);
+        Gestor gestor = new Gestor(aLogin, aPassword, aNome, aEmail, aAtivo);
 
         System.out.println("Gestor criado");
+
     }
 }
