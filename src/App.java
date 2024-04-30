@@ -17,7 +17,7 @@ public class App {
             nome = leDados("Introduza o seu nome: ");
             email = leDados("Introduza o seu email: ");
             ativo = true;
-            criarGestor(login, password, nome, email, ativo);
+            criarGestor(login, password, nome, email, ativo, utilizadoresCriados);
         }
     }
 
@@ -28,9 +28,9 @@ public class App {
         return input;
     }
 
-    public static void criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
+    public static void criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, boolean aUtilizadoresCriados) {
 
-        Gestor gestor = new Gestor(aLogin, aPassword, aNome, aEmail, aAtivo);
+        Gestor gestor = new Gestor(aLogin, aPassword, aNome, aEmail, aAtivo, aUtilizadoresCriados);
 
         System.out.println("Gestor criado");
 
