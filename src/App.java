@@ -28,11 +28,11 @@ public class App {
         return input;
     }
 
-    public static void criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, boolean aUtilizadoresCriados) {
+    public static Gestor criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, boolean aUtilizadoresCriados) {
 
         Gestor gestor = new Gestor(aLogin, aPassword, aNome, aEmail, aAtivo, aUtilizadoresCriados);
 
-        System.out.println("Gestor criado");
+        return gestor;
 
     }
 }
