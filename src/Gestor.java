@@ -5,12 +5,8 @@ public class Gestor extends User {
     protected String email;
     protected boolean ativo;
 
-    Gestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
-        super(aLogin, aPassword, aNome, aEmail, aAtivo);
-        this.login = aLogin;
-        this.password = aPassword;
-        this.nome = aNome;
-        this.email = aEmail;
-        this.ativo = aAtivo;
+    Gestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, boolean aUtilizadoresCriados) {
+        super(aLogin, aPassword, aNome, aEmail, aAtivo, aUtilizadoresCriados);
+        
     }
 }
