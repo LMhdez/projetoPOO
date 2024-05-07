@@ -41,6 +41,14 @@ public class GerirUser {
     }
     return false;
   }
-
+  public boolean verificaEmail(String aEmail){
+    for(User u : lista){
+      if(u.getEmail().equals(aEmail)){
+        return true;
+      }
+    }
+    return false;
+  }
+  
 
 }

@@ -1,5 +1,4 @@
 
-
 public class User {
   protected String login;
   protected String password;
@@ -7,23 +6,23 @@ public class User {
   protected String email;
   protected boolean ativo;
 
-  
+  User(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
 
-  User(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo ) {
+    this.login = aLogin;
+    this.password = aPassword;
+    this.nome = aNome;
+    this.email = aEmail;
+    this.ativo = aAtivo;
 
-   
-      this.login = aLogin;
-      this.password = aPassword;
-      this.nome = aNome;
-      this.email = aEmail;
-      this.ativo = aAtivo;
-
-    
   }
 
-protected String getLogin(){
-  return login;
-}
+  protected String getLogin() {
+    return login;
+  }
+
+  protected String getEmail() {
+    return email;
+  }
 
   protected void setLogin(String aLogin) {
     this.login = aLogin;
@@ -44,6 +43,5 @@ protected String getLogin(){
   protected String getNome() {
     return nome;
   }
-
 
 }
