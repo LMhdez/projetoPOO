@@ -9,7 +9,7 @@ public class GerirUser {
   }
 
   public boolean adicionarUser(User aUser) {
-    if (lista != null)
+    if (lista != null && )
       return lista.add(aUser);
     return false;
   }
