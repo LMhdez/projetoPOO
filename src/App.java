@@ -29,7 +29,7 @@ public class App {
             }
         }
 
-        String menu = null;
+        String menu = "1-Login\n2-Criar Conta";
         int op = leDadosInt(menu);
         switch (op) {
             case 1:
