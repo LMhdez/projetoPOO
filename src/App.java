@@ -12,7 +12,7 @@ public class App {
         boolean utilizadoresCriados = false;
 
         if (!utilizadoresCriados) {
-            login = leDados("Introduza o seu login: ");
+            login = leDados("Introduza o seu username: ");
             password = leDados("Introduza a sua password: ");
             nome = leDados("Introduza o seu nome: ");
             email = leDados("Introduza o seu email: ");
