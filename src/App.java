@@ -36,11 +36,4 @@ public class App {
         return input;
     }
 
-    public static Gestor criarGestor(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
-            boolean aUtilizadoresCriados) {
-
-        Gestor gestor = new Gestor(aLogin, aPassword, aNome, aEmail, aAtivo);
-        return gestor;
-
-    }
 }
