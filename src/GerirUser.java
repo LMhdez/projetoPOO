@@ -24,7 +24,6 @@ public class GerirUser {
         }
         return false;
       
-      
     }
 
     public boolean criarGestor(String login, String password, String nome, String email, boolean aAtivo) {
@@ -64,8 +63,4 @@ public class GerirUser {
         }
         return false;
     }
-
-
- 
-
 }
