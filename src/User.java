@@ -1,4 +1,4 @@
-import java.util.List;
+
 
 public class User {
   protected String login;

@@ -8,30 +8,30 @@ public class GerirUser {
     lista = new ArrayList<User>();
   }
 
-  public boolean adicionaUser(User aUser) {
+  public boolean adicionarUser(User aUser) {
     if (lista != null)
       return lista.add(aUser);
     return false;
   }
 
-  public boolean criaGestor(String login, String password, String nome, String email, boolean aAtivo) {
+  public boolean criarGestor(String login, String password, String nome, String email, boolean aAtivo) {
     Gestor gestor = new Gestor(login, password, nome, email, aAtivo);
-    return adicionaUser(gestor);
+    return adicionarUser(gestor);
   }
 
-  public boolean criaFarmaceutico(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
+  public boolean criarFarmaceutico(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
       String aNIF, String aMorada,
       String aContato) {
 
     Farmaceutico farmaceutico = new Farmaceutico(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
-    return adicionaUser(farmaceutico);
+    return adicionarUser(farmaceutico);
   }
 
-  public boolean criaCliente(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
+  public boolean criarCliente(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
       String aNIF, String aMorada,
       String aContato) {
     Cliente cliente = new Cliente(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
-    return adicionaUser(cliente);
+    return adicionarUser(cliente);
   }
 
 }

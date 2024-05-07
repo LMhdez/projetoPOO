@@ -18,15 +18,15 @@ public class App {
             email = leDados("Introduza o seu email: ");
             ativo = true;
 
-            if (criarGestor(login, password, nome, email, ativo)!=null) {
+            GerirUser gerirUser = new GerirUser();
+
+            if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
                 System.out.println("Gestor criado com sucesso!");
-            }
-            else{
+            } else {
                 System.out.println("Gestor não criado!");
             }
         }
-        
-       
+
     }
 
     private static String leDados(String aMensagem) {
