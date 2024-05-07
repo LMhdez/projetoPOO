@@ -27,4 +27,11 @@ public class GerirUser {
     return adicionaUser(farmaceutico);
   }
 
+  public boolean criaCliente(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
+      String aNIF, String aMorada,
+      String aContato) {
+    Cliente cliente = new Cliente(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
+    return adicionaUser(cliente);
+  }
+
 }
