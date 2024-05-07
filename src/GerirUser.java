@@ -15,6 +15,18 @@ public class GerirUser {
         return false;
     }
 
+    public boolean logar(String aUser, String aPassword) {
+     
+        for (User u : lista) {
+            if (u.getLogin().equals(aUser) && u.getPassword().equals(aPassword)) {
+                return true;
+            }
+        }
+        return false;
+      
+      
+    }
+
     public boolean criarGestor(String login, String password, String nome, String email, boolean aAtivo) {
         Gestor gestor = new Gestor(login, password, nome, email, aAtivo);
         return adicionarUser(gestor);
@@ -52,5 +64,8 @@ public class GerirUser {
         }
         return false;
     }
+
+
+ 
 
 }
