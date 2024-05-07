@@ -9,7 +9,7 @@ public class GerirUser {
     }
 
     public boolean adicionarUser(User aUser) {
-        if (lista != null && verificaEmail(aUser.getEmail()) && verificaLogin(aUser.getLogin())) {
+        if (lista != null && !verificaEmail(aUser.getEmail()) && !verificaLogin(aUser.getLogin())) {
             return lista.add(aUser);
         }
         return false;
