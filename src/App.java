@@ -18,9 +18,9 @@ public class App {
             email = leDados("Introduza o seu email: ");
             ativo = true;
 
-            GerirUser gerirUser = new GerirUser();
+            GerirUser GerirUser = new GerirUser();
 
-            if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
+            if (GerirUser.criarGestor(login, password, nome, email, ativo)) {
                 System.out.println("Gestor criado com sucesso!");
             } else {
                 System.out.println("Gestor não criado!");
