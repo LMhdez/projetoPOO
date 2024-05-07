@@ -33,5 +33,14 @@ public class GerirUser {
     Cliente cliente = new Cliente(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
     return adicionarUser(cliente);
   }
+  public boolean verificaLogin(String aLogin){
+    for(User u : lista){
+      if(u.getLogin().equals(aLogin)){
+        return true;
+      }
+    }
+    return false;
+  }
+
 
 }

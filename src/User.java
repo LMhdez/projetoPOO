@@ -21,6 +21,10 @@ public class User {
     
   }
 
+protected String getLogin(){
+  return login;
+}
+
   protected void setLogin(String aLogin) {
     this.login = aLogin;
   }
