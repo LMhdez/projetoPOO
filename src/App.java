@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -14,8 +15,10 @@ public class App {
 
         boolean utilizadoresCriados = false;
         GerirUser gerirUser = new GerirUser();
+        utilizadoresCriados = gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
+        User Userlogado = gerirUser.logar("sim", "123");
 
-        if (!utilizadoresCriados) {
+        while (!utilizadoresCriados) {
             login = leDados("Introduza o seu username: ");
             password = leDados("Introduza a sua password: ");
             nome = leDados("Introduza o seu nome: ");
@@ -24,75 +27,131 @@ public class App {
 
             if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
                 System.out.println("Gestor criado com sucesso!");
+                utilizadoresCriados = true;
             } else {
                 System.out.println("Gestor nao criado!");
             }
         }
 
         String menu = "1-Login\n2-Criar Conta\n3-Sair";
-        int op = leDadosInt(menu);
-        switch (op) {
-            case 1:
-                login = leDados("Introduza o seu username: ");
-                password = leDados("Introduza a sua password: ");
+        int op;
+        while (true) {
 
-                if (gerirUser.logar(login, password)) {
-                    System.out.println("Bem-vindo " + login);
-                } else {
-                    System.out.println("Login ou password errados!");
-                }
-                break;
-            case 2:
-                int tipo = leDadosInt(
-                        "Qual é o tipo de conta que gostaria de criar?\n 1-Farmaceutico\n 2-Cliente\n 3-Gestor\n");
-                login = leDados("Introduza o seu username: ");
-                password = leDados("Introduza a sua password: ");
-                nome = leDados("Introduza o seu nome: ");
-                email = leDados("Introduza o seu email: ");
-                ativo = true;
-                if (tipo == 1 || tipo == 2) {
-                    NIF = leDados("Introduza o seu NIF: ");
-                    morada = leDados("Introduza a sua morada: ");
-                    contato = leDados("Introduza o seu contato: ");
+            op = leDadosInt(menu);
+            switch (op) {
+                case 1:
+                    login = leDados("Introduza o seu username: ");
+                    password = leDados("Introduza a sua password: ");
 
-                }
-                switch (tipo) {
-                    case 1:
-                        gerirUser.criarFarmaceutico(login, password, nome, email, ativo, NIF, morada, contato);
+                    Userlogado = gerirUser.logar(login, password);
+
+                    if (Userlogado != null) {
+                        System.out.println("Bem-vindo " + login);
+                        if (Userlogado instanceof Gestor) {
+                            Userlogado = ((Gestor) Userlogado);
+                            System.out.println("gestor");
+                            int opGestor = leDadosInt(
+                                    "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos");
+                            switch (opGestor) {
+                                case 1:
+                                    System.out.println(gerirUser.GetPedidosdeRegisto());
+                                    opGestor = leDadosInt("Indique o Pedido que deseja aprovar: ");
+                                    if (opGestor > gerirUser.GetPedidosdeRegisto().size() || opGestor < 0) {
+                                        System.out.println("Pedido inexistente");
+                                        break;
+
+                                    } else {
+                                        gerirUser.setAtivo(gerirUser.getUserByIndex(opGestor));
+
+                                    }
+
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                        }
 
                         break;
-                    case 2:
-                        gerirUser.criarCliente(login, password, nome, email, ativo, NIF, morada, contato);
-                        break;
-                    case 3:
-                        gerirUser.criarGestor(login, password, nome, email, ativo);
 
-                    default:
-                        System.out.println("Tipo de Conta invalida!");
-                        break;
-                }
+                    } else {
+                        System.out.println("Login ou password errados!");
+                    }
 
-                if (gerirUser.logar(login, password)) {
-                    System.out.println("Bem-vindo " + login);
-                } else {
-                    System.out.println("Login ou password errados!");
-                }
+                    break;
+                case 2:
+                    int tipo = leDadosInt(
+                            "Qual é o tipo de conta que gostaria de criar?\n 1-Farmaceutico\n 2-Cliente\n 3-Gestor\n");
+                    login = leDados("Introduza o seu username: ");
+                    password = leDados("Introduza a sua password: ");
+                    nome = leDados("Introduza o seu nome: ");
+                    email = leDados("Introduza o seu email: ");
+                    ativo = false;
+                    if (tipo == 1 || tipo == 2) {
+                        NIF = leDados("Introduza o seu NIF: ");
+                        morada = leDados("Introduza a sua morada: ");
+                        contato = leDados("Introduza o seu contato: ");
 
-                break;
-            case 3:
-                System.out.println("Adeus");
-                System.exit(0);
+                    }
+                    switch (tipo) {
+                        case 1:
+                            if (gerirUser.criarFarmaceutico(login, password, nome, email, ativo, NIF, morada,
+                                    contato)) {
+                                System.out.println("Farmaceutico criado com sucesso!");
+                            } else
+                                System.out.println(
+                                        "O login/Username/email/NIF/Contato ja estao associados a outra conta!");
 
-                break;
-            case 4:
+                            break;
+                        case 2:
+                            if (gerirUser.criarCliente(login, password, nome, email, ativo, NIF, morada, contato)) {
+                                System.out.println("Cliente criado com sucesso!");
+                            } else
+                                System.out.println(
+                                        "O login/Username/email/NIF/Contato já estão associados a outra conta!");
+                            break;
+                        case 3:
+                            if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
+                                System.out.println("Gestor criado com sucesso!");
+                            } else
+                                System.out.println(
+                                        "O login/Username/email/NIF/Contato já estão associados a outra conta!");
+                            break;
 
-                break;
-            case 5:
+                        default:
+                            System.out.println("Tipo de Conta invalida!");
+                            break;
+                    }
 
-                break;
+                    /*
+                     * if (gerirUser.logar(login, password)!=null) {
+                     * System.out.println("Bem-vindo " + login);
+                     * } else {
+                     * System.out.println("Login ou password errados!");
+                     * }
+                     */
 
-            default:
-                break;
+                    break;
+                case 3:
+                    System.out.println("Adeus");
+                    System.exit(0);
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+
+                    break;
+
+                default:
+                    break;
+            }
         }
 
     }

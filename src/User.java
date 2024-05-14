@@ -27,8 +27,8 @@ public class User {
   protected void setLogin(String aLogin) {
     this.login = aLogin;
   }
-  
-  protected String getPassword(){
+
+  protected String getPassword() {
 
     return password;
   }
@@ -47,6 +47,14 @@ public class User {
 
   protected String getNome() {
     return nome;
+  }
+
+  protected boolean getativo() {
+    return ativo;
+  }
+
+  protected boolean setAtivo() {
+    return ativo = true;
   }
 
 }

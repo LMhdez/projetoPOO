@@ -15,15 +15,15 @@ public class GerirUser {
         return false;
     }
 
-    public boolean logar(String aUser, String aPassword) {
-     
+    public User logar(String aUser, String aPassword) {
+
         for (User u : lista) {
-            if (u.getLogin().equals(aUser) && u.getPassword().equals(aPassword)) {
-                return true;
+            if (u.getLogin().equals(aUser) && u.getPassword().equals(aPassword) && u.getativo()) {
+                return u;
             }
         }
-        return false;
-      
+        return null;
+
     }
 
     public boolean criarGestor(String login, String password, String nome, String email, boolean aAtivo) {
@@ -36,20 +36,63 @@ public class GerirUser {
             String aContato) {
 
         Farmaceutico farmaceutico = new Farmaceutico(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
-        return adicionarUser(farmaceutico);
+        if (!verificaNIF(aNIF) && !verificaContato(aContato)) {
+            return adicionarUser(farmaceutico);
+        } else
+            return false;
+
     }
 
     public boolean criarCliente(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo,
             String aNIF, String aMorada,
             String aContato) {
         Cliente cliente = new Cliente(aLogin, aPassword, aNome, aEmail, aAtivo, aNIF, aMorada, aContato);
-        return adicionarUser(cliente);
+        if (!verificaNIF(aNIF) && !verificaContato(aContato)) {
+            return adicionarUser(cliente);
+        } else
+            return false;
     }
 
     public boolean verificaLogin(String aLogin) {
         for (User u : lista) {
             if (u.getLogin().equals(aLogin)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificaNIF(String aNIF) {
+        for (User u : lista) {
+            if (u instanceof Cliente) {
+                Cliente cliente = (Cliente) u; // Cast para Cliente
+                if (cliente.getNIF().equals(aNIF)) {
+                    return true;
+                } else if (u instanceof Farmaceutico) {
+                    Farmaceutico farmaceutico = (Farmaceutico) u; // Cast para farmaceutico
+                    if (farmaceutico.getNIF().equals(aNIF)) {
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean verificaContato(String aContato) {
+        for (User u : lista) {
+            if (u instanceof Cliente) {
+                Cliente cliente = (Cliente) u; // Cast para Cliente
+                if (cliente.getContato().equals(aContato)) {
+                    return true;
+                } else if (u instanceof Farmaceutico) {
+                    Farmaceutico farmaceutico = (Farmaceutico) u; // Cast para farmaceutico
+                    if (farmaceutico.getContato().equals(aContato)) {
+                        return true;
+                    }
+
+                }
             }
         }
         return false;
@@ -63,4 +106,30 @@ public class GerirUser {
         }
         return false;
     }
+
+    private ArrayList<User> Pedidosporaprovar = new ArrayList<User>();
+
+    public ArrayList<String> GetPedidosdeRegisto() {
+        ArrayList<String> Pedidos = new ArrayList<String>();
+        int i = 0;
+        for (User u : lista) {
+            if (!u.getativo()) {
+                Pedidos.add((char) i + "-" + u.getLogin() + " - " + u.getClass().getName());
+                i++;
+                Pedidosporaprovar.add(u);
+            }
+        }
+        return Pedidos;
+
+    }
+
+    public User getUserByIndex(int i) {
+        return Pedidosporaprovar.get(i);
+
+    }
+
+    public boolean setAtivo(User aUser) {
+        return aUser.setAtivo();
+    }
+
 }

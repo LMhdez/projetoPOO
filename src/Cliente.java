@@ -12,4 +12,12 @@ public class Cliente extends User {
 
     }
 
+    public String getNIF() {
+        return NIF;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
 }
