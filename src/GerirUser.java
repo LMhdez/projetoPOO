@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GerirUser {
 
@@ -18,7 +19,7 @@ public class GerirUser {
     public User logar(String aUser, String aPassword) {
 
         for (User u : lista) {
-            if (u.getLogin().equals(aUser) && u.getPassword().equals(aPassword) && u.getativo()) {
+            if (u.getLogin().equals(aUser) && u.getPassword().equals(aPassword) && u.getAtivo()) {
                 return u;
             }
         }
@@ -107,29 +108,31 @@ public class GerirUser {
         return false;
     }
 
-    private ArrayList<User> Pedidosporaprovar = new ArrayList<User>();
+private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Store indexes and users
 
-    public ArrayList<String> GetPedidosdeRegisto() {
-        ArrayList<String> Pedidos = new ArrayList<String>();
-        int i = 0;
-        for (User u : lista) {
-            if (!u.getativo()) {
-                Pedidos.add((char) i + "-" + u.getLogin() + " - " + u.getClass().getName());
-                i++;
-                Pedidosporaprovar.add(u);
-            }
+public ArrayList<String> GetPedidosdeRegisto() {
+    ArrayList<String> Pedidos = new ArrayList<String>();
+    int i = 0;
+    for (User u : lista) {
+        if (!u.getAtivo()) {
+            i++;
+            Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName()+"\n");
+            PedidosPorAprovar.put(i, u); // Store index and user in the map
         }
-        return Pedidos;
-
     }
+    return Pedidos;
+}
 
-    public User getUserByIndex(int i) {
-        return Pedidosporaprovar.get(i);
-
+public boolean ativarUser(int index) {
+    User u = PedidosPorAprovar.get(index); // Retrieve user using index from the map
+    if (u != null && !u.getAtivo()) {
+        u.setAtivo(); // Activate the user
+        
+        PedidosPorAprovar.remove(index); // Remove index from the map
+        return true; // User activated successfully
     }
+    return false; // User not found or already active
+}
 
-    public boolean setAtivo(User aUser) {
-        return aUser.setAtivo();
-    }
 
 }

@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class App {
     public static void main(String[] args) {
@@ -56,12 +56,12 @@ public class App {
                                 case 1:
                                     System.out.println(gerirUser.GetPedidosdeRegisto());
                                     opGestor = leDadosInt("Indique o Pedido que deseja aprovar: ");
-                                    if (opGestor > gerirUser.GetPedidosdeRegisto().size() || opGestor < 0) {
+                                    if (opGestor > gerirUser.GetPedidosdeRegisto().size() || opGestor < 1) {
                                         System.out.println("Pedido inexistente");
                                         break;
 
                                     } else {
-                                        gerirUser.setAtivo(gerirUser.getUserByIndex(opGestor));
+                                        gerirUser.ativarUser((opGestor));
 
                                     }
 

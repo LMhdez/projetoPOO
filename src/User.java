@@ -49,7 +49,7 @@ public class User {
     return nome;
   }
 
-  protected boolean getativo() {
+  protected boolean getAtivo() {
     return ativo;
   }
 
