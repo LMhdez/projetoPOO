@@ -32,9 +32,9 @@ public class App {
             }
         }
 
-        String menu = "1-Login\n2-Criar Conta\n3-Sair";
-        int op;
-        while (true) {
+        String menu = "1-Login\n2-Criar Conta\n0-Sair";
+        int op=1;
+        while (op > 0) {
 
             op = leDadosInt(menu);
             switch (op) {
@@ -49,8 +49,10 @@ public class App {
                         if (Userlogado instanceof Gestor) {
                             Userlogado = ((Gestor) Userlogado);
                             System.out.println("gestor");
-                            int opGestor = leDadosInt(
-                                    "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos");
+                            int opGestor = 1;
+                            while(opGestor!=0){
+                            opGestor = leDadosInt(
+                                    "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos\n0-Encerrar sessao");
                             switch (opGestor) {
                                 case 1:
                                     System.out.println(gerirUser.GetPedidosdeRegisto());
@@ -68,11 +70,16 @@ public class App {
                                 case 2:
                                     break;
                                 case 3:
+                                    
                                     break;
 
                                 default:
+                                
                                     break;
+                                    
                             }
+                            
+                        }
 
                         }
 
