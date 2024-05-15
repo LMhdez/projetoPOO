@@ -108,31 +108,29 @@ public class GerirUser {
         return false;
     }
 
-private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Store indexes and users
+    private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Guarda indexes e users
 
-public ArrayList<String> GetPedidosdeRegisto() {
-    ArrayList<String> Pedidos = new ArrayList<String>();
-    int i = 0;
-    for (User u : lista) {
-        if (!u.getAtivo()) {
-            i++;
-            Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName()+"\n");
-            PedidosPorAprovar.put(i, u); // Store index and user in the map
+    public ArrayList<String> GetPedidosdeRegisto() {
+        ArrayList<String> Pedidos = new ArrayList<String>();
+        int i = 0;
+        for (User u : lista) {
+            if (!u.getAtivo()) {
+                i++;
+                Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName() + "\n");
+                PedidosPorAprovar.put(i, u); // Guarda index e seu user no hashmap
+            }
         }
+        return Pedidos;
     }
-    return Pedidos;
-}
 
-public boolean ativarUser(int index) {
-    User u = PedidosPorAprovar.get(index); // Retrieve user using index from the map
-    if (u != null && !u.getAtivo()) {
-        u.setAtivo(); // Activate the user
-        
-        PedidosPorAprovar.remove(index); // Remove index from the map
-        return true; // User activated successfully
+    public boolean ativarUser(int i) {
+        User u = PedidosPorAprovar.get(i); // Procurar user pelo index no hash map
+        if (u != null && !u.getAtivo()) {
+            u.setAtivo(); // Activar user
+
+            PedidosPorAprovar.remove(i); // Remover o registo do hashmap
+            return true; // sucesso
+        }
+        return false; // nao encontrado ou já estava ativo
     }
-    return false; // User not found or already active
-}
-
-
 }
