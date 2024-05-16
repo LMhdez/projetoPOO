@@ -49,20 +49,21 @@ public class App {
                         if (Userlogado instanceof Gestor) {
                             Userlogado = ((Gestor) Userlogado);
                             System.out.println("gestor");
-                            int opGestor = 1;
-                            while(opGestor!=0){
-                            opGestor = leDadosInt(
+                            while(op!=0){
+                            op = leDadosInt(
                                     "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos\n0-Encerrar sessao");
-                            switch (opGestor) {
+                            switch (op) {
+                                case 0:
+                                System.out.println("Adeus "+ Userlogado.getNome());
                                 case 1:
                                     System.out.println(gerirUser.GetPedidosdeRegisto());
-                                    opGestor = leDadosInt("Indique o Pedido que deseja aprovar: ");
-                                    if (opGestor > gerirUser.GetPedidosdeRegisto().size() || opGestor < 1) {
+                                    op = leDadosInt("Indique o Pedido que deseja aprovar: ");
+                                    if (op > gerirUser.GetPedidosdeRegisto().size() || op < 1) {
                                         System.out.println("Pedido inexistente");
                                         break;
 
                                     } else {
-                                        gerirUser.ativarUser((opGestor));
+                                        gerirUser.ativarUser((op));
 
                                     }
 
@@ -82,6 +83,28 @@ public class App {
                         }
 
                         }
+
+                        if (Userlogado instanceof Cliente){
+                            Userlogado = ((Cliente) Userlogado);
+                            System.out.println("cliente");
+                            while(op!=0){
+                                op=leDadosInt(
+                                    "1- Solicitar pedido de Servico \n0-Encerrar sessao");
+                                    
+                                switch (op) {
+                                    case 0:
+                                    
+                                    System.out.println("Adeus "+ Userlogado.getNome());
+                                    
+                                    break;
+                                    
+                                    case 1:
+                                    
+                                    
+                                    break;
+                                }
+
+
 
                         break;
 

@@ -133,4 +133,5 @@ public class GerirUser {
         }
         return false; // nao encontrado ou já estava ativo
     }
+    
 }
