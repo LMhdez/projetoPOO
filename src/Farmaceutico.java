@@ -20,8 +20,5 @@ public class Farmaceutico extends User {
     public String getContato() {
         return contato;
     }
-    public boolean criarMedicamento(Medicamentos aMedicamento){
-        
 
-    }
 }

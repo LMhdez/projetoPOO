@@ -1,4 +1,6 @@
-public class Pedidos {
+import java.util.ArrayList;
+
+public class Encomendas {
     private int id;
     private Farmaceutico farmaceutico;
     private ArrayList<Medicamentos> medicamentos;
@@ -11,25 +13,25 @@ public class Pedidos {
     private boolean encerrado;
     private int status;// vai variar de 1 a 5
     
-    Pedidos(int id, private ArrayList<Medicamentos> aMedicamentos, boolean aUrgente){
+    Encomendas(int id, ArrayList<Medicamentos> aMedicamentos, boolean aUrgente){
         this.id = id;
         this.medicamentos = aMedicamentos;
         this.urgente = aUrgente;
         this.status = 1;
     }
-    private boolean setFarmaceutico(Farmaceutico aFarmaceutico){
+    public Farmaceutico setFarmaceutico(Farmaceutico aFarmaceutico){
         
         return this.farmaceutico = aFarmaceutico;
 
     }
 
-    private boolean setAprovado(){
+    public boolean setAprovado(){
         
         return this.aprovado = true;
     }
    
 
-    private boolean setEncerrado(){
+    public boolean setEncerrado(){
         
         return this.encerrado = true;
     }

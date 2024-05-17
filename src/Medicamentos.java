@@ -1,4 +1,4 @@
-public class Medicamento {
+public class Medicamentos {
 
   private String nome;
   private String marca;
@@ -11,13 +11,13 @@ public class Medicamento {
   private boolean medicoNecessario;
   private boolean generico;
 
-  Medicamento(
+  Medicamentos(
     String aMarca,
     String aLote,
     String aComponenteAct,
     String aDosagem,
-    String aStock,
-    String aPreco,
+    int aStock,
+    float aPreco,
     int aAnoFabrico,
     boolean aMedicoNecessario,
     boolean aGenerico

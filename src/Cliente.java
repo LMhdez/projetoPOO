@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Cliente extends User {
     private String NIF;
     private String morada;
