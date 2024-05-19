@@ -10,7 +10,7 @@ public class Gestor extends User {
     public boolean encerrarEncomenda(Encomendas aEncomenda){ 
         return aEncomenda.setEncerrado();
     }
-    public  Object AssociarFarmaceutico(Encomendas aEncomenda, Farmaceutico aFarmaceutico){ 
+    public  boolean AssociarFarmaceutico(Encomendas aEncomenda, Farmaceutico aFarmaceutico){ 
         return aEncomenda.setFarmaceutico(aFarmaceutico);
     }
 }

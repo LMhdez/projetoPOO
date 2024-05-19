@@ -19,9 +19,16 @@ public class Encomendas {
         this.urgente = aUrgente;
         this.status = 1;
     }
-    public Farmaceutico setFarmaceutico(Farmaceutico aFarmaceutico){
+    public boolean setFarmaceutico(Farmaceutico aFarmaceutico){
         
-        return this.farmaceutico = aFarmaceutico;
+        if (aprovado && aFarmaceutico != null){ 
+         this.farmaceutico = aFarmaceutico;
+         return true;
+            
+        }
+        else
+        return false;
+
 
     }
 
