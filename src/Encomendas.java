@@ -13,8 +13,8 @@ public class Encomendas {
     private boolean encerrado;
     private int status;// vai variar de 1 a 5
     
-    Encomendas(int id, ArrayList<Medicamentos> aMedicamentos, boolean aUrgente){
-        this.id = id;
+    Encomendas( ArrayList<Medicamentos> aMedicamentos, boolean aUrgente){
+        this.id++;
         this.medicamentos = aMedicamentos;
         this.urgente = aUrgente;
         this.status = 1;

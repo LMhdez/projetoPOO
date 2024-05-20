@@ -20,13 +20,7 @@ public class Cliente extends User {
     public String getContato() {
         return contato;
     }
-    private ArrayList<Encomendas> pedidos;
-    public ArrayList<Encomendas> getEncomendas() {
-        return pedidos;
-    }
-    public boolean newEncomenda(Encomendas aEncomenda){
-        return pedidos.add(aEncomenda);
-    }
+   
 
     
     

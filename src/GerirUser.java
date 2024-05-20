@@ -116,7 +116,8 @@ public class GerirUser {
         for (User u : lista) {
             if (!u.getAtivo()) {
                 i++;
-                Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName() + "\n");
+                Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName());
+                
                 PedidosPorAprovar.put(i, u); // Guarda index e seu user no hashmap
             }
         }
