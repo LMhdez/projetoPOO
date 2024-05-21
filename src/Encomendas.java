@@ -42,7 +42,9 @@ public class Encomendas {
         
         return this.encerrado = true;
     }
-   
+   public ArrayList<Medicamentos> getMedicamentos() {
+       return medicamentos;
+   }
 
 
 }

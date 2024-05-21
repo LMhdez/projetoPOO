@@ -110,25 +110,23 @@ public class GerirUser {
 
     private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Guarda indexes e users
 
-    public ArrayList<String> GetPedidosdeRegisto() {
-        ArrayList<String> Pedidos = new ArrayList<String>();
+    public HashMap<Integer, User> GetPedidosdeRegisto() {
+        
         int i = 0;
         for (User u : lista) {
             if (!u.getAtivo()) {
                 i++;
-                Pedidos.add(String.valueOf(i) + "-" + u.getLogin() + " - " + u.getClass().getName());
                 
                 PedidosPorAprovar.put(i, u); // Guarda index e seu user no hashmap
             }
         }
-        return Pedidos;
+        return PedidosPorAprovar;
     }
 
     public boolean ativarUser(int i) {
         User u = PedidosPorAprovar.get(i); // Procurar user pelo index no hash map
         if (u != null && !u.getAtivo()) {
             u.setAtivo(); // Activar user
-
             PedidosPorAprovar.remove(i); // Remover o registo do hashmap
             return true; // sucesso
         }

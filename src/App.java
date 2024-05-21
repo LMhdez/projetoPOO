@@ -60,7 +60,15 @@ public class App {
                                         System.out.println("Adeus " + Userlogado.getNome());
                                         break;
                                     case 1:
-                                        System.out.println(gerirUser.GetPedidosdeRegisto());
+
+                                        HashMap<Integer, User> pedidos = gerirUser.GetPedidosdeRegisto();
+
+                                        // Print HashMap
+                                        for (HashMap.Entry<Integer, User> entry : pedidos.entrySet()) {
+                                            int i = entry.getKey();
+                                            User user = entry.getValue();
+                                            System.out.println(i + "- " +"Nome: "+ user.getNome()+", Tipo de conta: "+ user.getClass().getName());
+                                        }
                                         int pedido = leDadosInt("Indique o Pedido que deseja aprovar: ");
                                         if (pedido > gerirUser.GetPedidosdeRegisto().size() || pedido < 1) {
                                             System.out.println("Pedido inexistente");
@@ -74,12 +82,12 @@ public class App {
                                         HashMap<Cliente, ArrayList<Encomendas>> encomendas = gerirEncomendas
                                                 .getEncomendas();
 
-                                        // Printing the HashMap
+                                        // Print HashMap
                                         for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
                                                 .entrySet()) {
                                             Cliente cliente = entry.getKey();
                                             ArrayList<Encomendas> listaEncomendas = entry.getValue();
-                                            System.out.println(cliente + ": " + listaEncomendas);
+                                            System.out.println(cliente.getNome() + ": " + listaEncomendas);
                                         }
 
                                         break;
@@ -115,7 +123,7 @@ public class App {
                                         }
                                         boolean urgente = leDadosInt("A sua encomenda é urgente?\n1-Sim\n2-Não") == 1;
                                         Encomendas Encomenda = null;
-                                        // Encomenda = new Encomendas(medicamentos, urgente);
+                                        Encomenda = new Encomendas(null, urgente);
                                         gerirEncomendas.adicionarEncomenda((Cliente) Userlogado, Encomenda);
                                         break;
                                     default:
@@ -124,13 +132,14 @@ public class App {
                                 }
                             }
                         }
-                    } else {
+                    } 
+                    else {
                         System.out.println("Login ou password errados!");
                     }
                     break;
                 case 2:
                     int tipo = leDadosInt(
-                            "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor\n");
+                            "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
                     login = leDados("Introduza o seu username: ");
                     password = leDados("Introduza a sua password: ");
                     nome = leDados("Introduza o seu nome: ");
