@@ -67,7 +67,8 @@ public class App {
                                         for (HashMap.Entry<Integer, User> entry : pedidos.entrySet()) {
                                             int i = entry.getKey();
                                             User user = entry.getValue();
-                                            System.out.println(i + "- " +"Nome: "+ user.getNome()+", Tipo de conta: "+ user.getClass().getName());
+                                            System.out.println(i + "- " + "Nome: " + user.getNome()
+                                                    + ", Tipo de conta: " + user.getClass().getName());
                                         }
                                         int pedido = leDadosInt("Indique o Pedido que deseja aprovar: ");
                                         if (pedido > gerirUser.GetPedidosdeRegisto().size() || pedido < 1) {
@@ -103,7 +104,7 @@ public class App {
 
                         if (Userlogado instanceof Cliente) {
                             System.out.println("cliente");
-                            while (opLogado != 0) {
+                            while (opLogado > 0) {
                                 opLogado = leDadosInt("1- Solicitar pedido de Servico \n0-Encerrar sessao");
                                 switch (opLogado) {
                                     case 0:
@@ -132,8 +133,33 @@ public class App {
                                 }
                             }
                         }
-                    } 
-                    else {
+                        if (Userlogado instanceof Farmaceutico) {
+                            while (opLogado > 0) {
+                                opLogado = leDadosInt("1-Consultar os Pedidos\n0-Encerrar sessao");
+
+                                switch (opLogado) {
+                                    case 1:
+                                        ArrayList<Encomendas> listaEncomendas = gerirEncomendas
+                                                .getEncomendasFarmaceutico((Farmaceutico) Userlogado);
+
+                                        for (Encomendas encomendas : listaEncomendas) {
+                                            System.out.println("Encomenda" + ": " + encomendas.getMedicamentos());
+                                        }
+
+                                        break;
+                                    case 2:
+
+                                        break;
+                                    case 3:
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    } else {
                         System.out.println("Login ou password errados!");
                     }
                     break;
@@ -192,14 +218,30 @@ public class App {
     }
 
     private static String leDados(String aMensagem) {
-        System.out.println(aMensagem);
-        Scanner teclado = new Scanner(System.in);
-        return teclado.nextLine();
+        while (true) {
+            try {
+                System.out.println(aMensagem);
+                Scanner teclado = new Scanner(System.in);
+                return teclado.nextLine();
+            } catch (Exception e) {
+                System.out.println("Entrada invalida!");
+            }
+        }
+
     }
 
     private static int leDadosInt(String aMensagem) {
-        System.out.println(aMensagem);
-        Scanner teclado = new Scanner(System.in);
-        return teclado.nextInt();
+        while (true) {
+            try {
+                System.out.println(aMensagem);
+                Scanner teclado = new Scanner(System.in);
+                return teclado.nextInt();
+
+            } catch (Exception e) {
+                System.out.println("Entrada invalida!");
+
+            }
+        }
+
     }
 }

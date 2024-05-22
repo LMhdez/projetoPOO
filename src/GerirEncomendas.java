@@ -23,8 +23,30 @@ public class GerirEncomendas {
         return true;
 
     }
+
     public HashMap<Cliente, ArrayList<Encomendas>> getEncomendas() {
         return lista;
+    }
+
+    public ArrayList<Encomendas> getEncomendasFarmaceutico(Farmaceutico aFarmaceutico) {
+       
+        // Handle "Gerir encomendas"
+        HashMap<Cliente, ArrayList<Encomendas>> encomendas = getEncomendas();
+         ArrayList<Encomendas> encomendasFarmaceutico = new ArrayList<Encomendas>();
+
+        
+        for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
+                .entrySet()) {
+            Cliente cliente = entry.getKey();
+            ArrayList<Encomendas> listaEncomendas = entry.getValue();
+            for (Encomendas encomendas2 : listaEncomendas) {
+                if (encomendas2.getFarmaceutico().equals(aFarmaceutico)){
+                    encomendasFarmaceutico.add(encomendas2);
+                }
+            }
+        
+        }
+        return encomendasFarmaceutico;
     }
 
 }

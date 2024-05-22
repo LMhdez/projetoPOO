@@ -31,6 +31,9 @@ public class Encomendas {
 
 
     }
+    public Farmaceutico getFarmaceutico() {
+        return farmaceutico;
+    }
 
     public boolean setAprovado(){
         
