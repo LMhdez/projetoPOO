@@ -32,6 +32,7 @@ public class Medicamentos {
     this.medicoNecessario = aMedicoNecessario;
     this.generico = aGenerico;
   }
+  
 
 
 }

@@ -28,10 +28,7 @@ public class Farmaceutico extends User {
 
     // Os farmacêuticos introduzem medicamentos, categorias e excipientes e gerem os
     // serviços.
-    public Medicamentos CriarMedicamento(String aMarca, String aLote, String aComponenteAct, String aDosagem, int aStock, float aPreco, int aAnoFabrico, boolean aMedicoNecessario, boolean aGenerico) {
-    Medicamentos medicamento= new Medicamentos( aMarca, aLote, aComponenteAct, aDosagem, aStock, aPreco, aAnoFabrico, aMedicoNecessario, aGenerico);
-    return medicamento;
-    }
+
     /*public Categorias CriarCategoria() {
     
     return ;
