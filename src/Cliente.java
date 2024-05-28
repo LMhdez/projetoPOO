@@ -20,7 +20,9 @@ public class Cliente extends User {
     public String getContato() {
         return contato;
     }
-   
+    public Encomendas criarEncomenda(){
+        
+    }
 
     
     

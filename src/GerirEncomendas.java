@@ -29,24 +29,27 @@ public class GerirEncomendas {
     }
 
     public ArrayList<Encomendas> getEncomendasFarmaceutico(Farmaceutico aFarmaceutico) {
-       
-        // Handle "Gerir encomendas"
-        HashMap<Cliente, ArrayList<Encomendas>> encomendas = getEncomendas();
-         ArrayList<Encomendas> encomendasFarmaceutico = new ArrayList<Encomendas>();
-
-        
-        for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
-                .entrySet()) {
-            Cliente cliente = entry.getKey();
-            ArrayList<Encomendas> listaEncomendas = entry.getValue();
-            for (Encomendas encomendas2 : listaEncomendas) {
-                if (encomendas2.getFarmaceutico().equals(aFarmaceutico)){
-                    encomendasFarmaceutico.add(encomendas2);
+        if (aFarmaceutico == null) {
+            return null;
+        }
+        ArrayList<Encomendas> encomendasFarmaceutico = new ArrayList<Encomendas>();
+    
+        for (ArrayList<Encomendas> listaEncomendas : lista.values()) {
+            for (Encomendas encomenda : listaEncomendas) {
+                if (encomenda.getFarmaceutico().equals(aFarmaceutico)) {
+                    encomendasFarmaceutico.add(encomenda);
                 }
             }
-        
         }
+    
         return encomendasFarmaceutico;
     }
+    public ArrayList<Encomendas> getEncomendasCliente(Cliente aCliente) {
+        if (aCliente == null) {
+            return null;
+        }
+        return lista.get(aCliente);
+    }
+
 
 }
