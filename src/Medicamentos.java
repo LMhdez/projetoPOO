@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 public class Medicamentos {
 
   private String nome;
   private String marca;
   private String lote;
-  private String componenteAct;
+  private ComponenteAtivo componenteAct;
+  private ArrayList<Excipiente> Excipientes;
   private String dosagem;
   private int stock;
   private float preco;
@@ -21,7 +24,7 @@ public class Medicamentos {
   Medicamentos(
       String aMarca,
       String aLote,
-      String aComponenteAct,
+      ComponenteAtivo aComponenteAct,
       String aDosagem,
       int aStock,
       float aPreco,
@@ -38,6 +41,7 @@ public class Medicamentos {
     this.medicoNecessario = aMedicoNecessario;
     this.generico = aGenerico;
   }
+
   public boolean setStock(int aStock) {
     if (aStock >= 0) {
       this.stock = aStock;
@@ -45,9 +49,9 @@ public class Medicamentos {
     }
     return false;
   }
+
   public int getStock() {
     return this.stock;
   }
-
 
 }

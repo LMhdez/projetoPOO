@@ -12,7 +12,7 @@ public class GerirMedicamentos {
         }
         return lista.add(aMedicamento);
     }
-    public Medicamentos CriarMedicamento(String aMarca, String aLote, String aComponenteAct, String aDosagem, int aStock, float aPreco, int aAnoFabrico, boolean aMedicoNecessario, boolean aGenerico) {
+    public Medicamentos CriarMedicamento(String aMarca, String aLote, ComponenteAtivo aComponenteAct, String aDosagem, int aStock, float aPreco, int aAnoFabrico, boolean aMedicoNecessario, boolean aGenerico) {
         Medicamentos medicamento= new Medicamentos( aMarca, aLote, aComponenteAct, aDosagem, aStock, aPreco, aAnoFabrico, aMedicoNecessario, aGenerico);
         lista.add(medicamento);
         
@@ -24,11 +24,11 @@ public class GerirMedicamentos {
     public boolean setStock(Medicamentos aMedicamento, int aStock){
         return aMedicamento.setStock(aStock);
     }
-    public boolean soldQuantity(Medicamentos aMedicamento, int aQuantity){
+    public boolean vender(Medicamentos aMedicamento, int aQuantity){
         return aMedicamento.setStock(aMedicamento.getStock()-aQuantity);
     }
 
-    
+
 
 
     
