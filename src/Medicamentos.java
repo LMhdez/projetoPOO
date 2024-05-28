@@ -38,6 +38,7 @@ public class Medicamentos {
     this.medicoNecessario = aMedicoNecessario;
     this.generico = aGenerico;
   }
+
   public boolean setStock(int aStock) {
     if (aStock >= 0) {
       this.stock = aStock;
@@ -45,9 +46,9 @@ public class Medicamentos {
     }
     return false;
   }
+
   public int getStock() {
     return this.stock;
   }
-
 
 }
