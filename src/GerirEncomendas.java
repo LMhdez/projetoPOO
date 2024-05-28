@@ -62,6 +62,9 @@ public class GerirEncomendas {
     public boolean encerrarEncomenda(Encomendas aEncomenda){ 
         return aEncomenda.setEstatus(5);
     }
+    public  boolean AssociarFarmaceutico(Encomendas aEncomenda, Farmaceutico aFarmaceutico){ 
+        return aEncomenda.setFarmaceutico(aFarmaceutico);
+    }
 
     
     

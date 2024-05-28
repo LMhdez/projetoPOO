@@ -5,7 +5,5 @@ public class Gestor extends User {
     }
 
  
-    public  boolean AssociarFarmaceutico(Encomendas aEncomenda, Farmaceutico aFarmaceutico){ 
-        return aEncomenda.setFarmaceutico(aFarmaceutico);
-    }
+  
 }
