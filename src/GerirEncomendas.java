@@ -50,6 +50,21 @@ public class GerirEncomendas {
         }
         return lista.get(aCliente);
     }
+    public boolean aprovarEncomenda(Encomendas aEncomenda){
+        return aEncomenda.setEstatus(2);
+    }
+    public boolean processarEncomenda(Encomendas aEncomenda){ 
+        return aEncomenda.setEstatus(3);
+    }
+    public boolean concluirEncomenda(Encomendas aEncomenda){ 
+        return aEncomenda.setEstatus(4);
+    }
+    public boolean encerrarEncomenda(Encomendas aEncomenda){ 
+        return aEncomenda.setEstatus(5);
+    }
+
+    
+    
 
 
 }

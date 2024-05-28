@@ -9,8 +9,8 @@ public class Encomendas {
     private float horasGastas;
     private String descricao;
     private boolean urgente;
-    private boolean aprovado;
-    private boolean encerrado;
+    private static int controloencomendas=0;
+ 
     private int status;// vai variar de 1 a 5
 
     public String toString() {
@@ -21,7 +21,7 @@ public class Encomendas {
     }
 
     Encomendas(ArrayList<Medicamentos> aMedicamentos, boolean aUrgente) {
-        this.id++;
+        this.id=controloencomendas++;
         this.medicamentos = aMedicamentos;
         this.urgente = aUrgente;
         this.status = 1;
@@ -29,7 +29,7 @@ public class Encomendas {
 
     public boolean setFarmaceutico(Farmaceutico aFarmaceutico) {
 
-        if (aprovado && aFarmaceutico != null) {
+        if (status>1 && aFarmaceutico != null) {
             this.farmaceutico = aFarmaceutico;
             return true;
 
@@ -42,18 +42,21 @@ public class Encomendas {
         return farmaceutico;
     }
 
-    public boolean setAprovado() {
 
-        return this.aprovado = true;
-    }
-
-    public boolean setEncerrado() {
-
-        return this.encerrado = true;
-    }
 
     public ArrayList<Medicamentos> getMedicamentos() {
         return medicamentos;
+    }
+    public boolean setEstatus(int aEstatus){
+        if (aEstatus>0&& aEstatus<5){
+            this.status = aEstatus;
+            return true;
+        }
+        else return false;
+
+    }
+    public int getEstatus(){
+        return this.status;
     }
 
 }

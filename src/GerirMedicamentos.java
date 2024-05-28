@@ -21,6 +21,15 @@ public class GerirMedicamentos {
     public ArrayList<Medicamentos> getMedicamentos(){
         return lista;
     }
+    public boolean setStock(Medicamentos aMedicamento, int aStock){
+        return aMedicamento.setStock(aStock);
+    }
+    public boolean soldQuantity(Medicamentos aMedicamento, int aQuantity){
+        return aMedicamento.setStock(aMedicamento.getStock()-aQuantity);
+    }
+
+    
+
 
     
 }
