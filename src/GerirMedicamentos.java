@@ -18,7 +18,7 @@ public class GerirMedicamentos {
     }
     public Medicamentos CriarMedicamento(String aMarca, String aLote, ComponenteAtivo aComponenteAct, String aDosagem, int aStock, float aPreco, int aAnoFabrico, boolean aMedicoNecessario, boolean aGenerico) {
         Medicamentos medicamento= new Medicamentos( aMarca, aLote, aComponenteAct, aDosagem, aStock, aPreco, aAnoFabrico, aMedicoNecessario, aGenerico);
-        lista.add(medicamento);
+        listaMedicamentos.add(medicamento);
         
         return medicamento;
     }
