@@ -6,7 +6,10 @@ public class Medicamentos {
   private String marca;
   private String lote;
   private ComponenteAtivo componenteAct;
+  //maximo 5 exipientes
   private ArrayList<Excipiente> Excipientes;
+  //maximo 3 categorias
+  private ArrayList<Categoria> Categoria;
   private String dosagem;
   private int stock;
   private float preco;
