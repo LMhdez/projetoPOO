@@ -11,17 +11,23 @@ public class Medicamentos {
   private boolean medicoNecessario;
   private boolean generico;
 
+  public String toString() {
+    return "Nome: " + nome + " Marca: " + marca + " Lote: " + lote + " Componente Ativo: " + componenteAct
+        + " Dosagem: " + dosagem
+        + " Stock: " + stock + " Preco: " + preco + " Ano de Fabrico: " + anoFabrico + " Medico Necessario: "
+        + medicoNecessario + " Medicamento Generico: " + generico;
+  }
+
   Medicamentos(
-    String aMarca,
-    String aLote,
-    String aComponenteAct,
-    String aDosagem,
-    int aStock,
-    float aPreco,
-    int aAnoFabrico,
-    boolean aMedicoNecessario,
-    boolean aGenerico
-  ) {
+      String aMarca,
+      String aLote,
+      String aComponenteAct,
+      String aDosagem,
+      int aStock,
+      float aPreco,
+      int aAnoFabrico,
+      boolean aMedicoNecessario,
+      boolean aGenerico) {
     this.marca = aMarca;
     this.lote = aLote;
     this.componenteAct = aComponenteAct;
@@ -32,7 +38,5 @@ public class Medicamentos {
     this.medicoNecessario = aMedicoNecessario;
     this.generico = aGenerico;
   }
-  
-
 
 }

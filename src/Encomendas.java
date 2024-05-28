@@ -14,9 +14,10 @@ public class Encomendas {
     private int status;// vai variar de 1 a 5
 
     public String toString() {
-
-        return id + " " + farmaceutico + " " + medicamentos + " " + total + " " + data + " " + descricao + " " + urgente
-                + " " + aprovado + " " + encerrado + " " + status + " " + horasGastas;
+        return "ID: " + id + " Farmaceutico: " + farmaceutico + " Medicamentos: " + medicamentos + " Total: " + total
+                + " Data: " + data
+                + " Horas Gastas: " + horasGastas + " Descricao: " + descricao + " Urgencia: " + urgente + " Status: "
+                + status;
     }
 
     Encomendas(ArrayList<Medicamentos> aMedicamentos, boolean aUrgente) {
