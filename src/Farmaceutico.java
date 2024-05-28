@@ -3,6 +3,11 @@ public class Farmaceutico extends User {
     private String morada;
     private String contato;
 
+    public String toString() {
+        return "login: " + login + " password: " + password + " nome: " + nome + " email: " + email + " ativo: " + ativo
+                + " NIF: " + NIF + " morada: " + morada + " contato: " + contato;
+    }
+
     Farmaceutico(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, String aNIF,
             String aMorada,
             String aContato) {

@@ -1,8 +1,14 @@
 import java.util.ArrayList;
+
 public class Cliente extends User {
     private String NIF;
     private String morada;
     private String contato;
+
+    public String toString() {
+        return "login: " + login + " password: " + password + " nome: " + nome + " email: " + email + " ativo: " + ativo
+                + " NIF: " + NIF + " morada: " + morada + " contato: " + contato;
+    }
 
     Cliente(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo, String aNIF, String aMorada,
             String aContato) {
@@ -20,10 +26,5 @@ public class Cliente extends User {
     public String getContato() {
         return contato;
     }
-    public Encomendas criarEncomenda(){
-        
-    }
 
-    
-    
 }
