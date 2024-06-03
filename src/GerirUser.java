@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class GerirUser {
 
     private ArrayList<User> lista;
@@ -14,6 +15,19 @@ public class GerirUser {
             return lista.add(aUser);
         }
         return false;
+    }
+    public ArrayList<User> getOrderedUsers(){
+        ArrayList<User> users = new ArrayList<User>();
+        for (User u : lista) {
+            users.add(u);
+        }
+        users.sort(null);
+        return users;
+    }
+
+
+    public boolean isEmpty() {
+        return lista.isEmpty();
     }
 
     public User logar(String aUser, String aPassword) {
@@ -111,12 +125,12 @@ public class GerirUser {
     private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Guarda indexes e users
 
     public HashMap<Integer, User> GetPedidosdeRegisto() {
-        
+
         int i = 0;
         for (User u : lista) {
             if (!u.getAtivo()) {
                 i++;
-                
+
                 PedidosPorAprovar.put(i, u); // Guarda index e seu user no hashmap
             }
         }
@@ -132,5 +146,5 @@ public class GerirUser {
         }
         return false; // nao encontrado ou já estava ativo
     }
-    
+
 }

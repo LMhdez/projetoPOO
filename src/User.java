@@ -1,14 +1,17 @@
-public class User {
+public class User implements Comparable<User> {
   protected String login;
   protected String password;
   protected String nome;
   protected String email;
   protected boolean ativo;
-  
+
+  public int compareTo(User u) {
+    return this.nome.compareTo(u.getNome());
+  }
 
   public String toString() {
     return "login: " + login + " password: " + password + " nome: " + nome + " email: " + email + " ativo: " + ativo;
-}
+  }
 
   User(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
 

@@ -1,6 +1,8 @@
+//Deve ser possível ordenar medicamentos por designação.
+
 import java.util.ArrayList;
 
-public class Medicamentos {
+public class Medicamentos implements Comparable<Medicamentos>  {
 
   private String nome;
   private String marca;
@@ -9,7 +11,7 @@ public class Medicamentos {
   //maximo 5 exipientes
   private ArrayList<Excipiente> Excipientes;
   //maximo 3 categorias
-  private ArrayList<Categoria> Categoria;
+  private ArrayList<Categoria> Categorias;
   private String dosagem;
   private int stock;
   private float preco;
@@ -17,6 +19,11 @@ public class Medicamentos {
   private boolean medicoNecessario;
   private boolean generico;
 
+  
+
+  public int compareTo(Medicamentos u) {
+    return this.nome.compareTo(u.nome);
+  }
   public String toString() {
     return "Nome: " + nome + " Marca: " + marca + " Lote: " + lote + " Componente Ativo: " + componenteAct
         + " Dosagem: " + dosagem
@@ -33,6 +40,8 @@ public class Medicamentos {
       float aPreco,
       int aAnoFabrico,
       boolean aMedicoNecessario,
+      ArrayList<Excipiente> aExcipientes,
+      ArrayList<Categoria> aCategorias,
       boolean aGenerico) {
     this.marca = aMarca;
     this.lote = aLote;
@@ -42,6 +51,8 @@ public class Medicamentos {
     this.preco = aPreco;
     this.anoFabrico = aAnoFabrico;
     this.medicoNecessario = aMedicoNecessario;
+    this.Excipientes = aExcipientes;
+    this.Categorias = aCategorias;
     this.generico = aGenerico;
   }
 
@@ -56,5 +67,4 @@ public class Medicamentos {
   public int getStock() {
     return this.stock;
   }
-
 }

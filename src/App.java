@@ -14,14 +14,14 @@ public class App {
         String morada = null;
         String contato = null;
 
-        boolean utilizadoresCriados = false;
+        
         GerirUser gerirUser = new GerirUser();
         GerirEncomendas gerirEncomendas = new GerirEncomendas();
-        utilizadoresCriados = gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
+         gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
         User Userlogado = gerirUser.logar("sim", "123");
 
-        if (!utilizadoresCriados) {
-            while (!utilizadoresCriados) {
+        if (gerirUser.isEmpty()) {
+            while (gerirUser.isEmpty()) {
                 login = leDados("Introduza o seu username: ");
                 password = leDados("Introduza a sua password: ");
                 nome = leDados("Introduza o seu nome: ");
@@ -30,7 +30,7 @@ public class App {
 
                 if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
                     System.out.println("Gestor criado com sucesso!");
-                    utilizadoresCriados = true;
+                    
                 } else {
                     System.out.println("Gestor nao criado!");
                 }
