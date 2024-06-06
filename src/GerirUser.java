@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +13,19 @@ public class GerirUser {
 
     public boolean adicionarUser(User aUser) {
         if (lista != null && !verificaEmail(aUser.getEmail()) && !verificaLogin(aUser.getLogin())) {
-            return lista.add(aUser);
+            boolean sucesso = lista.add(aUser);
+            if (sucesso) {
+                // Escrever credenciais em credenciais_acesso.txt
+                try {
+                    FileWriter writer = new FileWriter("credenciais_acesso.txt", true);
+                    writer.write(aUser.getLogin() + " " + aUser.getPassword() + "\n");
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return sucesso;
         }
         return false;
     }

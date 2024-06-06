@@ -96,5 +96,42 @@ public class GerirMedicamentos {
             return Resultados;
 
         }
+
+    }
+    public ArrayList<Medicamentos> getMedicamentosGenericos(boolean aGenerico) {
+        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
+        for (Medicamentos m : this.listaMedicamentos) {
+            if (m.getGenerico() == aGenerico) {
+                Resultados.add(m);
+            }
+        }
+        return Resultados;
+    }
+    public ArrayList<Medicamentos> getMedicamentosGenericos(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa) {
+        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
+        for (Medicamentos m : listadepesquisa) {
+            if (m.getGenerico() == aGenerico) {
+                Resultados.add(m);
+            }
+        }
+        return Resultados;
+    }
+    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico){
+        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
+        for (Medicamentos m : this.listaMedicamentos) {
+            if (m.getGenerico() == aGenerico) {
+                Resultados.add(m);
+            }
+        }
+        return Resultados;
+    }
+    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa){
+        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
+        for (Medicamentos m : listadepesquisa) {
+            if (m.getGenerico() == aGenerico) {
+                Resultados.add(m);
+            }
+        }
+        return Resultados;
     }
 }

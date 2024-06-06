@@ -25,19 +25,7 @@ public class Farmaceutico extends User {
     public String getContato() {
         return contato;
     }
-
-    // Os farmacêuticos introduzem medicamentos, categorias e excipientes e gerem os
-    // serviços.
-
-    /*public Categorias CriarCategoria() {
-    
-    return ;
-    }
-    public Excipientes CriarExcipiente() {
-    
-    return ;
-    }*/
-    
+  
 
 
 }

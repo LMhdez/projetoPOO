@@ -51,6 +51,7 @@ public class GerirEncomendas {
         return encomendasComStatus3;
 
     }
+
     public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasEncerradas() {
         HashMap<Cliente, ArrayList<Encomendas>> encomendasComStatus5 = new HashMap<>();
 
@@ -74,7 +75,7 @@ public class GerirEncomendas {
 
     }
 
-    public ArrayList<Encomendas> getEncomendasFarmaceutico(Farmaceutico aFarmaceutico) {
+    public ArrayList<Encomendas> getEncomendasByFarmaceutico(Farmaceutico aFarmaceutico) {
         if (aFarmaceutico == null) {
             return null;
         }
@@ -91,13 +92,40 @@ public class GerirEncomendas {
         return encomendasFarmaceutico;
     }
 
-    public ArrayList<Encomendas> getEncomendasCliente(Cliente aCliente) {
+    public ArrayList<Encomendas> getEncomendasByCliente(Cliente aCliente) {
         if (aCliente == null) {
             return null;
         }
         return lista.get(aCliente);
     }
 
+    public String getEncomendaById(int aCodigo) {
+        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
+            Cliente cliente = entry.getKey();
+            ArrayList<Encomendas> todasEncomendas = entry.getValue();
+            for (Encomendas encomenda : todasEncomendas) {
+                if (encomenda.getId() < aCodigo) {
+                    return "\nCliente: " + cliente.toString() + "\n Encomenda: " + encomenda.toString();
+                }
+            }
+        }
+        return null;
+    }
+//Deve ser possível pesquisar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
+public HashMap<Cliente,Encomendas> getEncomendaByhorasgastas(float aHoras){
+    HashMap<Cliente,Encomendas> Resultados = new HashMap<Cliente,Encomendas>();
+    for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
+        Cliente cliente = entry.getKey();
+        ArrayList<Encomendas> todasEncomendas = entry.getValue();
+        for (Encomendas encomenda : todasEncomendas) {
+            if (encomenda.getHorasGastas() > aHoras) {
+                Resultados.put(cliente,encomenda);
+            }
+        }
+    }
+    return Resultados;
+
+}
     public boolean aprovarEncomenda(Encomendas aEncomenda) {
         return aEncomenda.setEstatus(2);
     }

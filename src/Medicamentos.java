@@ -1,5 +1,3 @@
-//Deve ser possível ordenar medicamentos por designação.
-
 import java.util.ArrayList;
 
 public class Medicamentos implements Comparable<Medicamentos> {
@@ -77,5 +75,8 @@ public class Medicamentos implements Comparable<Medicamentos> {
 
   public ComponenteAtivo getComponenteAct() {
     return this.componenteAct;
+  }
+  public boolean getGenerico() {
+    return this.generico;
   }
 }

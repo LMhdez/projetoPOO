@@ -1,3 +1,9 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -14,11 +20,26 @@ public class App {
         String morada = null;
         String contato = null;
 
-        
         GerirUser gerirUser = new GerirUser();
         GerirEncomendas gerirEncomendas = new GerirEncomendas();
-         gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
-        User Userlogado = gerirUser.logar("sim", "123");
+        try {
+            FileInputStream fileInputStream = new FileInputStream("dados_apl.dat");
+            fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            // Se o arquivo não existir, cria um novo arquivo vazio
+            try {
+                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("dados_apl.dat"));
+                outputStream.close();
+                System.out.println("Arquivo dados_apl.dat criado com sucesso.");
+            } catch (IOException ex) {
+                System.out.println("Erro ao criar o arquivo dados_apl.dat: " + ex.getMessage());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao fechar o FileInputStream: " + e.getMessage());
+        }
+
+        // gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
+        // User Userlogado = gerirUser.logar("sim", "123");
 
         if (gerirUser.isEmpty()) {
             while (gerirUser.isEmpty()) {
@@ -30,7 +51,7 @@ public class App {
 
                 if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
                     System.out.println("Gestor criado com sucesso!");
-                    
+
                 } else {
                     System.out.println("Gestor nao criado!");
                 }
@@ -46,7 +67,7 @@ public class App {
                     login = leDados("Introduza o seu username: ");
                     password = leDados("Introduza a sua password: ");
 
-                    Userlogado = gerirUser.logar(login, password);
+                    User Userlogado = gerirUser.logar(login, password);
 
                     if (Userlogado != null) {
                         int opLogado = 1;
@@ -141,7 +162,7 @@ public class App {
                                 switch (opLogado) {
                                     case 1:
                                         ArrayList<Encomendas> listaEncomendas = gerirEncomendas
-                                                .getEncomendasFarmaceutico((Farmaceutico) Userlogado);
+                                                .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
 
                                         for (Encomendas encomendas : listaEncomendas) {
                                             System.out.println("Encomenda" + ": " + encomendas.getMedicamentos());
@@ -216,6 +237,16 @@ public class App {
                     break;
             }
         }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            // Salvar dados em dados_apl.dat
+            try {
+                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("dados_apl.dat"));
+                outputStream.writeObject(gerirUser.getUsers()); // Lista de usuários
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
     }
 
     private static String leDados(String aMensagem) {

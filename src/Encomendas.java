@@ -58,5 +58,11 @@ public class Encomendas {
     public int getEstatus(){
         return this.status;
     }
+    public int getId() {
+        return id;
+    }
+    public float getHorasGastas() {
+        return horasGastas;
+    }
 
 }
