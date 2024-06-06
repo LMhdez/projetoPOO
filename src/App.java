@@ -7,14 +7,7 @@ import java.io.*;
 public class App {
 
     public static void main(String[] args) {
-        String login;
-        String password;
-        String nome;
-        String email;
-        boolean ativo;
-        String NIF = null;
-        String morada = null;
-        String contato = null;
+        
 
         InfoSistema infoSistema = loadInfoSistema();
         infoSistema.incrementarExecucoes();
@@ -33,13 +26,8 @@ public class App {
 
         if (gerirUser.isEmpty()) {
             while (gerirUser.isEmpty()) {
-                login = leDados("Introduza o seu username: ");
-                password = leDados("Introduza a sua password: ");
-                nome = leDados("Introduza o seu nome: ");
-                email = leDados("Introduza o seu email: ");
-                ativo = true;
-
-                if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
+                
+                if (gerirUser.criarGestor(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "),leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), true)) {
                     System.out.println("Gestor criado com sucesso!");
 
                 } else {
@@ -179,21 +167,13 @@ public class App {
                     break;
                 case 2:
                     int tipo = leDadosInt(
-                            "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
-                    login = leDados("Introduza o seu username: ");
-                    password = leDados("Introduza a sua password: ");
-                    nome = leDados("Introduza o seu nome: ");
-                    email = leDados("Introduza o seu email: ");
-                    ativo = false;
-                    if (tipo == 1 || tipo == 2) {
-                        NIF = leDados("Introduza o seu NIF: ");
-                        morada = leDados("Introduza a sua morada: ");
-                        contato = leDados("Introduza o seu contato: ");
-                    }
-                    switch (tipo) {
+                        "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
+            
+                    
+                    switch ( tipo) {
                         case 1:
-                            if (gerirUser.criarFarmaceutico(login, password, nome, email, ativo, NIF, morada,
-                                    contato)) {
+                            if (gerirUser.criarFarmaceutico(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "), leDados("Introduza a sua morada: "),
+                            leDados("Introduza o seu contato: "))) {
                                 System.out.println("Farmaceutico criado com sucesso!");
                             } else {
                                 System.out.println(
@@ -201,7 +181,8 @@ public class App {
                             }
                             break;
                         case 2:
-                            if (gerirUser.criarCliente(login, password, nome, email, ativo, NIF, morada, contato)) {
+                            if (gerirUser.criarCliente(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "), leDados("Introduza a sua morada: "),
+                            leDados("Introduza o seu contato: "))) {
                                 System.out.println("Cliente criado com sucesso!");
                             } else {
                                 System.out.println(
@@ -209,7 +190,8 @@ public class App {
                             }
                             break;
                         case 3:
-                            if (gerirUser.criarGestor(login, password, nome, email, ativo)) {
+                    
+                            if (gerirUser.criarGestor( leDados("Introduza o seu username: "),leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false)) {
                                 System.out.println("Gestor criado com sucesso!");
                             } else {
                                 System.out.println("O login/Username/email já estão associados a outra conta!");
