@@ -24,9 +24,13 @@ public class App {
         GerirEncomendas gerirEncomendas = new GerirEncomendas();
         try {
             FileInputStream fileInputStream = new FileInputStream("dados_apl.dat");
-            fileInputStream.close();
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            ArrayList<User> userList = (ArrayList<User>) objectInputStream.readObject();
+            gerirUser.setLista(userList); // Set the loaded list to your GerirUser object
+            objectInputStream.close();
+            System.out.println("Arquivo dados_apl.dat lido com sucesso.");
         } catch (FileNotFoundException e) {
-            // Se o arquivo não existir, cria um novo arquivo vazio
+            // If the file doesn't exist, create a new empty file
             try {
                 ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("dados_apl.dat"));
                 outputStream.close();
@@ -35,8 +39,14 @@ public class App {
                 System.out.println("Erro ao criar o arquivo dados_apl.dat: " + ex.getMessage());
             }
         } catch (IOException e) {
-            System.out.println("Erro ao fechar o FileInputStream: " + e.getMessage());
+            // Handle IO exception
+            System.out.println("Erro ao ler o arquivo dados_apl.dat: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            // Handle class not found exception
+            System.out.println("Classe não encontrada ao ler o arquivo dados_apl.dat: " + e.getMessage());
         }
+        
+        
 
         // gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
         // User Userlogado = gerirUser.logar("sim", "123");
