@@ -7,7 +7,6 @@ import java.io.*;
 public class App {
 
     public static void main(String[] args) {
-        
 
         InfoSistema infoSistema = loadInfoSistema();
         infoSistema.incrementarExecucoes();
@@ -26,8 +25,9 @@ public class App {
 
         if (gerirUser.isEmpty()) {
             while (gerirUser.isEmpty()) {
-                
-                if (gerirUser.criarGestor(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "),leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), true)) {
+
+                if (gerirUser.criarGestor(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "),
+                        leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), true)) {
                     System.out.println("Gestor criado com sucesso!");
 
                 } else {
@@ -167,13 +167,15 @@ public class App {
                     break;
                 case 2:
                     int tipo = leDadosInt(
-                        "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
-            
-                    
-                    switch ( tipo) {
+                            "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
+
+                    switch (tipo) {
                         case 1:
-                            if (gerirUser.criarFarmaceutico(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "), leDados("Introduza a sua morada: "),
-                            leDados("Introduza o seu contato: "))) {
+                            if (gerirUser.criarFarmaceutico(leDados("Introduza o seu username: "),
+                                    leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
+                                    leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "),
+                                    leDados("Introduza a sua morada: "),
+                                    leDados("Introduza o seu contato: "))) {
                                 System.out.println("Farmaceutico criado com sucesso!");
                             } else {
                                 System.out.println(
@@ -181,8 +183,11 @@ public class App {
                             }
                             break;
                         case 2:
-                            if (gerirUser.criarCliente(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "), leDados("Introduza a sua morada: "),
-                            leDados("Introduza o seu contato: "))) {
+                            if (gerirUser.criarCliente(leDados("Introduza o seu username: "),
+                                    leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
+                                    leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "),
+                                    leDados("Introduza a sua morada: "),
+                                    leDados("Introduza o seu contato: "))) {
                                 System.out.println("Cliente criado com sucesso!");
                             } else {
                                 System.out.println(
@@ -190,8 +195,10 @@ public class App {
                             }
                             break;
                         case 3:
-                    
-                            if (gerirUser.criarGestor( leDados("Introduza o seu username: "),leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), false)) {
+
+                            if (gerirUser.criarGestor(leDados("Introduza o seu username: "),
+                                    leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
+                                    leDados("Introduza o seu email: "), false)) {
                                 System.out.println("Gestor criado com sucesso!");
                             } else {
                                 System.out.println("O login/Username/email já estão associados a outra conta!");
@@ -255,11 +262,11 @@ public class App {
                     try {
                         file.createNewFile();
                         System.out.println("ficheiro dados_apl.dat criado com sucesso.");
-                        
+
                     } catch (IOException e) {
                         System.err.println("Erro ao criar o ficheiro: " + e.getMessage());
                         e.printStackTrace();
-                       
+
                     }
                 }
 
@@ -288,7 +295,7 @@ public class App {
             System.out.println("Dados carregados com sucesso de dados_apl.dat.");
             return dados;
         } catch (Exception e) {
-            
+
             return null;
         }
     }
