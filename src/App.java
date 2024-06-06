@@ -1,12 +1,8 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.*;
 
 public class App {
 
@@ -20,36 +16,20 @@ public class App {
         String morada = null;
         String contato = null;
 
-        GerirUser gerirUser = new GerirUser();
-        GerirEncomendas gerirEncomendas = new GerirEncomendas();
-        try {
-            FileInputStream fileInputStream = new FileInputStream("dados_apl.dat");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            ArrayList<User> userList = (ArrayList<User>) objectInputStream.readObject();
-            gerirUser.setLista(userList); // Set the loaded list to your GerirUser object
-            objectInputStream.close();
-            System.out.println("Arquivo dados_apl.dat lido com sucesso.");
-        } catch (FileNotFoundException e) {
-            // If the file doesn't exist, create a new empty file
-            try {
-                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("dados_apl.dat"));
-                outputStream.close();
-                System.out.println("Arquivo dados_apl.dat criado com sucesso.");
-            } catch (IOException ex) {
-                System.out.println("Erro ao criar o arquivo dados_apl.dat: " + ex.getMessage());
-            }
-        } catch (IOException e) {
-            // Handle IO exception
-            System.out.println("Erro ao ler o arquivo dados_apl.dat: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            // Handle class not found exception
-            System.out.println("Classe não encontrada ao ler o arquivo dados_apl.dat: " + e.getMessage());
-        }
-        
-        
+        InfoSistema infoSistema = loadInfoSistema();
+        infoSistema.incrementarExecucoes();
 
-        // gerirUser.criarGestor("sim", "123", "manito", "fghj", true);
-        // User Userlogado = gerirUser.logar("sim", "123");
+        GerirUser gerirUser = new GerirUser();
+        // gerirUser.setLista(dadosFicheiro.getUsers());
+        GerirEncomendas gerirEncomendas = new GerirEncomendas();
+        GerirMedicamentos gerirMedicamento = new GerirMedicamentos();
+        DadosFicheiro dadosFicheiro = loadData();
+
+        if (dadosFicheiro != null) {
+            gerirUser = dadosFicheiro.getUsers();
+            gerirEncomendas = dadosFicheiro.getEncomendas();
+            gerirMedicamento = dadosFicheiro.getMedicamentos();
+        }
 
         if (gerirUser.isEmpty()) {
             while (gerirUser.isEmpty()) {
@@ -74,14 +54,16 @@ public class App {
             op = leDadosInt(menu);
             switch (op) {
                 case 1:
-                    login = leDados("Introduza o seu username: ");
-                    password = leDados("Introduza a sua password: ");
 
-                    User Userlogado = gerirUser.logar(login, password);
+                    User Userlogado = gerirUser.logar(leDados("Introduza o seu username: "),
+                            leDados("Introduza a sua password: "));
 
                     if (Userlogado != null) {
                         int opLogado = 1;
-                        System.out.println("Bem-vindo " + login);
+                        System.out.println("Bem-vindo " + Userlogado.getLogin());
+                        logAction(Userlogado.login, "Fez login");
+                        infoSistema.setUltimoUsuario(Userlogado.getLogin());
+                        saveInfoSistema(infoSistema);
                         if (Userlogado instanceof Gestor) {
                             System.out.println("gestor");
                             while (opLogado != 0) {
@@ -240,6 +222,8 @@ public class App {
                     break;
                 case 0:
                     System.out.println("Adeus");
+
+                    saveData(gerirUser, gerirEncomendas, gerirMedicamento);
                     System.exit(0);
                     break;
                 default:
@@ -247,16 +231,7 @@ public class App {
                     break;
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            // Salvar dados em dados_apl.dat
-            try {
-                ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("dados_apl.dat"));
-                outputStream.writeObject(gerirUser.getUsers()); // Lista de usuários
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }));
+
     }
 
     private static String leDados(String aMensagem) {
@@ -285,5 +260,116 @@ public class App {
             }
         }
 
+    }
+
+    private static void saveData(GerirUser aGerirUser, GerirEncomendas aGerirEncomendas,
+            GerirMedicamentos aGerirMedicamentos) {
+        try {
+            DadosFicheiro dados = new DadosFicheiro(aGerirUser, aGerirEncomendas, aGerirMedicamentos);
+            if (dados.getEncomendas() != null || dados.getUsers() != null || !dados.getUsers().isEmpty()) {
+                File file = new File("dados_apl.dat");
+                if (!file.exists()) {
+                    // Se o ficheiro não existe, cria e retorna null
+                    try {
+                        file.createNewFile();
+                        System.out.println("ficheiro dados_apl.dat criado com sucesso.");
+                        
+                    } catch (IOException e) {
+                        System.err.println("Erro ao criar o ficheiro: " + e.getMessage());
+                        e.printStackTrace();
+                       
+                    }
+                }
+
+                FileOutputStream ficheiro = new FileOutputStream("dados_apl.dat");
+                BufferedOutputStream bos = new BufferedOutputStream(ficheiro);
+                ObjectOutputStream oos = new ObjectOutputStream(bos);
+                oos.writeObject(dados);
+                oos.close();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static DadosFicheiro loadData() {
+        File file = new File("dados_apl.dat");
+        // Carregar os dados do ficheiro
+        try {
+            FileInputStream ficheiro = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(ficheiro);
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            DadosFicheiro dados = (DadosFicheiro) ois.readObject();
+            ois.close();
+            System.out.println("Dados carregados com sucesso de dados_apl.dat.");
+            return dados;
+        } catch (Exception e) {
+            
+            return null;
+        }
+    }
+
+    private static void logAction(String aUser, String aAcao) {
+        File logFile = new File("log.txt");
+        try {
+            File tempFile = new File("temp_log.txt");
+            PrintWriter writer = new PrintWriter(new FileWriter(tempFile));
+            writer.println(aUser + " " + aAcao);
+
+            if (logFile.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(logFile));
+                String linha;
+                while ((linha = reader.readLine()) != null) {
+                    writer.println(linha);
+                }
+                reader.close();
+            }
+            writer.close();
+
+            logFile.delete();
+            tempFile.renameTo(logFile);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static InfoSistema loadInfoSistema() {
+        File file = new File("info_sistema.dat");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                return new InfoSistema();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new InfoSistema();
+            }
+        }
+
+        try {
+            FileInputStream fileIn = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(fileIn);
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            InfoSistema info = (InfoSistema) ois.readObject();
+            ois.close();
+            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new InfoSistema();
+        }
+    }
+
+    private static void saveInfoSistema(InfoSistema info) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("info_sistema.dat");
+            BufferedOutputStream bos = new BufferedOutputStream(fileOut);
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(info);
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

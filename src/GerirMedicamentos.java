@@ -5,12 +5,14 @@ import java.util.HashMap;
 public class GerirMedicamentos implements Serializable{
     private ArrayList<Medicamentos> listaMedicamentos = new ArrayList<Medicamentos>();
     private ArrayList<Excipiente> listaExcipientes = new ArrayList<Excipiente>();
+    private ArrayList<ComponenteAtivo> listaComponenteAtivos = new ArrayList<ComponenteAtivo>();
 
     private HashMap<Integer, Categoria> listaCategorias;
 
     public GerirMedicamentos() {
         listaMedicamentos = new ArrayList<Medicamentos>();
         listaExcipientes = new ArrayList<Excipiente>();
+        listaComponenteAtivos = new ArrayList<ComponenteAtivo>();
         listaCategorias = new HashMap<Integer, Categoria>();
     }
 
@@ -37,6 +39,11 @@ public class GerirMedicamentos implements Serializable{
     public boolean criarExcipiente(String aDesignacao, String aClassificacao, int aQuantidade) {
         Excipiente excipiente = new Excipiente(aDesignacao, aClassificacao, aQuantidade);
         listaExcipientes.add(excipiente);
+        return true;
+    }
+    public boolean criarComponenteAtivo(String aDesignacao, String aClassificacao, int aQuantidade) {
+        ComponenteAtivo componenteAtivo = new ComponenteAtivo(aDesignacao, aClassificacao, aQuantidade);
+        listaComponenteAtivos.add(componenteAtivo);
         return true;
     }
 
