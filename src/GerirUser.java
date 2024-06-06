@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class GerirUser {
 
     private ArrayList<User> lista;
@@ -16,7 +15,8 @@ public class GerirUser {
         }
         return false;
     }
-    public ArrayList<User> getOrderedUsers(){
+
+    public ArrayList<User> getOrderedUsers() {
         ArrayList<User> users = new ArrayList<User>();
         for (User u : lista) {
             users.add(u);
@@ -25,6 +25,41 @@ public class GerirUser {
         return users;
     }
 
+    public ArrayList<User> getUsers() {
+        return lista;
+    }
+
+    public ArrayList<User> getGestores() {
+        ArrayList<User> gestores = new ArrayList<User>();
+        for (User u : lista) {
+            if (u instanceof Gestor) {
+                gestores.add((Gestor) u);
+            }
+        }
+        return gestores;
+    }
+
+    public ArrayList<User> getClientes() {
+        ArrayList<User> clientes = new ArrayList<User>();
+        for (User u : lista) {
+            if (u instanceof Cliente) {
+                clientes.add((Cliente) u);
+            }
+        }
+        return clientes;
+
+    }
+
+    public ArrayList<User> getFarmaceuticos() {
+        ArrayList<User> farmaceuticos = new ArrayList<User>();
+        for (User u : lista) {
+            if (u instanceof Farmaceutico) {
+                farmaceuticos.add((Farmaceutico) u);
+            }
+        }
+        return farmaceuticos;
+
+    }
 
     public boolean isEmpty() {
         return lista.isEmpty();
@@ -145,6 +180,25 @@ public class GerirUser {
             return true; // sucesso
         }
         return false; // nao encontrado ou já estava ativo
+    }
+
+    public User getUserByUsername(String aUsername) {
+        for (User u : lista) {
+            if (u.getLogin().equals(aUsername)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<User> getUserByNome(String aNome) {
+        ArrayList<User> Resultados = new ArrayList<User>();
+        for (User u : lista) {
+            if (u.getLogin().equals(aNome)) {
+                Resultados.add(u);
+            }
+        }
+        return Resultados;
     }
 
 }

@@ -2,15 +2,15 @@
 
 import java.util.ArrayList;
 
-public class Medicamentos implements Comparable<Medicamentos>  {
+public class Medicamentos implements Comparable<Medicamentos> {
 
   private String nome;
   private String marca;
   private String lote;
   private ComponenteAtivo componenteAct;
-  //maximo 5 exipientes
+  // maximo 5 exipientes
   private ArrayList<Excipiente> Excipientes;
-  //maximo 3 categorias
+  // maximo 3 categorias
   private ArrayList<Categoria> Categorias;
   private String dosagem;
   private int stock;
@@ -19,11 +19,10 @@ public class Medicamentos implements Comparable<Medicamentos>  {
   private boolean medicoNecessario;
   private boolean generico;
 
-  
-
   public int compareTo(Medicamentos u) {
     return this.nome.compareTo(u.nome);
   }
+
   public String toString() {
     return "Nome: " + nome + " Marca: " + marca + " Lote: " + lote + " Componente Ativo: " + componenteAct
         + " Dosagem: " + dosagem
@@ -66,5 +65,17 @@ public class Medicamentos implements Comparable<Medicamentos>  {
 
   public int getStock() {
     return this.stock;
+  }
+
+  public String getNome() {
+    return this.nome;
+  }
+
+  public ArrayList<Categoria> getCategorias() {
+    return this.Categorias;
+  }
+
+  public ComponenteAtivo getComponenteAct() {
+    return this.componenteAct;
   }
 }
