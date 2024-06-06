@@ -8,6 +8,9 @@ public class GerirUser implements Serializable{
 
     private ArrayList<User> lista;
 
+    public void setLista(ArrayList<User> lista) {
+        this.lista = lista;
+    }
     public GerirUser() {
         lista = new ArrayList<User>();
     }
