@@ -1,4 +1,5 @@
-public class User implements Comparable<User> {
+import java.io.Serializable;
+public class User implements Comparable<User>, Serializable{
   protected String login;
   protected String password;
   protected String nome;

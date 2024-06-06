@@ -1,4 +1,6 @@
-public class Farmaceutico extends User {
+import java.io.Serializable;
+
+public class Farmaceutico extends User implements Serializable{
     private String NIF;
     private String morada;
     private String contato;

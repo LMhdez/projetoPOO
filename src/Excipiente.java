@@ -1,4 +1,5 @@
-public class Excipiente {
+import java.io.Serializable;
+public class Excipiente implements Serializable{
     String designacao;
     String classificacao;
     int quantidade;

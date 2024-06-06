@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GerirMedicamentos {
+public class GerirMedicamentos implements Serializable{
     private ArrayList<Medicamentos> listaMedicamentos = new ArrayList<Medicamentos>();
     private ArrayList<Excipiente> listaExcipientes = new ArrayList<Excipiente>();
 

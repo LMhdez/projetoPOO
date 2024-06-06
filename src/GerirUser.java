@@ -1,9 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GerirUser {
+public class GerirUser implements Serializable{
 
     private ArrayList<User> lista;
 

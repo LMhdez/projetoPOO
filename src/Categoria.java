@@ -1,4 +1,5 @@
-public class Categoria {
+import java.io.Serializable;
+public class Categoria implements Serializable {
     String designacao;
     String classificacao;
     int codigo;

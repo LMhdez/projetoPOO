@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Medicamentos implements Comparable<Medicamentos> {
+public class Medicamentos implements Comparable<Medicamentos>, Serializable {
 
   private String nome;
   private String marca;

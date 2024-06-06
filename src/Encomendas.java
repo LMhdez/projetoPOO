@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Encomendas {
+public class Encomendas implements Serializable{
     private int id;
     private Farmaceutico farmaceutico;
     private ArrayList<Medicamentos> medicamentos;
