@@ -1,6 +1,6 @@
-import java.io.Serializable;
 
-public class Cliente extends User  implements Serializable{
+
+public class Cliente extends User {
     private String NIF;
     private String morada;
     private String contato;
