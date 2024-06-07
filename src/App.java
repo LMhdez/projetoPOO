@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.*;
 
@@ -56,7 +57,7 @@ public class App {
                             System.out.println("gestor");
                             while (opLogado != 0) {
                                 opLogado = leDadosInt(
-                                        "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos\n0-Encerrar sessao");
+                                        "1- Gerir Registos \n2- Gerir Pedidos de Servicos\n3- Historico de Servicos\n4-Alterar dados da conta\n0-Encerrar sessao");
                                 switch (opLogado) {
                                     case 0:
                                         System.out.println("Adeus " + Userlogado.getNome());
@@ -80,91 +81,161 @@ public class App {
                                         }
                                         break;
                                     case 2:
+                                        opLogado = leDadosInt("1-Aprovar encomendas\n2-Encerrar encomendas");
+                                        HashMap<Cliente, ArrayList<Encomendas>> Encomendas;
+                                        int opEncomenda;
+                                        switch (opLogado) {
+                                            case 1:
+                                                Encomendas = gerirEncomendas
+                                                        .getEncomendasByStatus(1);
 
-                                        // Handle "Gerir encomendas"
-                                        HashMap<Cliente, ArrayList<Encomendas>> encomendas = gerirEncomendas
-                                                .getEncomendas();
+                                                // Print HashMap
+                                                for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : Encomendas
+                                                        .entrySet()) {
+                                                    Cliente cliente = entry.getKey();
+                                                    ArrayList<Encomendas> encomendas = entry.getValue();
+                                                    System.out.println("Cliente: " + cliente.getNome());
+                                                    for (Encomendas encomenda : encomendas) {
+                                                        System.out.println("Encomenda: " + encomenda);
+                                                    }
+                                                }
+                                                opEncomenda = leDadosInt(
+                                                        "Indique o ID da encomenda que deseja aprovar: ");
+                                                if (opEncomenda > Encomendas.size() || opEncomenda < 1) {
+                                                    System.out.println("Encomenda inexistente");
+                                                } else {
+                                                    gerirEncomendas
+                                                            .aprovarEncomenda(
+                                                                    gerirEncomendas.getEncomendaById(opEncomenda));
+                                                }
+                                                break;
 
-                                        // Print HashMap
-                                        for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
-                                                .entrySet()) {
-                                            Cliente cliente = entry.getKey();
-                                            ArrayList<Encomendas> listaEncomendas = entry.getValue();
-                                            System.out.println(cliente.getNome() + ": " + listaEncomendas);
+                                            case 2:
+
+                                                Encomendas = gerirEncomendas
+                                                        .getEncomendasByStatus(4);
+
+                                                for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : Encomendas
+                                                        .entrySet()) {
+                                                    Cliente cliente = entry.getKey();
+                                                    ArrayList<Encomendas> encomendas = entry.getValue();
+                                                    System.out.println("Cliente: " + cliente.getNome());
+                                                    for (Encomendas encomenda : encomendas) {
+                                                        System.out.println("Encomenda: " + encomenda);
+                                                    }
+                                                }
+
+                                                opEncomenda = leDadosInt(
+                                                        "Indique o ID da encomenda que deseja encerrar: ");
+                                                if (opEncomenda > Encomendas.size() || opEncomenda < 1) {
+                                                    System.out.println("Encomenda inexistente");
+                                                } else {
+                                                    gerirEncomendas
+                                                            .aprovarEncomenda(
+                                                                    gerirEncomendas.getEncomendaById(opEncomenda));
+                                                }
+                                                break;
+
+                                            default:
+                                                break;
                                         }
 
-                                        break;
                                     case 3:
                                         // Handle "Historico de Servicos"
-                                        break;
-                                    default:
-                                        System.out.println("Opção inválida");
-                                        break;
-                                }
-                            }
-                        }
 
-                        if (Userlogado instanceof Cliente) {
-                            System.out.println("cliente");
-                            while (opLogado > 0) {
-                                opLogado = leDadosInt("1- Solicitar pedido de Servico \n0-Encerrar sessao");
-                                switch (opLogado) {
-                                    case 0:
-                                        System.out.println("Adeus " + Userlogado.getNome());
                                         break;
-                                    case 1:
-                                        boolean continuar = true;
-                                        HashMap<String, Integer> medicamentos = new HashMap<String, Integer>();
-                                        // isto tem que ser mudados depois quando o projeto tiver mais avançado
 
-                                        while (continuar) {
-                                            String nomeMedicamento = leDados("Indique o nome do medicamento");
-                                            int quantidade = leDadosInt("Indique a quantidade do medicamento");
-                                            continuar = leDadosInt(
-                                                    "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
-                                            medicamentos.put(nomeMedicamento, quantidade);
-                                        }
-                                        boolean urgente = leDadosInt("A sua encomenda é urgente?\n1-Sim\n2-Não") == 1;
-                                        Encomendas Encomenda = null;
-                                        Encomenda = new Encomendas(null, urgente);
-                                        gerirEncomendas.adicionarEncomenda((Cliente) Userlogado, Encomenda);
-                                        break;
-                                    default:
-                                        System.out.println("Opção inválida");
-                                        break;
-                                }
-                            }
-                        }
-                        if (Userlogado instanceof Farmaceutico) {
-                            while (opLogado > 0) {
-                                opLogado = leDadosInt("1-Consultar os Pedidos\n0-Encerrar sessao");
+                                    case 4:
+                                        if (AlterarDadosUser(Userlogado)) {
+                                            System.out.println("Dados alterados com sucesso");
+                                        } else {
+                                            System.out.println("Falha na alteração dos dados");
 
-                                switch (opLogado) {
-                                    case 1:
-                                        ArrayList<Encomendas> listaEncomendas = gerirEncomendas
-                                                .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
-
-                                        for (Encomendas encomendas : listaEncomendas) {
-                                            System.out.println("Encomenda" + ": " + encomendas.getMedicamentos());
                                         }
 
-                                        break;
-                                    case 2:
+                                }
 
-                                        break;
-                                    case 3:
+                            }
 
-                                        break;
+                            if (Userlogado instanceof Cliente) {
+                                System.out.println("cliente");
+                                while (opLogado > 0) {
+                                    opLogado = leDadosInt(
+                                            "1- Solicitar pedido de Servico\n2-Alterar dados da Conta\n0-Encerrar sessao");
+                                    switch (opLogado) {
+                                        case 0:
+                                            System.out.println("Adeus " + Userlogado.getNome());
+                                            break;
+                                        case 1:
+                                            boolean continuar = true;
+                                            HashMap<String, Integer> medicamentos = new HashMap<String, Integer>();
+                                            // isto tem que ser mudados depois quando o projeto tiver mais avançado
 
-                                    default:
-                                        break;
+                                            while (continuar) {
+                                                String nomeMedicamento = leDados("Indique o nome do medicamento");
+                                                int quantidade = leDadosInt("Indique a quantidade do medicamento");
+                                                continuar = leDadosInt(
+                                                        "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
+                                                medicamentos.put(nomeMedicamento, quantidade);
+                                            }
+                                            boolean urgente = leDadosInt(
+                                                    "A sua encomenda é urgente?\n1-Sim\n2-Não") == 1;
+                                            Encomendas Encomenda = null;
+                                            Encomenda = new Encomendas(null, urgente);
+                                            gerirEncomendas.adicionarEncomenda((Cliente) Userlogado, Encomenda);
+                                            break;
+                                        case 2:
+                                            if (AlterarDadosUser(Userlogado)) {
+                                                System.out.println("Dados alterados com sucesso");
+                                            } else {
+                                                System.out.println("Falha na alteração dos dados");
+
+                                            }
+                                            break;
+                                        default:
+                                            System.out.println("Opção inválida");
+                                            break;
+                                    }
                                 }
                             }
+                            if (Userlogado instanceof Farmaceutico) {
+                                while (opLogado > 0) {
+                                    opLogado = leDadosInt(
+                                            "1-Consultar os Pedidos\n2-Alterar dados da Conta\n0-Encerrar sessao");
+
+                                    switch (opLogado) {
+                                        case 1:
+                                            ArrayList<Encomendas> listaEncomendas = gerirEncomendas
+                                                    .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
+
+                                            for (Encomendas encomendas : listaEncomendas) {
+                                                System.out.println("Encomenda" + ": " + encomendas.getMedicamentos());
+                                            }
+
+                                            break;
+                                        case 2:
+                                            if (AlterarDadosUser(Userlogado)) {
+                                                System.out.println("Dados alterados com sucesso");
+                                            } else {
+                                                System.out.println("Falha na alteração dos dados");
+
+                                            }
+
+                                            break;
+                                        case 3:
+
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("Login ou password errados!");
                         }
-                    } else {
-                        System.out.println("Login ou password errados!");
                     }
-                    break;
+
                 case 2:
                     int tipo = leDadosInt(
                             "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
@@ -361,4 +432,32 @@ public class App {
             e.printStackTrace();
         }
     }
+
+    private static boolean AlterarDadosUser(User aUserLogado) {
+        int opLogado = leDadosInt(
+                "Escolha o que deseja editar\n1-Username\n2-Password\n3-Nome\n4-Email\n");
+        switch (opLogado) {
+            case 1:
+                aUserLogado.setLogin(leDados("Introduza o seu username: "));
+                break;
+
+            case 2:
+                aUserLogado.setPassword(leDados("Introduza a sua password: "));
+                break;
+
+            case 3:
+                aUserLogado.setNome(leDados("Introduza o seu nome: "));
+                break;
+
+            case 4:
+                aUserLogado.setEmail(leDados("Introduza o seu email: "));
+                break;
+
+            default:
+                System.out.println("Opção inválida");
+                return false; // Adicionado para indicar que a operação falhou
+        }
+        return true; // Adicionado para indicar que a operação foi bem-sucedida
+    }
+
 }

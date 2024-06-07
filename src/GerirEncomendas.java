@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class GerirEncomendas implements Serializable{
+public class GerirEncomendas implements Serializable {
     private HashMap<Cliente, ArrayList<Encomendas>> lista = new HashMap<Cliente, ArrayList<Encomendas>>();
 
     public GerirEncomendas() {
@@ -31,8 +30,8 @@ public class GerirEncomendas implements Serializable{
         return lista;
     }
 
-    public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasDecorrer() {
-        HashMap<Cliente, ArrayList<Encomendas>> encomendasComStatus3 = new HashMap<>();
+    public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasByStatus(int aStatus) {
+        HashMap<Cliente, ArrayList<Encomendas>> encomendasComStatus = new HashMap<>();
 
         for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
             Cliente cliente = entry.getKey();
@@ -40,40 +39,17 @@ public class GerirEncomendas implements Serializable{
             ArrayList<Encomendas> encomendasFiltradas = new ArrayList<>();
 
             for (Encomendas encomenda : todasEncomendas) {
-                if (encomenda.getEstatus() == 3) {
+                if (encomenda.getEstatus() == aStatus) {
                     encomendasFiltradas.add(encomenda);
                 }
             }
 
             if (!encomendasFiltradas.isEmpty()) {
-                encomendasComStatus3.put(cliente, encomendasFiltradas);
+                encomendasComStatus.put(cliente, encomendasFiltradas);
             }
         }
 
-        return encomendasComStatus3;
-
-    }
-
-    public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasEncerradas() {
-        HashMap<Cliente, ArrayList<Encomendas>> encomendasComStatus5 = new HashMap<>();
-
-        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
-            Cliente cliente = entry.getKey();
-            ArrayList<Encomendas> todasEncomendas = entry.getValue();
-            ArrayList<Encomendas> encomendasFiltradas = new ArrayList<>();
-
-            for (Encomendas encomenda : todasEncomendas) {
-                if (encomenda.getEstatus() == 5) {
-                    encomendasFiltradas.add(encomenda);
-                }
-            }
-
-            if (!encomendasFiltradas.isEmpty()) {
-                encomendasComStatus5.put(cliente, encomendasFiltradas);
-            }
-        }
-
-        return encomendasComStatus5;
+        return encomendasComStatus;
 
     }
 
@@ -101,33 +77,36 @@ public class GerirEncomendas implements Serializable{
         return lista.get(aCliente);
     }
 
-    public String getEncomendaById(int aCodigo) {
+    public Encomendas getEncomendaById(int aCodigo) {
         for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
             Cliente cliente = entry.getKey();
             ArrayList<Encomendas> todasEncomendas = entry.getValue();
             for (Encomendas encomenda : todasEncomendas) {
                 if (encomenda.getId() < aCodigo) {
-                    return "\nCliente: " + cliente.toString() + "\n Encomenda: " + encomenda.toString();
+                    return encomenda;
                 }
             }
         }
         return null;
     }
-//Deve ser possível pesquisar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
-public HashMap<Cliente,Encomendas> getEncomendaByhorasgastas(float aHoras){
-    HashMap<Cliente,Encomendas> Resultados = new HashMap<Cliente,Encomendas>();
-    for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
-        Cliente cliente = entry.getKey();
-        ArrayList<Encomendas> todasEncomendas = entry.getValue();
-        for (Encomendas encomenda : todasEncomendas) {
-            if (encomenda.getHorasGastas() > aHoras) {
-                Resultados.put(cliente,encomenda);
+
+    // Deve ser possível pesquisar serviços com tempo despendido superior a um
+    // determinado limite (introduzido pelo utilizador no momento de pesquisa).
+    public HashMap<Cliente, Encomendas> getEncomendaByhorasgastas(float aHoras) {
+        HashMap<Cliente, Encomendas> Resultados = new HashMap<Cliente, Encomendas>();
+        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
+            Cliente cliente = entry.getKey();
+            ArrayList<Encomendas> todasEncomendas = entry.getValue();
+            for (Encomendas encomenda : todasEncomendas) {
+                if (encomenda.getHorasGastas() > aHoras) {
+                    Resultados.put(cliente, encomenda);
+                }
             }
         }
-    }
-    return Resultados;
+        return Resultados;
 
-}
+    }
+
     public boolean aprovarEncomenda(Encomendas aEncomenda) {
         return aEncomenda.setEstatus(2);
     }
