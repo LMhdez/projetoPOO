@@ -258,7 +258,7 @@ public class App {
             if (dados.getEncomendas() != null || dados.getUsers() != null || !dados.getUsers().isEmpty()) {
                 File file = new File("dados_apl.dat");
                 if (!file.exists()) {
-                    // Se o ficheiro não existe, cria e retorna null
+                    // Se o ficheiro não existe, cria
                     try {
                         file.createNewFile();
                         System.out.println("ficheiro dados_apl.dat criado com sucesso.");
