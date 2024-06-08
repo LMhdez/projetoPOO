@@ -53,21 +53,48 @@ public class GerirEncomendas implements Serializable {
 
     }
 
-    public ArrayList<Encomendas> getEncomendasByFarmaceutico(Farmaceutico aFarmaceutico) {
-        if (aFarmaceutico == null) {
-            return null;
-        }
-        ArrayList<Encomendas> encomendasFarmaceutico = new ArrayList<Encomendas>();
+    public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasByStatus(int aStatus, HashMap<Cliente, ArrayList<Encomendas>> aHashMap) {
+        HashMap<Cliente, ArrayList<Encomendas>> resultado = new HashMap<>();
 
-        for (ArrayList<Encomendas> listaEncomendas : lista.values()) {
-            for (Encomendas encomenda : listaEncomendas) {
-                if (encomenda.getFarmaceutico().equals(aFarmaceutico)) {
-                    encomendasFarmaceutico.add(encomenda);
+        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : aHashMap.entrySet()) {
+            Cliente cliente = entry.getKey();
+            ArrayList<Encomendas> todasEncomendas = entry.getValue();
+            ArrayList<Encomendas> encomendasFiltradas = new ArrayList<>();
+
+            for (Encomendas encomenda : todasEncomendas) {
+                if (encomenda.getEstatus() == aStatus) {
+                    encomendasFiltradas.add(encomenda);
                 }
+            }
+
+            if (!encomendasFiltradas.isEmpty()) {
+                resultado.put(cliente, encomendasFiltradas);
             }
         }
 
-        return encomendasFarmaceutico;
+        return resultado;
+
+    }
+
+    public HashMap<Cliente, ArrayList<Encomendas>> getEncomendasByFarmaceutico(Farmaceutico aFarmaceutico) {
+        if (aFarmaceutico == null) {
+            return null;
+        }
+        HashMap<Cliente, ArrayList<Encomendas>> resultado = new HashMap<>();
+        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
+            Cliente cliente = entry.getKey();
+            ArrayList<Encomendas> todasEncomendas = entry.getValue();
+            ArrayList<Encomendas> encomendasFiltradas = new ArrayList<>();
+            for (Encomendas encomenda : todasEncomendas) {
+                if (encomenda.getFarmaceutico().equals(aFarmaceutico)) {
+                    encomendasFiltradas.add(encomenda);
+                }
+            }
+            if (!encomendasFiltradas.isEmpty()) {
+                resultado.put(cliente, encomendasFiltradas);
+            }
+        }
+        return resultado;
     }
 
     public ArrayList<Encomendas> getEncomendasByCliente(Cliente aCliente) {
@@ -79,7 +106,6 @@ public class GerirEncomendas implements Serializable {
 
     public Encomendas getEncomendaById(int aCodigo) {
         for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
-            Cliente cliente = entry.getKey();
             ArrayList<Encomendas> todasEncomendas = entry.getValue();
             for (Encomendas encomenda : todasEncomendas) {
                 if (encomenda.getId() < aCodigo) {
@@ -90,9 +116,20 @@ public class GerirEncomendas implements Serializable {
         return null;
     }
 
+    public Cliente getClienteByEncomenda(Encomendas aEncomenda) {
+        for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
+            ArrayList<Encomendas> todasEncomendas = entry.getValue();
+            for (Encomendas encomenda : todasEncomendas) {
+                if (encomenda.equals(aEncomenda)) {
+                    return entry.getKey();
+                }
+            }
+        }
+        return null;
+    }
     // Deve ser possível pesquisar serviços com tempo despendido superior a um
     // determinado limite (introduzido pelo utilizador no momento de pesquisa).
-    public HashMap<Cliente, Encomendas> getEncomendaByhorasgastas(float aHoras) {
+    public HashMap<Cliente, Encomendas> getEncomendasByhorasgastas(float aHoras) {
         HashMap<Cliente, Encomendas> Resultados = new HashMap<Cliente, Encomendas>();
         for (Map.Entry<Cliente, ArrayList<Encomendas>> entry : lista.entrySet()) {
             Cliente cliente = entry.getKey();
@@ -106,6 +143,21 @@ public class GerirEncomendas implements Serializable {
         return Resultados;
 
     }
+    public boolean atribuirTotal(Encomendas aEncomenda, float aValor){
+        if (aEncomenda!=null&& aValor>=0){
+            aEncomenda.setTotal(aValor);
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean atribuirHoras(Encomendas aEncomenda, float aValor){
+        if (aEncomenda!=null&& aValor>=0){
+            aEncomenda.setHorasGastas(aValor);
+            return true;
+        }
+        else return false;
+    }
 
     public boolean aprovarEncomenda(Encomendas aEncomenda) {
         return aEncomenda.setEstatus(2);
@@ -113,10 +165,20 @@ public class GerirEncomendas implements Serializable {
 
     public boolean processarEncomenda(Encomendas aEncomenda) {
         return aEncomenda.setEstatus(3);
+        
     }
 
     public boolean concluirEncomenda(Encomendas aEncomenda) {
-        return aEncomenda.setEstatus(4);
+        if (aEncomenda.setEstatus(4)) {
+            for (Object item : aEncomenda.getLista()) {
+                if (item instanceof Medicamentos) {
+                    Medicamentos medicamento = (Medicamentos) item;
+                    medicamento.setStock(medicamento.getStock()-1); // Supondo que 1 unidade é vendida por cada item na encomenda
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public boolean encerrarEncomenda(Encomendas aEncomenda) {

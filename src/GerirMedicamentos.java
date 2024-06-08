@@ -55,7 +55,14 @@ public class GerirMedicamentos implements Serializable {
     public ArrayList<ComponenteAtivo> getListaComponenteAtivos() {
         return listaComponenteAtivos;
     }
-
+    public ComponenteAtivo getComponenteAtivoByNome(String nome) {
+        for (ComponenteAtivo c : listaComponenteAtivos) {
+            if (c.getDesignacao().equals(nome)) {
+                return c;
+            }
+        }
+        return null;
+    }
     public ArrayList<Excipiente> getListaExcipientes() {
         return listaExcipientes;
     }
@@ -95,31 +102,55 @@ public class GerirMedicamentos implements Serializable {
         return listaCategorias.containsKey(aCodigo);
     }
 
-    public Medicamentos getMedicamentoByNome(String aNome) {
+
+    public ArrayList<Medicamentos> getMedicamentosByNomeParcial(String termoPesquisa) {
+        ArrayList<Medicamentos> medicamentosEncontrados = new ArrayList<>();
         for (Medicamentos m : listaMedicamentos) {
-            if (m.getNome().equals(aNome)) {
-                return m;
+            if (m.getNome().toLowerCase().contains(termoPesquisa.toLowerCase())) {
+                medicamentosEncontrados.add(m);
             }
         }
-        return null;
+        return medicamentosEncontrados;
+    }
+    public ArrayList<ComponenteAtivo> getComponentesAtivosByNomeParcial(String termoPesquisa) {
+        ArrayList<ComponenteAtivo> componentesEncontrados = new ArrayList<>();
+        for (ComponenteAtivo ca : listaComponenteAtivos) {
+            if (ca.getDesignacao().toLowerCase().contains(termoPesquisa.toLowerCase())) {
+                componentesEncontrados.add(ca);
+            }
+        }
+        return componentesEncontrados;
     }
 
-    public ArrayList<Medicamentos> getMedicamentosByCategoria(Categoria aCategoria) {
+    public ArrayList<Medicamentos> getMedicamentosByCategoria(String aNomeParcial) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : listaMedicamentos) {
-            if (m.getCategorias().contains(aCategoria)) {
+            for (Categoria c : m.getCategorias()) {
+                if (c.getDesignacao().toLowerCase().contains(aNomeParcial.toLowerCase())) {
+                    Resultados.add(m);
+                }
+            }
+        }
+        return Resultados;
+        
+
+    }
+    public ArrayList<Medicamentos> getMedicamentosByGenerico(boolean aGenerico) {
+        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
+        for (Medicamentos m : this.listaMedicamentos) {
+            if (m.getGenerico() == aGenerico) {
                 Resultados.add(m);
             }
         }
         return Resultados;
-
     }
+        
 
-    public ArrayList<Medicamentos> getMedicamentosByComponenteAtiva(ComponenteAtivo aAtivo) {
+    public ArrayList<Medicamentos> getMedicamentosByComponenteAtiva(String aNomeParcial) {
         {
             ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
             for (Medicamentos m : listaMedicamentos) {
-                if (m.getComponenteAct().equals(aAtivo)) {
+                if (m.getComponenteAct().getDesignacao().toLowerCase().contains(aNomeParcial.toLowerCase())) {
                     Resultados.add(m);
                 }
             }
@@ -150,20 +181,20 @@ public class GerirMedicamentos implements Serializable {
         return Resultados;
     }
 
-    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico) {
+    public ArrayList<Medicamentos> getMedicamentosByStock(int aStock) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : this.listaMedicamentos) {
-            if (m.getGenerico() == aGenerico) {
+            if (m.getStock() < aStock) {
                 Resultados.add(m);
             }
         }
         return Resultados;
     }
 
-    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa) {
+    public ArrayList<Medicamentos> getMedicamentosByStock(int aStock, ArrayList<Medicamentos> listadepesquisa) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : listadepesquisa) {
-            if (m.getGenerico() == aGenerico) {
+            if (m.getStock() < aStock) {
                 Resultados.add(m);
             }
         }

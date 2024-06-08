@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GerirUser implements Serializable{
+public class GerirUser implements Serializable {
 
     private ArrayList<User> lista;
 
     public void setLista(ArrayList<User> lista) {
         this.lista = lista;
     }
+
     public GerirUser() {
         lista = new ArrayList<User>();
     }
@@ -34,49 +35,24 @@ public class GerirUser implements Serializable{
         return false;
     }
 
-    public ArrayList<User> getOrderedUsers() {
-        ArrayList<User> users = new ArrayList<User>();
-        for (User u : lista) {
-            users.add(u);
-        }
-        users.sort(null);
-        return users;
-    }
+   
+
+   
+        
+
 
     public ArrayList<User> getUsers() {
         return lista;
     }
 
-    public ArrayList<User> getGestores() {
-        ArrayList<User> gestores = new ArrayList<User>();
+    public ArrayList<User> getUsersByClassname(String classname) {
+        ArrayList<User> users = new ArrayList<User>();
         for (User u : lista) {
-            if (u instanceof Gestor) {
-                gestores.add((Gestor) u);
+            if (u.getClass().getName().equals(classname)) {
+                users.add(u);
             }
         }
-        return gestores;
-    }
-
-    public ArrayList<User> getClientes() {
-        ArrayList<User> clientes = new ArrayList<User>();
-        for (User u : lista) {
-            if (u instanceof Cliente) {
-                clientes.add((Cliente) u);
-            }
-        }
-        return clientes;
-
-    }
-
-    public ArrayList<User> getFarmaceuticos() {
-        ArrayList<User> farmaceuticos = new ArrayList<User>();
-        for (User u : lista) {
-            if (u instanceof Farmaceutico) {
-                farmaceuticos.add((Farmaceutico) u);
-            }
-        }
-        return farmaceuticos;
-
+        return users;
     }
 
     public boolean isEmpty() {
@@ -200,19 +176,42 @@ public class GerirUser implements Serializable{
         return false; // nao encontrado ou já estava ativo
     }
 
-    public User getUserByUsername(String aUsername) {
+    public ArrayList<User> getUserByUsername(String aUsername) {
+        ArrayList<User> resultados = new ArrayList<User>();
         for (User u : lista) {
-            if (u.getLogin().equals(aUsername)) {
-                return u;
+            if (u.getNome().contains(aUsername)) {
+                resultados.add(u);
             }
         }
-        return null;
+        return resultados;
     }
+    
 
     public ArrayList<User> getUserByNome(String aNome) {
+        ArrayList<User> resultados = new ArrayList<User>();
+        for (User u : lista) {
+            if (u.getNome().contains(aNome)) {
+                resultados.add(u);
+            }
+        }
+        return resultados;
+    }
+    
+    public ArrayList<User>getOrderedUsers(ArrayList<User> aUsers){
+        ArrayList<User> users = new ArrayList<User>();
+        for (User u : aUsers) {
+            users.add(u);
+        }
+        users.sort(null);
+        return users;
+
+    }
+
+    public ArrayList<User> getUserByNome(String aNome, String aClassname) {
+
         ArrayList<User> Resultados = new ArrayList<User>();
         for (User u : lista) {
-            if (u.getLogin().equals(aNome)) {
+            if (u.getNome().contains(aNome) && u.getClass().getName().equals(aClassname)) {
                 Resultados.add(u);
             }
         }

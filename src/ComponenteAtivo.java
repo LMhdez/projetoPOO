@@ -14,5 +14,8 @@ public class ComponenteAtivo implements Serializable{
     public String toString() {
         return "Designacao: " + designacao + " Classificacao: " + classificacao + " Quantidade: " + quantidade;
     }
+    public String getDesignacao() {
+        return designacao;
+    }
 
 }

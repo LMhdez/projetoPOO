@@ -17,5 +17,11 @@ public class Categoria implements Serializable {
         return "Designacao: " + designacao + " Classificacao: " + classificacao + " Codigo: " + codigo + " Fornecedor: "
                 + fornecedor;
     }
+    public String getDesignacao() {
+        return designacao;
+    }
+    public int getCodigo() {
+        return codigo;
+    }
 
 }
