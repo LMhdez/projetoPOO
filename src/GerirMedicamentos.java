@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GerirMedicamentos implements Serializable{
+public class GerirMedicamentos implements Serializable {
     private ArrayList<Medicamentos> listaMedicamentos = new ArrayList<Medicamentos>();
     private ArrayList<Excipiente> listaExcipientes = new ArrayList<Excipiente>();
     private ArrayList<ComponenteAtivo> listaComponenteAtivos = new ArrayList<ComponenteAtivo>();
@@ -38,17 +38,39 @@ public class GerirMedicamentos implements Serializable{
 
     public boolean criarExcipiente(String aDesignacao, String aClassificacao, int aQuantidade) {
         Excipiente excipiente = new Excipiente(aDesignacao, aClassificacao, aQuantidade);
-        listaExcipientes.add(excipiente);
-        return true;
+        
+        return listaExcipientes.add(excipiente);
     }
+
     public boolean criarComponenteAtivo(String aDesignacao, String aClassificacao, int aQuantidade) {
         ComponenteAtivo componenteAtivo = new ComponenteAtivo(aDesignacao, aClassificacao, aQuantidade);
-        listaComponenteAtivos.add(componenteAtivo);
-        return true;
+        
+        return listaComponenteAtivos.add(componenteAtivo);
     }
 
     public ArrayList<Medicamentos> getMedicamentos() {
         return listaMedicamentos;
+    }
+
+    public ArrayList<ComponenteAtivo> getListaComponenteAtivos() {
+        return listaComponenteAtivos;
+    }
+
+    public ArrayList<Excipiente> getListaExcipientes() {
+        return listaExcipientes;
+    }
+
+    public HashMap<Integer, Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+    public Categoria getCategoriaById(int id) {
+        return listaCategorias.get(id);
+    }
+    public Excipiente getExcipienteById(int id) {
+        return listaExcipientes.get(id);
+    }
+    public ComponenteAtivo getComponenteAtivoById(int id) {
+        return listaComponenteAtivos.get(id);
     }
 
     public ArrayList<Medicamentos> getOrderedMedicamentos() {
@@ -106,6 +128,7 @@ public class GerirMedicamentos implements Serializable{
         }
 
     }
+
     public ArrayList<Medicamentos> getMedicamentosGenericos(boolean aGenerico) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : this.listaMedicamentos) {
@@ -115,7 +138,9 @@ public class GerirMedicamentos implements Serializable{
         }
         return Resultados;
     }
-    public ArrayList<Medicamentos> getMedicamentosGenericos(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa) {
+
+    public ArrayList<Medicamentos> getMedicamentosGenericos(boolean aGenerico,
+            ArrayList<Medicamentos> listadepesquisa) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : listadepesquisa) {
             if (m.getGenerico() == aGenerico) {
@@ -124,7 +149,8 @@ public class GerirMedicamentos implements Serializable{
         }
         return Resultados;
     }
-    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico){
+
+    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : this.listaMedicamentos) {
             if (m.getGenerico() == aGenerico) {
@@ -133,7 +159,8 @@ public class GerirMedicamentos implements Serializable{
         }
         return Resultados;
     }
-    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa){
+
+    public ArrayList<Medicamentos> getMedicamentosByStock(boolean aGenerico, ArrayList<Medicamentos> listadepesquisa) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
         for (Medicamentos m : listadepesquisa) {
             if (m.getGenerico() == aGenerico) {

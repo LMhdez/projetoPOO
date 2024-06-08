@@ -141,7 +141,6 @@ public class App {
                                         }
 
                                     case 3:
-                                        // Handle "Historico de Servicos"
 
                                         break;
 
@@ -201,7 +200,7 @@ public class App {
                             if (Userlogado instanceof Farmaceutico) {
                                 while (opLogado > 0) {
                                     opLogado = leDadosInt(
-                                            "1-Consultar os Pedidos\n2-Alterar dados da Conta\n0-Encerrar sessao");
+                                            "1-Consultar encomendas\n2-Alterar dados da Conta\n3-Introduzir medicamento\n4-Introduzir categoria\n5-Introduzir excipiente\n6-Introduzir componente ativa\n7-Modificar stock de medicamento existente\n\n0-Encerrar sessao");
 
                                     switch (opLogado) {
                                         case 1:
@@ -223,8 +222,148 @@ public class App {
 
                                             break;
                                         case 3:
+                                            String marca = leDados("Introduza a marca do medicamento: ");
+                                            String lote = leDados("Introduza o lote do medicamento: ");
+                                            String dosagem = leDados("Introduza a dosagem do medicamento: ");
+                                            int stock = leDadosInt("Introduza o stock do medicamento: ");
+                                            float preco = leDadosFloat("Introduza o preco do medicamento: ");
+                                            int anoFabrico = leDadosInt("Introduza o ano de fabrico do medicamento: ");
+                                            boolean medicoNecessario = leDadosInt(
+                                                    "Introduza se o medicamento necessita de medico?\n1-Sim\n2-Não") == 1;
+
+                                            boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
+
+                                            HashMap<Integer, Categoria> categorias = gerirMedicamento
+                                                    .getListaCategorias();
+                                            // print hashmap
+                                            int n;
+                                            do {
+                                                n = leDadosInt(
+                                                        "Introduza o numero de categorias do medicamento(max:3)");
+                                                if (n > 2 || n < 1) {
+                                                    System.out.println("Entrada invalida");
+
+                                                }
+
+                                            } while (n > 2 || n < 1);
+                                            for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
+                                                Integer key = entry.getKey();
+                                                Categoria categoria = entry.getValue();
+                                                System.err.println(key);
+                                                System.out.println(categoria);
+                                            }
+
+                                            ArrayList<Categoria> categoriasMedicamento = new ArrayList<Categoria>();
+
+                                            for (int i = 0; i < n; i++) {
+                                                categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
+                                                        leDadosInt("Introduza o codigo da categoria: ")));
+                                            }
+
+                                            do {
+                                                n = leDadosInt(
+                                                        "Introduza o numero de excipientes do medicamento(max:5)");
+                                                if (n > 5 || n < 1) {
+                                                    System.out.println("Entrada invalida");
+
+                                                }
+
+                                            } while (n > 5 || n < 1);
+
+                                            ArrayList<Excipiente> excipientes = gerirMedicamento.getListaExcipientes();
+                                            for (Excipiente excipiente : excipientes) {
+                                                System.out.println(excipientes.indexOf(excipiente));
+                                                System.out.println(excipiente);
+                                            }
+
+                                            ArrayList<Excipiente> excipienteMedicamento = new ArrayList<Excipiente>();
+
+                                            for (int i = 0; i < n; i++) {
+                                                excipienteMedicamento.add(gerirMedicamento.getExcipienteById(
+                                                        leDadosInt("Introduza o index do excipiente: ")));
+                                            }
+
+                                            ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
+                                                    .getListaComponenteAtivos();
+                                            for (ComponenteAtivo componenteAtivo : componentesAtivos) {
+                                                System.out.println(componentesAtivos.indexOf(componenteAtivo));
+                                                System.out.println(componenteAtivo);
+                                            }
+
+                                            do {
+                                                n = leDadosInt(
+                                                        "Introduza o numero de componente ativo");
+                                                if (n > componentesAtivos.size() || n < 0) {
+                                                    System.out.println("Entrada invalida");
+
+                                                }
+
+                                            } while (n > componentesAtivos.size() || n < 0);
+
+                                            ComponenteAtivo componenteAtivo = gerirMedicamento
+                                                    .getComponenteAtivoById(n);
+
+                                            if (gerirMedicamento.CriarMedicamento(marca, lote, componenteAtivo, dosagem,
+                                                    stock, preco, anoFabrico, medicoNecessario, excipientes,
+                                                    categoriasMedicamento, generico)) {
+
+                                                System.out.println("Medicamento criado com sucesso");
+                                            }
+
+                                            else {
+                                                System.out.println("Erro na criação do medicamento");
+                                            }
 
                                             break;
+                                        case 4:
+
+                                            if (gerirMedicamento.criarCategoria(
+                                                    leDados("Introduza a designacao da nova categoria: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("introduza o codigo: "),
+                                                    leDados("introduza o fornecedor: "))) {
+                                                System.out.println("Categoria criada com sucesso ");
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação da categoria, verifique se o codigo já está a ser utilizado");
+                                            }
+
+                                            break;
+
+                                        case 5:
+                                            // String aDesignacao, String aClassificacao, int aQuantidade
+                                            if (gerirMedicamento.criarExcipiente(
+                                                    leDados("Introduza o nome do excipiente: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("Introduza a quantidade padrao: "))) {
+                                                System.out.println("Excipiente criado com sucesso ");
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação do excipiente");
+                                            }
+
+                                            break;
+
+                                        case 6:
+                                            if (gerirMedicamento.criarExcipiente(
+                                                    leDados("Introduza o nome da componente ativa: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("Introduza a quantidade padrao: "))) {
+                                                System.out.println("Excipiente criado com sucesso ");
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação do excipiente");
+                                            }
+
+                                            break;
+
+                                        case 7:
+
+                                            if (gerirMedicamento.getMedicamentoByNome(
+                                                    leDados("Introduza o nome do medicamento: ")) == null) {
+                                                System.out.println("Nao foi possível encontrar o medicamento");
+
+                                            }
 
                                         default:
                                             break;
@@ -320,6 +459,19 @@ public class App {
             }
         }
 
+    }
+
+    private static float leDadosFloat(String aMensagem) {
+        while (true) {
+            try {
+                System.out.println(aMensagem);
+                Scanner teclado = new Scanner(System.in);
+                return teclado.nextFloat();
+
+            } catch (Exception e) {
+                System.out.println("Entrada invalida!");
+            }
+        }
     }
 
     private static void saveData(GerirUser aGerirUser, GerirEncomendas aGerirEncomendas,
