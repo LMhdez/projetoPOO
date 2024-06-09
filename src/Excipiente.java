@@ -1,8 +1,9 @@
 import java.io.Serializable;
-public class Excipiente implements Serializable{
-    String designacao;
-    String classificacao;
-    int quantidade;
+
+public class Excipiente implements Serializable {
+    private String designacao;
+    private String classificacao;
+    private int quantidade;
 
     Excipiente(String aDesignacao, String aClassificacao, int aQuantidade) {
         this.designacao = aDesignacao;

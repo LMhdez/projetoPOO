@@ -1,9 +1,9 @@
 import java.io.Serializable;
 
 public class ComponenteAtivo implements Serializable{
-    String designacao;
-    String classificacao;
-    int quantidade;
+    private String designacao;
+    private String classificacao;
+    private int quantidade;
 
     ComponenteAtivo(String aDesignacao, String aClassificacao, int aQuantidade) {
         this.designacao = aDesignacao;

@@ -1364,7 +1364,7 @@ public class App {
 
                                             do {
                                                 n = leDadosInt(
-                                                        "Introduza o numero de componente ativo");
+                                                        "Introduza o numero do componente ativo");
                                                 if (n > componentesAtivos.size() || n < 0) {
                                                     System.out.println("Entrada invalida");
 
