@@ -1412,6 +1412,7 @@ public class App {
                                             logAction(Userlogado.getLogin(), "CriarMedicamento");
                                         } else {
                                             System.out.println("Erro na criacao do medicamento");
+                                            logAction(Userlogado.getLogin(),"erro CriarMedicamento" );
                                         }
                                         break;
                                     case 4:
