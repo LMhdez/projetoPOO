@@ -754,7 +754,7 @@ public class App {
                             System.out.println("cliente");
                             while (opLogado > 0) {
                                 opLogado = leDadosInt(
-                                        "1- Solicitar encomenda\n2-Alterar dados da Conta\n0-Encerrar sessao");
+                                        "1- Solicitar encomenda\n2-Alterar dados da Conta\n3-Consultar os seus servicos\n0-Encerrar sessao");
                                 switch (opLogado) {
                                     case 0:
                                         System.out.println("Adeus " + Userlogado.getNome());
@@ -998,6 +998,20 @@ public class App {
 
                                         }
                                         break;
+                                    case 3:
+                                    //consultar os seus servicos
+                                    ArrayList<Encomendas> encomendas = gerirEncomendas.getEncomendasByCliente((Cliente) Userlogado);
+                                    if(encomendas.size() > 0|| encomendas== null){
+                                        for(Encomendas e : encomendas){
+                                            System.err.println(encomendas.indexOf(e) + e.toString());
+                                        }
+                                        logAction(Userlogado.getLogin(), "getEncomendasByCliente");
+                                    }else{
+                                        System.out.println("Nao tem encomendas");
+                                        logAction(Userlogado.getLogin(), "getEncomendasByCliente, nao tem encomendas");
+                                    }
+
+
                                     default:
                                         System.out.println("Opção inválida");
                                         logAction(Userlogado.getLogin(), "Opcao Invalida");
