@@ -1263,48 +1263,58 @@ public class App {
                                         int anoFabrico = leDadosInt(
                                                 "Introduza o ano de fabrico do medicamento: ");
                                         boolean medicoNecessario = leDadosInt(
-                                                "Introduza se o medicamento necessita de medico?\n1-Sim\n2-Não") == 1;
+                                                "Introduza se o medicamento necessita receita medica?\n1-Sim\n2-Não") == 1;
 
                                         boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
 
                                         HashMap<Integer, Categoria> categorias = gerirMedicamento
                                                 .getListaCategorias();
-
-                                        // print hashmap
-                                        int n;
-                                        do {
-                                            n = leDadosInt(
-                                                    "Introduza o numero de categorias do medicamento(max:3)");
-                                            if (n > 2 || n < 1) {
-                                                System.out.println("Entrada invalida");
-
-                                            }
-
-                                        } while (n > 2 || n < 1);
-                                        for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
-                                            Integer key = entry.getKey();
-                                            Categoria categoria = entry.getValue();
-                                            System.err.println(key);
-                                            System.out.println(categoria);
-                                        }
-
                                         ArrayList<Categoria> categoriasMedicamento = new ArrayList<Categoria>();
 
-                                        for (int i = 0; i < n; i++) {
-                                            if (categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
-                                                    leDadosInt("Introduza o codigo da categoria: ")))) {
-                                                System.out.println(
-                                                        "Categoria adicionada com sucesso ao medicamento");
-                                                logAction(Userlogado.getLogin(), "categoriasMedicamento.add");
-                                            } else {
-                                                System.out
-                                                        .println("Erro ao adicionar categoria ao medicamento");
-                                                logAction(Userlogado.getLogin(),
-                                                        "Erro categoriasMedicamento.add ");
-                                                i--;
+                                        if (categorias.size() > 0) {
+
+                                            // print hashmap
+                                            int n;
+                                            do {
+                                                n = leDadosInt(
+                                                        "Introduza o numero de categorias do medicamento(max:3)");
+                                                if (n > 2 || n < 1) {
+                                                    System.out.println("Entrada invalida");
+
+                                                }
+
+                                            } while (n > 2 || n < 1);
+                                            for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
+                                                Integer key = entry.getKey();
+                                                Categoria categoria = entry.getValue();
+                                                System.err.println(key);
+                                                System.out.println(categoria);
                                             }
 
+                                            for (int i = 0; i < n; i++) {
+                                                if (categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
+                                                        leDadosInt("Introduza o codigo da categoria: ")))) {
+                                                    System.out.println(
+                                                            "Categoria adicionada com sucesso ao medicamento");
+                                                    logAction(Userlogado.getLogin(), "categoriasMedicamento.add");
+                                                } else {
+                                                    System.out
+                                                            .println("Erro ao adicionar categoria ao medicamento");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "Erro categoriasMedicamento.add ");
+                                                    i--;
+                                                }
+                                            }
                                         }
+
+                                        else {
+                                            System.out.println("Nao existem categorias");
+                                            logAction(Userlogado.getLogin(), "Nao existem categorias");
+
+                                        }
+                                        ArrayList<Excipiente> excipientes = gerirMedicamento
+                                                .getListaExcipientes();
+                                        int n;
 
                                         do {
                                             n = leDadosInt(
@@ -1316,8 +1326,6 @@ public class App {
 
                                         } while (n > 5 || n < 1);
 
-                                        ArrayList<Excipiente> excipientes = gerirMedicamento
-                                                .getListaExcipientes();
                                         if (excipientes.size() != 0) {
                                             for (Excipiente excipiente : excipientes) {
                                                 System.out.println(excipientes.indexOf(excipiente));
@@ -1375,6 +1383,10 @@ public class App {
                                             componenteAtivoMedicamento = gerirMedicamento
                                                     .getComponenteAtivoById(n);
                                         }
+                                        else{
+                                            System.out.println("Nao existem componentes ativos para adicionar");
+                                            logAction(Userlogado.getLogin(), "getListaComponenteAtivos, Nao existem componentes ativos para adicionar");
+                                        }
 
                                         if (gerirMedicamento.CriarMedicamento(marca, lote,
                                                 componenteAtivoMedicamento,
@@ -1383,6 +1395,7 @@ public class App {
                                                 categoriasMedicamento, generico)) {
 
                                             System.out.println("Medicamento criado com sucesso");
+                                            logAction(Userlogado.getLogin(), "CriarMedicamento");
                                         }
 
                                         else {
