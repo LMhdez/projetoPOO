@@ -1498,7 +1498,7 @@ public class App {
 
                                                 if (index >= 0
                                                         && index < medicamentos.size()) {
-                                                    stock= leDadosInt("Inroduza o novo stock do medicamento");
+                                                    stock= leDadosInt("Introduza o novo stock do medicamento");
                                                    if (medicamentos.get(index).setStock(stock)){
                                                     System.out.println("Stock alterado com sucesso");
                                                     logAction(Userlogado.getLogin(), "setStock");
