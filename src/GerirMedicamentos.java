@@ -20,16 +20,16 @@ public class GerirMedicamentos implements Serializable {
         if (verificaCodCategoria(aCodigo)) {
             return false;
         } else {
-            Categoria categoria = new Categoria(aDesignacao, aClassificacao, aCodigo, aFornecedor);
+            Categoria categoria = new Categoria(aDesignacao, aClassificacao, aFornecedor);
             listaCategorias.put(aCodigo, categoria);
             return true;
         }
     }
 
-    public boolean CriarMedicamento(String aMarca, String aLote, ComponenteAtivo aComponenteAct, String aDosagem,
+    public boolean CriarMedicamento(String aNome, String aMarca, String aLote, ComponenteAtivo aComponenteAct, String aDosagem,
             int aStock, float aPreco, int aAnoFabrico, boolean aMedicoNecessario, ArrayList<Excipiente> aExcipientes,
-            ArrayList<Categoria> aCategorias, boolean aGenerico) {
-        Medicamentos medicamento = new Medicamentos(aMarca, aLote, aComponenteAct, aDosagem, aStock, aPreco,
+            HashMap<Integer,Categoria> aCategorias, boolean aGenerico) {
+        Medicamentos medicamento = new Medicamentos(aNome,aMarca, aLote, aComponenteAct, aDosagem, aStock, aPreco,
                 aAnoFabrico, aMedicoNecessario, aExcipientes, aCategorias, aGenerico);
 
         return listaMedicamentos.add(medicamento);
@@ -123,17 +123,16 @@ public class GerirMedicamentos implements Serializable {
     }
 
     public ArrayList<Medicamentos> getMedicamentosByCategoria(String aNomeParcial) {
-        ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();
-        for (Medicamentos m : listaMedicamentos) {
-            for (Categoria c : m.getCategorias()) {
-                if (c.getDesignacao().toLowerCase().contains(aNomeParcial.toLowerCase())) {
-                    Resultados.add(m);
+        ArrayList<Medicamentos> resultados = new ArrayList<>();
+        for (Medicamentos medicamento : listaMedicamentos) {
+            for (Categoria categoria : medicamento.getCategorias().values()) {
+                if (categoria.getDesignacao().contains(aNomeParcial)) {
+                    resultados.add(medicamento);
+                    break; // Sai do loop assim que o medicamento é adicionado
                 }
             }
         }
-        return Resultados;
-        
-
+        return resultados;
     }
     public ArrayList<Medicamentos> getMedicamentosByGenerico(boolean aGenerico) {
         ArrayList<Medicamentos> Resultados = new ArrayList<Medicamentos>();

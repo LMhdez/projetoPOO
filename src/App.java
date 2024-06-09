@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 import java.util.Scanner;
 import java.io.*;
 
@@ -1255,21 +1255,19 @@ public class App {
                                         break;
                                     case 3:
                                         logAction(Userlogado.getLogin(), "Criar medicamento");
+                                        String nome = leDados("Introduza o nome do medicamento");
                                         String marca = leDados("Introduza a marca do medicamento: ");
                                         String lote = leDados("Introduza o lote do medicamento: ");
                                         String dosagem = leDados("Introduza a dosagem do medicamento: ");
                                         int stock = leDadosInt("Introduza o stock do medicamento: ");
                                         float preco = leDadosFloat("Introduza o preco do medicamento: ");
-                                        int anoFabrico = leDadosInt(
-                                                "Introduza o ano de fabrico do medicamento: ");
+                                        int anoFabrico = leDadosInt("Introduza o ano de fabrico do medicamento: ");
                                         boolean medicoNecessario = leDadosInt(
                                                 "Introduza se o medicamento necessita receita medica?\n1-Sim\n2-Não") == 1;
-
                                         boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
 
-                                        HashMap<Integer, Categoria> categorias = gerirMedicamento
-                                                .getListaCategorias();
-                                        ArrayList<Categoria> categoriasMedicamento = new ArrayList<Categoria>();
+                                        HashMap<Integer, Categoria> categorias = gerirMedicamento.getListaCategorias();
+                                        HashMap<Integer, Categoria> categoriasMedicamento = new HashMap<Integer, Categoria>();
 
                                         if (categorias.size() > 0) {
 
@@ -1278,13 +1276,13 @@ public class App {
                                             do {
                                                 n = leDadosInt(
                                                         "Introduza o numero de categorias do medicamento(max:3)");
-                                                if (n > 2 || n < 1) {
+                                                if (n > 3 || n < 1) {
                                                     System.out.println("Entrada invalida");
 
                                                 }
 
-                                            } while (n > 2 || n < 1);
-                                            for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
+                                            } while (n > 3 || n < 1);
+                                            for (Map.Entry<Integer, Categoria> entry : categorias.entrySet()) {
                                                 Integer key = entry.getKey();
                                                 Categoria categoria = entry.getValue();
                                                 System.err.println(key);
@@ -1292,33 +1290,30 @@ public class App {
                                             }
 
                                             for (int i = 0; i < n; i++) {
-                                                if (categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
-                                                        leDadosInt("Introduza o codigo da categoria: ")))) {
-                                                    System.out.println(
-                                                            "Categoria adicionada com sucesso ao medicamento");
-                                                    logAction(Userlogado.getLogin(), "categoriasMedicamento.add");
-                                                } else {
+                                                int codigoCategoria = leDadosInt("Introduza o codigo da categoria: ");
+                                                Categoria categoria = gerirMedicamento
+                                                        .getCategoriaById(codigoCategoria);
+                                                if (categoria != null) {
+                                                    categoriasMedicamento.put(codigoCategoria, categoria);
                                                     System.out
-                                                            .println("Erro ao adicionar categoria ao medicamento");
-                                                    logAction(Userlogado.getLogin(),
-                                                            "Erro categoriasMedicamento.add ");
+                                                            .println("Categoria adicionada com sucesso ao medicamento");
+                                                    logAction(Userlogado.getLogin(), "categoriasMedicamento.put");
+                                                } else {
+                                                    System.out.println("Erro ao adicionar categoria ao medicamento");
+                                                    logAction(Userlogado.getLogin(), "Erro categoriasMedicamento.put ");
                                                     i--;
                                                 }
                                             }
-                                        }
-
-                                        else {
+                                        } else {
                                             System.out.println("Nao existem categorias");
                                             logAction(Userlogado.getLogin(), "Nao existem categorias");
 
                                         }
-                                        ArrayList<Excipiente> excipientes = gerirMedicamento
-                                                .getListaExcipientes();
+                                        ArrayList<Excipiente> excipientes = gerirMedicamento.getListaExcipientes();
                                         int n;
 
                                         do {
-                                            n = leDadosInt(
-                                                    "Introduza o numero de excipientes do medicamento(max:5)");
+                                            n = leDadosInt("Introduza o numero de excipientes do medicamento(max:5)");
                                             if (n > 5 || n < 1) {
                                                 System.out.println("Entrada invalida");
 
@@ -1326,82 +1321,69 @@ public class App {
 
                                         } while (n > 5 || n < 1);
 
-                                        if (excipientes.size() != 0) {
+                                        if (!excipientes.isEmpty()) {
                                             for (Excipiente excipiente : excipientes) {
-                                                System.out.println(excipientes.indexOf(excipiente));
-                                                System.out.println(excipiente);
+                                                System.out.println(
+                                                        excipientes.indexOf(excipiente) + "-" + excipiente.toString());
                                             }
 
                                             ArrayList<Excipiente> excipienteMedicamento = new ArrayList<Excipiente>();
 
                                             for (int i = 0; i < n; i++) {
-                                                if (excipienteMedicamento
-                                                        .add(gerirMedicamento.getExcipienteById(
-                                                                leDadosInt(
-                                                                        "Introduza o index do excipiente: ")))) {
+                                                int indexExcipiente = leDadosInt("Introduza o index do excipiente: ");
+                                                Excipiente excipiente = gerirMedicamento
+                                                        .getExcipienteById(indexExcipiente);
+                                                if (excipiente != null) {
+                                                    excipienteMedicamento.add(excipiente);
                                                     System.out.println(
                                                             "Excipiente adicionado com sucesso ao medicamento");
-                                                    logAction(Userlogado.getLogin(),
-                                                            "exipienteMedicamento.add");
+                                                    logAction(Userlogado.getLogin(), "exipienteMedicamento.add");
                                                 } else {
-                                                    System.out.println(
-                                                            "Erro ao adicionar excipiente ao medicamento");
-                                                    logAction(Userlogado.getLogin(),
-                                                            "Erro exipienteMedicamento.add ");
+                                                    System.out.println("Erro ao adicionar excipiente ao medicamento");
+                                                    logAction(Userlogado.getLogin(), "Erro exipienteMedicamento.add ");
                                                     i--;
                                                 }
                                             }
                                         } else {
                                             System.out.println("Nao existem excipientes para adicionar");
-                                            logAction(Userlogado.getLogin(),
-                                                    "Nao existem excipientes para adicionar");
+                                            logAction(Userlogado.getLogin(), "Nao existem excipientes para adicionar");
 
                                         }
 
                                         ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
                                                 .getListaComponenteAtivos();
-                                        ComponenteAtivo componenteAtivoMedicamento = new ComponenteAtivo(null,
-                                                0, 0);
+                                        ComponenteAtivo componenteAtivoMedicamento = null;
 
-                                        if (componentesAtivos.size() != 0) {
+                                        if (!componentesAtivos.isEmpty()) {
                                             for (ComponenteAtivo componenteAtivo : componentesAtivos) {
-                                                System.out.println(componentesAtivos.indexOf(componenteAtivo)
-                                                        + "-" + componenteAtivo.toString());
-
+                                                System.out.println(componentesAtivos.indexOf(componenteAtivo) + "-"
+                                                        + componenteAtivo.toString());
                                             }
 
                                             do {
-                                                n = leDadosInt(
-                                                        "Introduza o numero do componente ativo");
-                                                if (n > componentesAtivos.size() || n < 0) {
-                                                    System.out.println("Entrada invalida");
-
+                                                n = leDadosInt("Introduza o numero do componente ativo");
+                                                if (n >= 0 && n < componentesAtivos.size()) {
+                                                    componenteAtivoMedicamento = componentesAtivos.get(n);
+                                                } else {
+                                                    System.out.println("Entrada inválida");
                                                 }
 
-                                            } while (n > componentesAtivos.size() || n < 0);
-
-                                            componenteAtivoMedicamento = gerirMedicamento
-                                                    .getComponenteAtivoById(n);
-                                        }
-                                        else{
+                                            } while (n < 0 || n >= componentesAtivos.size());
+                                        } else {
                                             System.out.println("Nao existem componentes ativos para adicionar");
-                                            logAction(Userlogado.getLogin(), "getListaComponenteAtivos, Nao existem componentes ativos para adicionar");
+                                            logAction(Userlogado.getLogin(),
+                                                    "getListaComponenteAtivos, Nao existem componentes ativos para adicionar");
                                         }
 
-                                        if (gerirMedicamento.CriarMedicamento(marca, lote,
-                                                componenteAtivoMedicamento,
-                                                dosagem,
-                                                stock, preco, anoFabrico, medicoNecessario, excipientes,
-                                                categoriasMedicamento, generico)) {
+                                        if (gerirMedicamento.CriarMedicamento(nome, marca, lote,
+                                                componenteAtivoMedicamento, dosagem, stock, preco, anoFabrico,
+                                                medicoNecessario, excipientes, categoriasMedicamento, generico)) {
 
                                             System.out.println("Medicamento criado com sucesso");
                                             logAction(Userlogado.getLogin(), "CriarMedicamento");
-                                        }
-
-                                        else {
+                                        } else {
                                             System.out.println("Erro na criação do medicamento");
                                         }
-
                                         break;
                                     case 4:
                                         while (true) {

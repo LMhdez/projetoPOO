@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.Serializable;
 
 public class Medicamentos implements Comparable<Medicamentos>, Serializable {
@@ -10,7 +11,7 @@ public class Medicamentos implements Comparable<Medicamentos>, Serializable {
   // maximo 5 exipientes
   private ArrayList<Excipiente> Excipientes;
   // maximo 3 categorias
-  private ArrayList<Categoria> Categorias;
+  private HashMap<Integer ,Categoria> Categorias;
   private String dosagem;
   private int stock;
   private float preco;
@@ -30,6 +31,7 @@ public class Medicamentos implements Comparable<Medicamentos>, Serializable {
   }
 
   Medicamentos(
+    String nome,
       String aMarca,
       String aLote,
       ComponenteAtivo aComponenteAct,
@@ -39,8 +41,10 @@ public class Medicamentos implements Comparable<Medicamentos>, Serializable {
       int aAnoFabrico,
       boolean aMedicoNecessario,
       ArrayList<Excipiente> aExcipientes,
-      ArrayList<Categoria> aCategorias,
+     HashMap<Integer ,Categoria> aCategorias
+      ,
       boolean aGenerico) {
+        this.nome = nome;
     this.marca = aMarca;
     this.lote = aLote;
     this.componenteAct = aComponenteAct;
@@ -70,7 +74,7 @@ public class Medicamentos implements Comparable<Medicamentos>, Serializable {
     return this.nome;
   }
 
-  public ArrayList<Categoria> getCategorias() {
+  public HashMap<Integer,Categoria> getCategorias() {
     return this.Categorias;
   }
 
