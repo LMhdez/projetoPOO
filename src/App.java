@@ -71,6 +71,8 @@ public class App {
                                     case 1:
 
                                         ArrayList<User> pedidos = gerirUser.GetPedidosdeRegisto();
+                                        if (!pedidos.isEmpty()){
+                                            logAction(Userlogado.getLogin(), "GetPedidosdeRegisto");
 
                                         // Print HashMap
                                         for (User u : pedidos) {
@@ -95,6 +97,11 @@ public class App {
                                                         "Erro ao aprovar pedido de registo" + pedido);
                                             }
                                         }
+                                    }
+                                    else{
+                                        System.out.println("Nao existem pedidos de registo");
+                                        logAction(Userlogado.getLogin(), "Nao existem pedidos de registo");
+                                    }
                                         break;
                                     case 2:
                                         HashMap<Cliente, ArrayList<Encomendas>> Encomendas;
@@ -103,36 +110,52 @@ public class App {
                                             case 1:
                                                 Encomendas = gerirEncomendas
                                                         .getEncomendasByStatus(1);
-
-                                                // Print HashMap
-                                                for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : Encomendas
-                                                        .entrySet()) {
-                                                    Cliente cliente = entry.getKey();
-                                                    ArrayList<Encomendas> encomendas = entry.getValue();
-                                                    System.out.println("Cliente: " + cliente.getNome());
-                                                    for (Encomendas encomenda : encomendas) {
-                                                        System.out.println("Encomenda: " + encomenda);
+                                                if (!Encomendas.isEmpty()) {
+                                                    logAction(Userlogado.getLogin(), "getEncomendasByStatus(1)");
+                                                    for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : Encomendas
+                                                            .entrySet()) {
+                                                        Cliente cliente = entry.getKey();
+                                                        ArrayList<Encomendas> encomendas = entry.getValue();
+                                                        System.out.println("Cliente: " + cliente.getNome());
+                                                        for (Encomendas encomenda : encomendas) {
+                                                            System.out.println("Encomenda: " + encomenda);
+                                                        }
                                                     }
+                                                    opEncomenda = leDadosInt(
+                                                            "Indique o ID da encomenda que deseja aprovar: ");
+                                                    if (opEncomenda > Encomendas.size() || opEncomenda < 1) {
+                                                        System.out.println("Encomenda inexistente");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Erro Encomenda Inexistente" + opEncomenda);
+                                                    } else {
+                                                        gerirEncomendas
+                                                                .aprovarEncomenda(
+                                                                        gerirEncomendas.getEncomendaById(opEncomenda));
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Encomenda Aprovada" + opEncomenda);
+                                                    }
+
+                                                }else{
+                                                    System.out.println("Não existem encomendas pendentes");
+                                                    logAction(Userlogado.getLogin(), "getEncomendasByStatus, Não existem encomendas pendentes");
                                                 }
-                                                opEncomenda = leDadosInt(
-                                                        "Indique o ID da encomenda que deseja aprovar: ");
-                                                if (opEncomenda > Encomendas.size() || opEncomenda < 1) {
-                                                    System.out.println("Encomenda inexistente");
-                                                    logAction(Userlogado.getLogin(),
-                                                            "Erro Encomenda Inexistente" + opEncomenda);
-                                                } else {
-                                                    gerirEncomendas
-                                                            .aprovarEncomenda(
-                                                                    gerirEncomendas.getEncomendaById(opEncomenda));
-                                                    logAction(Userlogado.getLogin(),
-                                                            "Encomenda Aprovada" + opEncomenda);
-                                                }
+
+
+                                                
+
                                                 break;
 
                                             case 2:
 
                                                 Encomendas = gerirEncomendas
                                                         .getEncomendasByStatus(4);
+
+                                                if(!Encomendas.isEmpty()){
+                                                    logAction(Userlogado.getLogin(), "getEncomendasByStatus(4");
+                                                
+                                            
+
+
 
                                                 for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : Encomendas
                                                         .entrySet()) {
@@ -159,7 +182,12 @@ public class App {
                                                             "Encomenda Aprovada" + opEncomenda);
 
                                                 }
+                                            }else{
+                                                System.out.println("Não existem encomendas concluidas por encerrar");
+                                                logAction(Userlogado.getLogin(), "getEncomendasByStatus(4), Não existem encomendas concluidas por encerrar");
+                                            }
                                                 break;
+                                                
 
                                             default:
                                                 break;
@@ -181,7 +209,7 @@ public class App {
 
                                                     users = gerirUser.getOrderedUsers(users);
                                                 }
-                                                if (users == null) {
+                                                if (users .isEmpty()) {
 
                                                     System.out.println("Nao existem contas");
                                                     logAction(Userlogado.getLogin(),
@@ -192,7 +220,7 @@ public class App {
                                                 else {
                                                     for (User user : users) {
 
-                                                        System.out.println(users.indexOf(user) + "-" + "tipo de: "
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
                                                                 + user.getClass().getName() + " " + user);
                                                         logAction(Userlogado.getLogin(), "getusers");
 
@@ -208,7 +236,7 @@ public class App {
 
                                                     users = gerirUser.getOrderedUsers(users);
                                                 }
-                                                if (users == null) {
+                                                if (users .isEmpty()) {
 
                                                     System.out.println("Nao existem farmaceuticos");
                                                     logAction(Userlogado.getLogin(),
@@ -229,7 +257,7 @@ public class App {
 
                                                     users = gerirUser.getOrderedUsers(users);
                                                 }
-                                                if (users == null) {
+                                                if (users .isEmpty()) {
 
                                                     System.out.println("Nao existem clientes");
 
@@ -253,7 +281,7 @@ public class App {
 
                                                     users = gerirUser.getOrderedUsers(users);
                                                 }
-                                                if (users == null) {
+                                                if (users .isEmpty()) {
 
                                                     System.out.println("Nao existem gestores");
 
@@ -276,7 +304,7 @@ public class App {
                                                     users = gerirUser.getOrderedUsers(users);
 
                                                 }
-                                                if (users == null) {
+                                                if (users.isEmpty()) {
 
                                                     System.out.println("Nao exitem utilizadores com esse nome");
 
@@ -299,7 +327,7 @@ public class App {
                                                 if (ordenar) {
                                                     users = gerirUser.getOrderedUsers(users);
                                                 }
-                                                if (users == null) {
+                                                if (users .isEmpty()) {
                                                     System.out.println("Nao existem utilizadores com esse username");
 
                                                     logAction(Userlogado.getLogin(),
@@ -338,7 +366,7 @@ public class App {
                                                 // 1-Ver medicamentos
                                                 ArrayList<Medicamentos> medicamentos = gerirMedicamento
                                                         .getMedicamentos();
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out.println("Nao existem medicamentos");
                                                     logAction(Userlogado.getLogin(),
@@ -357,7 +385,7 @@ public class App {
                                                 medicamentos = gerirMedicamento
                                                         .getMedicamentosByNomeParcial(leDados("Indique o nome: "));
 
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out.println("Nao existem medicamentos com esse nome");
                                                     logAction(Userlogado.getLogin(),
@@ -377,7 +405,7 @@ public class App {
                                                 medicamentos = gerirMedicamento
                                                         .getMedicamentosByCategoria(leDados("Indique a categoria: "));
 
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out.println("Nao existem medicamentos com essa categoria");
                                                     logAction(Userlogado.getLogin(),
@@ -396,7 +424,7 @@ public class App {
                                                 medicamentos = gerirMedicamento.getMedicamentosByComponenteAtiva(
                                                         leDados("Indique o componente ativo: "));
 
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out.println(
                                                             "Nao existem medicamentos com esse componente ativo");
@@ -417,7 +445,7 @@ public class App {
                                                 medicamentos = gerirMedicamento.getMedicamentosByGenerico(
                                                         leDadosInt("1-Generico\n2-Nao Generico\n") == 1);
 
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out
                                                             .println("Nao existem medicamentos com essa genericidade");
@@ -438,7 +466,7 @@ public class App {
                                                 medicamentos = gerirMedicamento
                                                         .getMedicamentosByStock(leDadosInt("Indique o limite: "));
 
-                                                if (medicamentos == null) {
+                                                if (medicamentos .isEmpty()) {
 
                                                     System.out.println("Nao existem medicamentos com esse stock");
                                                     logAction(Userlogado.getLogin(),
@@ -470,7 +498,7 @@ public class App {
 
                                                 encomendas = gerirEncomendas.getEncomendas();
 
-                                                if (encomendas == null) {
+                                                if (encomendas .isEmpty()) {
 
                                                     System.out.println("Nao existem encomendas");
                                                     logAction(Userlogado.getLogin(),
@@ -486,7 +514,7 @@ public class App {
                                                         System.out.println("Cliente: " + cliente.getNome());
                                                         for (Encomendas encomenda : encomendasCliente) {
 
-                                                            if (encomendasCliente == null) {
+                                                            if (encomendasCliente .isEmpty()) {
                                                                 System.out.println(
                                                                         "Nao existem encomendas para esse cliente");
                                                             } else {
@@ -507,7 +535,7 @@ public class App {
                                                         ArrayList<User> clientes = gerirUser
                                                                 .getUsersByClassname("Cliente");
 
-                                                        if (clientes == null) {
+                                                        if (clientes .isEmpty()) {
 
                                                             System.out.println("Nao existem clientes");
                                                             logAction(Userlogado.getLogin(),
@@ -532,7 +560,7 @@ public class App {
                                                                     System.out.println("Encomendas do cliente: "
                                                                             + clientes.get(index).getNome());
                                                                     for (Encomendas encomenda : encomendasList) {
-                                                                        if (encomendasList == null) {
+                                                                        if (encomendasList .isEmpty()) {
                                                                             System.out.println(
                                                                                     "Nao existem encomendas para esse cliente");
                                                                         } else {
@@ -556,7 +584,7 @@ public class App {
                                                         ArrayList<User> resultadoClientes = gerirUser.getUserByNome(
                                                                 leDados("Introduza o nome do cliente que procura: "),
                                                                 "Cliente");
-                                                        if (resultadoClientes.size() == 0) {
+                                                        if (resultadoClientes.isEmpty()) {
 
                                                             System.out.println("Cliente não encontrado");
 
@@ -587,7 +615,7 @@ public class App {
                                                                         + resultadoClientes.get(index).getNome());
                                                                 for (Encomendas encomenda : encomendasList) {
 
-                                                                    if (encomendasList == null) {
+                                                                    if (encomendasList .isEmpty()) {
                                                                         System.out.println(
                                                                                 "Nao existem encomendas para esse cliente");
                                                                     } else {
@@ -618,7 +646,7 @@ public class App {
                                                 HashMap<Cliente, ArrayList<Encomendas>> resultado = gerirEncomendas
                                                         .getEncomendasByStatus(3);
 
-                                                if (resultado.size() == 0) {
+                                                if (resultado.isEmpty()) {
 
                                                     System.out.println("Nao existem encomendas com o status 3");
                                                     logAction(Userlogado.getLogin(),
@@ -633,7 +661,7 @@ public class App {
                                                         System.out.println("Cliente: " + cliente.getNome());
                                                         for (Encomendas encomenda : encomendasCliente) {
 
-                                                            if (encomendasCliente == null) {
+                                                            if (encomendasCliente .isEmpty()) {
                                                                 System.out.println(
                                                                         "Nao existem encomendas para esse cliente");
                                                             }
@@ -654,7 +682,7 @@ public class App {
                                                 resultado = gerirEncomendas
                                                         .getEncomendasByStatus(5);
 
-                                                if (resultado.size() == 0) {
+                                                if (resultado.isEmpty()) {
                                                     System.out.println(
                                                             "Nao existem encomendas com o status 5");
                                                     logAction(Userlogado.getLogin(),
@@ -670,7 +698,7 @@ public class App {
                                                         System.out.println("Cliente: " + cliente.getNome());
                                                         for (Encomendas encomenda : encomendasCliente) {
 
-                                                            if (encomendasCliente == null) {
+                                                            if (encomendasCliente .isEmpty()) {
                                                                 System.out.println(
                                                                         "Nao existem encomendas para esse cliente");
                                                             }
@@ -693,7 +721,7 @@ public class App {
                                                 Encomendas encomenda = gerirEncomendas
                                                         .getEncomendaById(leDadosInt("Introduza o ID da encomenda: "));
 
-                                                if (encomenda == null) {
+                                                if (encomenda ==null) {
 
                                                     System.out.println("Encomenda não encontrada");
 
@@ -717,7 +745,7 @@ public class App {
                                                 HashMap<Cliente, Encomendas> encomendasHasMap = gerirEncomendas
                                                         .getEncomendasByhorasgastas(leDadosFloat(
                                                                 "Introduza o limite de horas gastas: "));
-                                                if (encomendasHasMap.size() == 0) {
+                                                if (encomendasHasMap.isEmpty()) {
 
                                                     System.out.println("Nao existem encomendas com esse limite");
 
@@ -823,7 +851,7 @@ public class App {
                                                         case 2:
                                                             medicamentos = gerirMedicamento.getMedicamentos();
 
-                                                            if (medicamentos.size() == 0) {
+                                                            if (medicamentos.isEmpty()) {
 
                                                                 System.out.println("Nao existem medicamentos");
                                                                 logAction(Userlogado.getLogin(),
@@ -1001,7 +1029,7 @@ public class App {
                                         // consultar os seus servicos
                                         ArrayList<Encomendas> encomendas = gerirEncomendas
                                                 .getEncomendasByCliente((Cliente) Userlogado);
-                                        if (encomendas.size() > 0 || encomendas == null) {
+                                        if (encomendas.size() > 0 || encomendas .isEmpty()) {
                                             for (Encomendas e : encomendas) {
                                                 System.err.println(encomendas.indexOf(e) + e.toString());
                                             }
@@ -1040,7 +1068,7 @@ public class App {
                                                         .getEncomendasByStatus(2,
                                                                 gerirEncomendas.getEncomendasByFarmaceutico(
                                                                         (Farmaceutico) Userlogado));
-                                                if (encomendas == null) {
+                                                if (encomendas .isEmpty()) {
                                                     System.out.println("Não exitem encomendas para iniciar");
                                                     logAction(Userlogado.getLogin(),
                                                             "getEncomendasByStatus(2), não exitem encomendas para iniciar");
@@ -1080,7 +1108,7 @@ public class App {
                                                         .getEncomendasByStatus(3,
                                                                 gerirEncomendas.getEncomendasByFarmaceutico(
                                                                         (Farmaceutico) Userlogado));
-                                                if (encomendasPorConcluir.size() == 0) {
+                                                if (encomendasPorConcluir.isEmpty()) {
                                                     System.out.println("Não exitem encomendas por concluir");
                                                     logAction(Userlogado.getLogin(),
                                                             "getEncomendasByStatus(3), não exitem encomendas por concluir");
@@ -1160,7 +1188,7 @@ public class App {
                                             case 3:
                                                 HashMap<Cliente, ArrayList<Encomendas>> encomendasFarmaceutico = gerirEncomendas
                                                         .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
-                                                if (encomendasFarmaceutico == null) {
+                                                if (encomendasFarmaceutico .isEmpty()) {
                                                     System.out.println("Nao exitem encomendas associadas a si");
                                                     logAction(Userlogado.getLogin(),
                                                             "getEncomendasByFarmaceutico, nao exitem encomendas associadas a si");
@@ -1185,7 +1213,7 @@ public class App {
                                                         .getEncomendasByStatus(3,
                                                                 gerirEncomendas.getEncomendasByFarmaceutico(
                                                                         (Farmaceutico) Userlogado));
-                                                if (encomendasIniciadas == null) {
+                                                if (encomendasIniciadas .isEmpty()) {
                                                     System.out.println(
                                                             "Não exitem encomendas a decorrer associadas a si");
                                                     logAction(Userlogado.getLogin(),
@@ -1448,7 +1476,7 @@ public class App {
                                         ArrayList<Medicamentos> medicamentos = gerirMedicamento
                                                 .getMedicamentosByNomeParcial(
                                                         leDados("Introduza o nome do medicamento"));
-                                        if (medicamentos.size() == 0) {
+                                        if (medicamentos.isEmpty()) {
                                             System.out.println("getMedicamentosByNomeParcial");
                                             logAction(Userlogado.getLogin(),
                                                     "Erro getMedicamentosByNomeParcial, getMedicamentosByNomeParcial");
