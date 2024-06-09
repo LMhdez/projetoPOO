@@ -185,7 +185,9 @@ public class App {
 
                                                 else {
                                                     for (User user : users) {
-                                                        System.out.println(users.indexOf(user) + "-" + user);
+
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de: "
+                                                                + user.getClass().getName() + user);
                                                         logAction(Userlogado.getLogin(), "getusers");
 
                                                     }
@@ -207,7 +209,8 @@ public class App {
                                                             "getfarmaceuticos erro, nao existem farmaceiticos");
                                                 } else {
                                                     for (User user : users) {
-                                                        System.out.println(users.indexOf(user) + "-" + user);
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
+                                                                + user.getClass().getName() + user);
                                                         logAction(Userlogado.getLogin(), "getfarmaceuticos");
 
                                                     }
@@ -229,7 +232,8 @@ public class App {
 
                                                 } else {
                                                     for (User user : users) {
-                                                        System.out.println(users.indexOf(user) + "-" + user);
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
+                                                                + user.getClass().getName() + user);
 
                                                         logAction(Userlogado.getLogin(), "getclientes");
 
@@ -252,7 +256,8 @@ public class App {
                                                 } {
 
                                                 for (User user : users) {
-                                                    System.out.println(users.indexOf(user) + "-" + user);
+                                                    System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
+                                                            + user.getClass().getName() + user);
 
                                                     logAction(Userlogado.getLogin(), "getgestores");
 
@@ -273,7 +278,8 @@ public class App {
                                                             "getnomeUSer erro, nao existem utilizadores com esse nome");
                                                 } else {
                                                     for (User user : users) {
-                                                        System.out.println(users.indexOf(user) + "-" + user);
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
+                                                                + user.getClass().getName() + user);
                                                     }
 
                                                     logAction(Userlogado.getLogin(), "getnomeUser");
@@ -294,7 +300,8 @@ public class App {
                                                             "getusernameUser erro, nao existem utilizadores com esse username");
                                                 } else {
                                                     for (User user : users) {
-                                                        System.out.println(users.indexOf(user) + "-" + user);
+                                                        System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
+                                                                + user.getClass().getName() + user);
                                                     }
 
                                                     logAction(Userlogado.getLogin(), "getusernameUser");
@@ -1445,11 +1452,12 @@ public class App {
                                     }
                                 }
                             }
-                        } else {
-                            System.out.println("Login ou password errados!");
-                            logAction("Sistema", "Erro login, Login ou password errados");
                         }
+                    } else {
+                        System.out.println("Login ou password errados!");
+                        logAction("Sistema", "Erro login, Login ou password errados");
                     }
+
                     break;
 
                 case 2:
@@ -1479,38 +1487,38 @@ public class App {
 
                             break;
                         case 2:
-                        while (true) {
+                            while (true) {
 
-                            if (gerirUser.criarCliente(leDados("Introduza o seu username: "),
-                                    leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
-                                    leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "),
-                                    leDados("Introduza a sua morada: "),
-                                    leDados("Introduza o seu contato: "))) {
-                                System.out.println("Cliente criado com sucesso!");
-                                logAction("Sistema", "Criar Cliente");
-                                break;
-                            } else {
-                                System.out.println(
-                                        "O login/Username/email/NIF/Contato invalidos!");
-                                logAction("Sistema", "Erro criar Cliente");
+                                if (gerirUser.criarCliente(leDados("Introduza o seu username: "),
+                                        leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
+                                        leDados("Introduza o seu email: "), false, leDados("Introduza o seu NIF: "),
+                                        leDados("Introduza a sua morada: "),
+                                        leDados("Introduza o seu contato: "))) {
+                                    System.out.println("Cliente criado com sucesso!");
+                                    logAction("Sistema", "Criar Cliente");
+                                    break;
+                                } else {
+                                    System.out.println(
+                                            "O login/Username/email/NIF/Contato invalidos!");
+                                    logAction("Sistema", "Erro criar Cliente");
+                                }
                             }
-                        }
                             break;
                         case 3:
-                        while (true) {
+                            while (true) {
 
-                            if (gerirUser.criarGestor(leDados("Introduza o seu username: "),
-                                    leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
-                                    leDados("Introduza o seu email: "), false)) {
-                                System.out.println("Gestor criado com sucesso!");
-                                logAction("Sistema", "Criar Gestor");
+                                if (gerirUser.criarGestor(leDados("Introduza o seu username: "),
+                                        leDados("Introduza a sua password: "), leDados("Introduza o seu nome: "),
+                                        leDados("Introduza o seu email: "), false)) {
+                                    System.out.println("Gestor criado com sucesso!");
+                                    logAction("Sistema", "Criar Gestor");
+                                    break;
+                                } else {
+                                    System.out.println("O login/Username/email invalidos");
+                                    logAction("Sistema", "Erro criar Gestor");
+                                }
                                 break;
-                            } else {
-                                System.out.println("O login/Username/email invalidos");
-                                logAction("Sistema", "Erro criar Gestor");
                             }
-                            break;
-                        }
                         default:
                             System.out.println("Tipo de Conta inválida!");
                             logAction("Sistema", "Erro criar Conta, numero invalido");

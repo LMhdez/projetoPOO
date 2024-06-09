@@ -1,0 +1,14 @@
+sleidy getusers
+sleidy getusers
+sleidy getusers
+sleidy Aprovou pedido de registo1
+sleidy Fez login
+Sistema Criar Farmaceutico
+Sistema Erro criar Farmaceutico
+sleidy Encerrar sessao
+sleidy Aprovou pedido de registo1
+sleidy Fez login
+Sistema Criar Cliente
+sleidy Encerrar sessao
+sleidy Fez login
+Sistema Criacao de gestor inicial
