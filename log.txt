@@ -1,3 +1,24 @@
+farmatodo Encerrar sessao
+farmatodo Fez login
+Sistema Sair
+farmatodo Encerrar sessao
+farmatodo Fez login
+Sistema Erro login, Login ou password errados
+Sistema Sair
+farmatodo Fez login
+Sistema Erro login, Login ou password errados
+farmatodo Fez login
+sleidy Encerrar sessao
+sleidy getusers
+sleidy getusers
+sleidy getusers
+sleidy Fez login
+farmatodo Fez login
+sleidy Encerrar sessao
+sleidy Fez login
+farmatodo Fez login
+Sistema Sair
+sleidy Encerrar sessao
 sleidy getusers
 sleidy getusers
 sleidy getusers

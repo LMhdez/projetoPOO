@@ -187,7 +187,7 @@ public class App {
                                                     for (User user : users) {
 
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de: "
-                                                                + user.getClass().getName() + user);
+                                                                + user.getClass().getName() + " " + user);
                                                         logAction(Userlogado.getLogin(), "getusers");
 
                                                     }
@@ -210,7 +210,7 @@ public class App {
                                                 } else {
                                                     for (User user : users) {
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
-                                                                + user.getClass().getName() + user);
+                                                                + user.getClass().getName() + " " + user);
                                                         logAction(Userlogado.getLogin(), "getfarmaceuticos");
 
                                                     }
@@ -233,7 +233,7 @@ public class App {
                                                 } else {
                                                     for (User user : users) {
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
-                                                                + user.getClass().getName() + user);
+                                                                + user.getClass().getName() + " " + user);
 
                                                         logAction(Userlogado.getLogin(), "getclientes");
 
@@ -257,7 +257,7 @@ public class App {
 
                                                 for (User user : users) {
                                                     System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
-                                                            + user.getClass().getName() + user);
+                                                            + user.getClass().getName() + " " + user);
 
                                                     logAction(Userlogado.getLogin(), "getgestores");
 
@@ -279,7 +279,7 @@ public class App {
                                                 } else {
                                                     for (User user : users) {
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
-                                                                + user.getClass().getName() + user);
+                                                                + user.getClass().getName() + " " + user);
                                                     }
 
                                                     logAction(Userlogado.getLogin(), "getnomeUser");
@@ -301,7 +301,7 @@ public class App {
                                                 } else {
                                                     for (User user : users) {
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
-                                                                + user.getClass().getName() + user);
+                                                                + user.getClass().getName() + " " + user);
                                                     }
 
                                                     logAction(Userlogado.getLogin(), "getusernameUser");
@@ -740,719 +740,720 @@ public class App {
                                         break;
 
                                 }
+                            }
+                        }
 
-                                if (Userlogado instanceof Cliente) {
-                                    System.out.println("cliente");
-                                    while (opLogado > 0) {
-                                        opLogado = leDadosInt(
-                                                "1- Solicitar encomenda\n2-Alterar dados da Conta\n0-Encerrar sessao");
-                                        switch (opLogado) {
-                                            case 0:
-                                                System.out.println("Adeus " + Userlogado.getNome());
+                        if (Userlogado instanceof Cliente) {
+                            System.out.println("cliente");
+                            while (opLogado > 0) {
+                                opLogado = leDadosInt(
+                                        "1- Solicitar encomenda\n2-Alterar dados da Conta\n0-Encerrar sessao");
+                                switch (opLogado) {
+                                    case 0:
+                                        System.out.println("Adeus " + Userlogado.getNome());
 
-                                                logAction(Userlogado.getLogin(),
-                                                        "encerrar sessao");
-                                                break;
-                                            case 1:
-                                                logAction(Userlogado.getLogin(), "Criar pedido");
-                                                // cliente solicita encomenda
-                                                ArrayList<Object> listaUser = new ArrayList<Object>();
-                                                boolean continuar = true;
-                                                while (continuar) {
+                                        logAction(Userlogado.getLogin(),
+                                                "encerrar sessao");
+                                        break;
+                                    case 1:
+                                        logAction(Userlogado.getLogin(), "Criar pedido");
+                                        // cliente solicita encomenda
+                                        ArrayList<Object> listaUser = new ArrayList<Object>();
+                                        boolean continuar = true;
+                                        while (continuar) {
 
+                                            switch (leDadosInt(
+                                                    "Deseja procurar o medicamento por componente ativo ou por nome?\n1-Nome\n2-Componente Ativo")) {
+
+                                                case 1:
                                                     switch (leDadosInt(
-                                                            "Deseja procurar o medicamento por componente ativo ou por nome?\n1-Nome\n2-Componente Ativo")) {
-
+                                                            "Deseja procurar manualmete ou listar todos os medicamentos?\n1-Manual\n2-Listar todos")) {
                                                         case 1:
-                                                            switch (leDadosInt(
-                                                                    "Deseja procurar manualmete ou listar todos os medicamentos?\n1-Manual\n2-Listar todos")) {
-                                                                case 1:
-                                                                    ArrayList<Medicamentos> medicamentos = gerirMedicamento
-                                                                            .getMedicamentosByNomeParcial(leDados(
-                                                                                    "Introduza o nome do medicamento: "));
-                                                                    // print arraylist
-                                                                    if (medicamentos != null) {
-                                                                        for (Medicamentos medicamento : medicamentos) {
-                                                                            System.out.println(medicamento);
-                                                                        }
+                                                            ArrayList<Medicamentos> medicamentos = gerirMedicamento
+                                                                    .getMedicamentosByNomeParcial(leDados(
+                                                                            "Introduza o nome do medicamento: "));
+                                                            // print arraylist
+                                                            if (medicamentos != null) {
+                                                                for (Medicamentos medicamento : medicamentos) {
+                                                                    System.out.println(medicamento);
+                                                                }
+
+                                                                logAction(Userlogado.getLogin(),
+                                                                        "getMedicamentosByNomeParcial");
+                                                                int index;
+                                                                do {
+                                                                    index = leDadosInt(
+                                                                            "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+
+                                                                    if (index >= 0
+                                                                            && index < medicamentos.size()) {
+                                                                        listaUser.add(medicamentos.get(index));
 
                                                                         logAction(Userlogado.getLogin(),
-                                                                                "getMedicamentosByNomeParcial");
-                                                                        int index;
-                                                                        do {
-                                                                            index = leDadosInt(
-                                                                                    "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
-
-                                                                            if (index >= 0
-                                                                                    && index < medicamentos.size()) {
-                                                                                listaUser.add(medicamentos.get(index));
-
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "medicamento adicionado a pedido");
-                                                                            } else {
-                                                                                System.out.println(
-                                                                                        "Medicamento nao encontrado");
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "medicamento nao encontrado");
-                                                                            }
-                                                                        } while (index >= medicamentos.size());
-
-                                                                    }
-
-                                                                    else {
-
+                                                                                "medicamento adicionado a pedido");
+                                                                    } else {
                                                                         System.out.println(
-                                                                                "Nao existe medicamentos com esse nome");
-
+                                                                                "Medicamento nao encontrado");
                                                                         logAction(Userlogado.getLogin(),
-                                                                                "erro getMedicamentosByNomeParcial, Nao existe medicamentos com esse nome");
-
+                                                                                "medicamento nao encontrado");
                                                                     }
-                                                                    continuar = leDadosInt(
-                                                                            "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
-                                                                    break;
+                                                                } while (index >= medicamentos.size());
 
-                                                                case 2:
-                                                                    medicamentos = gerirMedicamento.getMedicamentos();
-
-                                                                    if (medicamentos.size() == 0) {
-
-                                                                        System.out.println("Nao existem medicamentos");
-                                                                        logAction(Userlogado.getLogin(),
-                                                                                "erro getMedicamentos, Nao existem medicamentos");
-                                                                    }
-                                                                    for (Medicamentos medicamento : medicamentos) {
-                                                                        System.out.println(
-                                                                                medicamentos.indexOf(medicamento)
-                                                                                        + medicamento.toString());
-                                                                    }
-
-                                                                    logAction(Userlogado.getLogin(), "getmedicamentos");
-                                                                    int index;
-                                                                    do {
-                                                                        index = leDadosInt(
-                                                                                "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
-
-                                                                        if (index >= 0 && index < medicamentos.size()) {
-                                                                            if (listaUser
-                                                                                    .add(medicamentos.get(index))) {
-                                                                                System.out.println(
-                                                                                        "Medicamento adicionado ao pedido");
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "Medicamento adicionado ao pedido");
-                                                                            }
-                                                                        } else {
-                                                                            System.out.println(
-                                                                                    "Numero invalido");
-                                                                            logAction(Userlogado.getLogin(),
-                                                                                    "erro getMedicamento, numero invalido");
-
-                                                                        }
-                                                                    } while (index >= medicamentos.size());
-
-                                                                    continuar = leDadosInt(
-                                                                            "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
-
-                                                                    break;
-
-                                                                default:
-                                                                    break;
                                                             }
+
+                                                            else {
+
+                                                                System.out.println(
+                                                                        "Nao existe medicamentos com esse nome");
+
+                                                                logAction(Userlogado.getLogin(),
+                                                                        "erro getMedicamentosByNomeParcial, Nao existe medicamentos com esse nome");
+
+                                                            }
+                                                            continuar = leDadosInt(
+                                                                    "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
                                                             break;
 
                                                         case 2:
-                                                            switch (leDadosInt(
-                                                                    "Deseja procurar manualmete ou listar todos os componentes?\n1-Manual\n2-Listar todos")) {
-                                                                case 1:
-                                                                    ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
-                                                                            .getComponentesAtivosByNomeParcial(leDados(
-                                                                                    "Introduza o nome do medicamento: "));
-                                                                    if (componentesAtivos.size() != 0) {
-                                                                        logAction(Userlogado.getLogin(),
-                                                                                "getComponentesAtivosByNomeParcial");
-                                                                        for (ComponenteAtivo componente : componentesAtivos) {
-                                                                            System.out.println(componentesAtivos
-                                                                                    .indexOf(componente) + "-"
-                                                                                    + componente);
-                                                                        }
-                                                                        int index;
-                                                                        do {
-                                                                            index = leDadosInt(
-                                                                                    "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                            medicamentos = gerirMedicamento.getMedicamentos();
 
-                                                                            if (index >= 0
-                                                                                    && index < componentesAtivos
-                                                                                            .size()) {
-                                                                                listaUser.add(
-                                                                                        componentesAtivos.get(index));
-                                                                                System.out.println(
-                                                                                        "Componente ativo adicionado ao pedido");
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "Componente ativo adicionado ao pedido");
-                                                                            } else {
-                                                                                System.out.println(
-                                                                                        "Numero invalido");
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "erro getComponente, numero invalido");
-                                                                            }
-                                                                        } while (index >= componentesAtivos.size());
+                                                            if (medicamentos.size() == 0) {
 
-                                                                    }
-
-                                                                    else {
-                                                                        System.out.println(
-                                                                                "Nenhum componente encontrado");
-                                                                        logAction(Userlogado.getLogin(),
-                                                                                "Nenhum componente encontrado");
-                                                                    }
-                                                                    continuar = leDadosInt(
-                                                                            "Deseja adicionar outro elemento ao pedido?\n1-Sim\n2-Nao") == 1;
-                                                                    break;
-                                                                case 2:
-                                                                    componentesAtivos = gerirMedicamento
-                                                                            .getListaComponenteAtivos();
-
-                                                                    if (componentesAtivos.size() != 0) {
-                                                                        logAction(Userlogado.getLogin(),
-                                                                                "getListaComponenteAtivos");
-                                                                        for (ComponenteAtivo componente : componentesAtivos) {
-                                                                            System.out.println(
-                                                                                    componentesAtivos
-                                                                                            .indexOf(componente) + "-"
-                                                                                            + componente.toString());
-                                                                        }
-                                                                    } else {
-                                                                        System.out.println(
-                                                                                "Nao existem componentes ativos");
-                                                                        logAction(Userlogado.getLogin(),
-                                                                                "erro getListaComponenteAtivos, nao existem componentes ativos");
-                                                                    }
-                                                                    int index;
-                                                                    do {
-                                                                        index = leDadosInt(
-                                                                                "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
-                                                                        if (index >= 0
-                                                                                && index < componentesAtivos.size()) {
-                                                                            if (listaUser.add(
-                                                                                    componentesAtivos.get(index))) {
-                                                                                System.out.println(
-                                                                                        "Componente ativo adicionado ao pedido");
-                                                                                logAction(Userlogado.getLogin(),
-                                                                                        "componente ativo adicionado ao pedido");
-                                                                            }
-
-                                                                        } else {
-                                                                            System.out.println(
-                                                                                    "Numero invalido");
-                                                                            logAction(Userlogado.getLogin(),
-                                                                                    "erro, numero invalido");
-
-                                                                        }
-
-                                                                    } while (index >= componentesAtivos.size());
-                                                                    continuar = leDadosInt(
-                                                                            "Deseja adicionar outro elemento ao pedido?\n1-Sim\n2-Nao") == 1;
-                                                                    break;
-                                                                default:
-                                                                    break;
-                                                            }
-                                                    }
-
-                                                }
-                                                String descricao = leDados(
-                                                        "Introduza uma descricao para a sua encomenda");
-                                                boolean urgente = leDadosInt(
-                                                        "A encomenda é urgente?\n1-Sim\n2-Nao") == 1;
-
-                                                Encomendas encomendaUser = new Encomendas(listaUser, descricao,
-                                                        urgente);
-
-                                                if (gerirEncomendas.adicionarEncomenda((Cliente) Userlogado,
-                                                        encomendaUser)) {
-                                                    System.out.println("Encomenda adicionada com sucesso");
-                                                    logAction(Userlogado.getLogin(), "Encomenda adicionada");
-
-                                                } else {
-                                                    System.out.println("Erro ao adicionar encomenda");
-                                                    logAction(Userlogado.getLogin(), "Erro ao adicionar encomenda");
-                                                }
-
-                                                break;
-                                            case 2:
-                                                if (AlterarDadosUser(Userlogado)) {
-                                                    System.out.println("Dados alterados com sucesso");
-                                                    logAction(Userlogado.getLogin(), "Alterou os dados da conta");
-                                                } else {
-                                                    System.out.println("Falha na alteração dos dados");
-                                                    logAction(Userlogado.getLogin(),
-                                                            "Falha na alteração dos dados da conta");
-
-                                                }
-                                                break;
-                                            default:
-                                                System.out.println("Opção inválida");
-                                                logAction(Userlogado.getLogin(), "Opcao Invalida");
-
-                                                break;
-                                        }
-                                    }
-                                }
-                                if (Userlogado instanceof Farmaceutico) {
-                                    System.out.println("farmaceutico");
-                                    while (opLogado > 0) {
-                                        opLogado = leDadosInt(
-                                                "1-Gerir encomendas\n2-Alterar dados da Conta\n3-Introduzir medicamento\n4-Introduzir categoria\n5-Introduzir excipiente\n6-Introduzir componente ativa\n7-Modificar stock de medicamento existente\n0-Encerrar sessao");
-
-                                        switch (opLogado) {
-                                            case 0:
-                                                System.out.println("Adeus " + Userlogado.getNome());
-                                                logAction(Userlogado.getLogin(), "Encerrar sessao");
-                                                break;
-
-                                            case 1:
-                                                switch (leDadosInt(
-                                                        "1-Iniciar encomenda \n2-Conluir encomenda\n3-Consultar todas as encomendas associadas a si\n4-Adicionar subtarefa a uma encomenda iniciada")) {
-                                                    case 1:
-                                                        HashMap<Cliente, ArrayList<Encomendas>> encomendas = gerirEncomendas
-                                                                .getEncomendasByStatus(2,
-                                                                        gerirEncomendas.getEncomendasByFarmaceutico(
-                                                                                (Farmaceutico) Userlogado));
-                                                        if (encomendas == null) {
-                                                            System.out.println("Não exitem encomendas para iniciar");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(2), não exitem encomendas para iniciar");
-                                                        } else {
-                                                            // print hashmap encomendas
-                                                            for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
-                                                                    .entrySet()) {
-                                                                Cliente cliente = entry.getKey();
-                                                                ArrayList<Encomendas> encomendasCliente = entry
-                                                                        .getValue();
-                                                                System.out.println("Cliente: " + cliente.getNome());
-                                                                for (Encomendas encomenda : encomendasCliente) {
-                                                                    System.out.println("Encomenda: " + encomenda);
-                                                                }
-
-                                                            }
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(2)");
-
-                                                            if (gerirEncomendas
-                                                                    .processarEncomenda(
-                                                                            gerirEncomendas.getEncomendaById(
-                                                                                    leDadosInt(
-                                                                                            "Introduza o id da encomenda a iniciar")))) {
-                                                                System.out.println("Encomenda iniciada com sucesso");
+                                                                System.out.println("Nao existem medicamentos");
                                                                 logAction(Userlogado.getLogin(),
-                                                                        "Encomenda iniciada com sucesso");
-                                                            } else {
-                                                                System.out.println("Erro ao iniciar encomenda");
-                                                                logAction(Userlogado.getLogin(),
-                                                                        "Erro ao iniciar encomenda");
+                                                                        "erro getMedicamentos, Nao existem medicamentos");
                                                             }
-                                                        }
-                                                        break;
-                                                    case 2:
-                                                        HashMap<Cliente, ArrayList<Encomendas>> encomendasPorConcluir = gerirEncomendas
-                                                                .getEncomendasByStatus(3,
-                                                                        gerirEncomendas.getEncomendasByFarmaceutico(
-                                                                                (Farmaceutico) Userlogado));
-                                                        if (encomendasPorConcluir.size() == 0) {
-                                                            System.out.println("Não exitem encomendas por concluir");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(3), não exitem encomendas por concluir");
-                                                        } else {
-                                                            // print hashmap encomendas
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(3)");
-                                                            for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasPorConcluir
-                                                                    .entrySet()) {
-                                                                Cliente cliente = entry.getKey();
-                                                                ArrayList<Encomendas> encomendasCliente = entry
-                                                                        .getValue();
-                                                                System.out.println("Cliente: " + cliente.getNome());
-                                                                for (Encomendas encomenda : encomendasCliente) {
-                                                                    System.out.println("Encomenda: \n" + encomenda);
-                                                                }
+                                                            for (Medicamentos medicamento : medicamentos) {
+                                                                System.out.println(
+                                                                        medicamentos.indexOf(medicamento)
+                                                                                + medicamento.toString());
                                                             }
 
-                                                            Encomendas encomenda = gerirEncomendas.getEncomendaById(
-                                                                    leDadosInt(
-                                                                            "Introduza o id da encomenda Concluida"));
-                                                            gerirEncomendas.atribuirTotal(encomenda,
-                                                                    leDadosFloat("Introduza o valor total do pedido"));
+                                                            logAction(Userlogado.getLogin(), "getmedicamentos");
+                                                            int index;
+                                                            do {
+                                                                index = leDadosInt(
+                                                                        "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
 
-                                                            gerirEncomendas.atribuirHoras(encomenda,
-                                                                    leDadosInt("Introduza as horas gastas: "));
-
-                                                            // Substituir componentes ativas por medicamentos escolhidos
-                                                            // pelo farmacêutico
-                                                            ArrayList<Object> novosItens = new ArrayList<>();
-                                                            for (Object item : encomenda.getLista()) {
-                                                                if (item instanceof ComponenteAtivo) {
-                                                                    ComponenteAtivo componenteAtivo = (ComponenteAtivo) item;
-                                                                    ArrayList<Medicamentos> medicamentos = gerirMedicamento
-                                                                            .getMedicamentosByComponenteAtiva(
-                                                                                    componenteAtivo.getDesignacao());
-                                                                    System.out.println(
-                                                                            "Escolha um medicamento para o componente ativo: "
-                                                                                    + componenteAtivo.getDesignacao());
-                                                                    for (Medicamentos medicamento : medicamentos) {
-                                                                        System.out
-                                                                                .println((medicamentos
-                                                                                        .indexOf(medicamento))
-                                                                                        + "-" + medicamento.getNome());
-                                                                    }
-                                                                    int escolha = leDadosInt(
-                                                                            "Introduza o número do medicamento escolhido: ");
-                                                                    if (escolha >= 0
-                                                                            && escolha < medicamentos.size()) {
-                                                                        novosItens.add(medicamentos.get(escolha));
+                                                                if (index >= 0 && index < medicamentos.size()) {
+                                                                    if (listaUser
+                                                                            .add(medicamentos.get(index))) {
+                                                                        System.out.println(
+                                                                                "Medicamento adicionado ao pedido");
+                                                                        logAction(Userlogado.getLogin(),
+                                                                                "Medicamento adicionado ao pedido");
                                                                     }
                                                                 } else {
-                                                                    novosItens.add(item);
-                                                                }
-                                                            }
-
-                                                            encomenda.setLista(novosItens);
-                                                            System.err.println(
-                                                                    "Todos os componente ativos foram substituidos");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "Substituir componentes ativas por medicamentos");
-                                                            if (gerirEncomendas
-                                                                    .processarEncomenda(encomenda)) {
-                                                                System.out.println("Encomenda processada com sucesso");
-                                                                logAction(Userlogado.getLogin(),
-                                                                        "Encomenda processada com sucesso");
-                                                            } else {
-                                                                System.out.println("Erro ao processar encomenda");
-                                                                logAction(Userlogado.getLogin(),
-                                                                        "Erro ao processar encomenda");
-
-                                                            }
-
-                                                        }
-
-                                                        break;
-                                                    case 3:
-                                                        HashMap<Cliente, ArrayList<Encomendas>> encomendasFarmaceutico = gerirEncomendas
-                                                                .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
-                                                        if (encomendasFarmaceutico == null) {
-                                                            System.out.println("Nao exitem encomendas associadas a si");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByFarmaceutico, nao exitem encomendas associadas a si");
-                                                        } else {
-                                                            // print hashmap encomendas
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByFarmaceutico()");
-                                                            for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasFarmaceutico
-                                                                    .entrySet()) {
-                                                                Cliente cliente = entry.getKey();
-                                                                ArrayList<Encomendas> encomendasCliente = entry
-                                                                        .getValue();
-                                                                System.out.println("Cliente: " + cliente.getNome());
-                                                                for (Encomendas encomenda : encomendasCliente) {
-                                                                    System.out.println("Encomenda: \n" + encomenda);
-                                                                }
-                                                            }
-                                                        }
-                                                        break;
-                                                    case 4:
-                                                        HashMap<Cliente, ArrayList<Encomendas>> encomendasIniciadas = gerirEncomendas
-                                                                .getEncomendasByStatus(3,
-                                                                        gerirEncomendas.getEncomendasByFarmaceutico(
-                                                                                (Farmaceutico) Userlogado));
-                                                        if (encomendasIniciadas == null) {
-                                                            System.out.println(
-                                                                    "Não exitem encomendas a decorrer associadas a si");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(getEncomendasByFarmaceutico), nao exitem encomendas associadas a si");
-
-                                                        } else {
-                                                            // print hashmap encomendas
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "getEncomendasByStatus(getEncomendasByFarmaceutico)");
-                                                            for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasIniciadas
-                                                                    .entrySet()) {
-                                                                Cliente cliente = entry.getKey();
-                                                                ArrayList<Encomendas> encomendasCliente = entry
-                                                                        .getValue();
-                                                                System.out.println("Cliente: " + cliente.getNome());
-                                                                for (Encomendas encomenda : encomendasCliente) {
-                                                                    System.out.println("Encomenda: \n" + encomenda);
-                                                                }
-                                                            }
-
-                                                            Encomendas encomenda = gerirEncomendas.getEncomendaById(
-                                                                    leDadosInt(
-                                                                            "Introduza o id da encomenda a que deseja adicionar a subtarefa: "));
-                                                            if (encomenda != null) {
-                                                                ArrayList<User> listaFarmaceuticos = gerirUser
-                                                                        .getUsersByClassname("Farmaceutico");
-
-                                                                for (User farmaceutico : listaFarmaceuticos) {
                                                                     System.out.println(
-                                                                            listaFarmaceuticos.indexOf(farmaceutico)
-                                                                                    + farmaceutico.getNome());
+                                                                            "Numero invalido");
+                                                                    logAction(Userlogado.getLogin(),
+                                                                            "erro getMedicamento, numero invalido");
+
                                                                 }
+                                                            } while (index >= medicamentos.size());
 
-                                                                Farmaceutico farmaceutico = (Farmaceutico) listaFarmaceuticos
-                                                                        .get(leDadosInt(
-                                                                                "Introduza o id do farmaceutico: "));
+                                                            continuar = leDadosInt(
+                                                                    "Deseja adicionar outro medicamento?\n1-Sim\n2-Nao") == 1;
 
-                                                                encomenda.criarSubTarefa(farmaceutico,
-                                                                        leDados("Introduza o nome da subtarefa: "));
-                                                            } else {
-                                                                System.out.println("Encomenda nao existe");
+                                                            break;
+
+                                                        default:
+                                                            break;
+                                                    }
+                                                    break;
+
+                                                case 2:
+                                                    switch (leDadosInt(
+                                                            "Deseja procurar manualmete ou listar todos os componentes?\n1-Manual\n2-Listar todos")) {
+                                                        case 1:
+                                                            ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
+                                                                    .getComponentesAtivosByNomeParcial(leDados(
+                                                                            "Introduza o nome do medicamento: "));
+                                                            if (componentesAtivos.size() != 0) {
                                                                 logAction(Userlogado.getLogin(),
-                                                                        "getEncomendaById, encomenda nao existe");
+                                                                        "getComponentesAtivosByNomeParcial");
+                                                                for (ComponenteAtivo componente : componentesAtivos) {
+                                                                    System.out.println(componentesAtivos
+                                                                            .indexOf(componente) + "-"
+                                                                            + componente);
+                                                                }
+                                                                int index;
+                                                                do {
+                                                                    index = leDadosInt(
+                                                                            "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+
+                                                                    if (index >= 0
+                                                                            && index < componentesAtivos
+                                                                                    .size()) {
+                                                                        listaUser.add(
+                                                                                componentesAtivos.get(index));
+                                                                        System.out.println(
+                                                                                "Componente ativo adicionado ao pedido");
+                                                                        logAction(Userlogado.getLogin(),
+                                                                                "Componente ativo adicionado ao pedido");
+                                                                    } else {
+                                                                        System.out.println(
+                                                                                "Numero invalido");
+                                                                        logAction(Userlogado.getLogin(),
+                                                                                "erro getComponente, numero invalido");
+                                                                    }
+                                                                } while (index >= componentesAtivos.size());
 
                                                             }
 
+                                                            else {
+                                                                System.out.println(
+                                                                        "Nenhum componente encontrado");
+                                                                logAction(Userlogado.getLogin(),
+                                                                        "Nenhum componente encontrado");
+                                                            }
+                                                            continuar = leDadosInt(
+                                                                    "Deseja adicionar outro elemento ao pedido?\n1-Sim\n2-Nao") == 1;
+                                                            break;
+                                                        case 2:
+                                                            componentesAtivos = gerirMedicamento
+                                                                    .getListaComponenteAtivos();
+
+                                                            if (componentesAtivos.size() != 0) {
+                                                                logAction(Userlogado.getLogin(),
+                                                                        "getListaComponenteAtivos");
+                                                                for (ComponenteAtivo componente : componentesAtivos) {
+                                                                    System.out.println(
+                                                                            componentesAtivos
+                                                                                    .indexOf(componente) + "-"
+                                                                                    + componente.toString());
+                                                                }
+                                                            } else {
+                                                                System.out.println(
+                                                                        "Nao existem componentes ativos");
+                                                                logAction(Userlogado.getLogin(),
+                                                                        "erro getListaComponenteAtivos, nao existem componentes ativos");
+                                                            }
+                                                            int index;
+                                                            do {
+                                                                index = leDadosInt(
+                                                                        "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                                if (index >= 0
+                                                                        && index < componentesAtivos.size()) {
+                                                                    if (listaUser.add(
+                                                                            componentesAtivos.get(index))) {
+                                                                        System.out.println(
+                                                                                "Componente ativo adicionado ao pedido");
+                                                                        logAction(Userlogado.getLogin(),
+                                                                                "componente ativo adicionado ao pedido");
+                                                                    }
+
+                                                                } else {
+                                                                    System.out.println(
+                                                                            "Numero invalido");
+                                                                    logAction(Userlogado.getLogin(),
+                                                                            "erro, numero invalido");
+
+                                                                }
+
+                                                            } while (index >= componentesAtivos.size());
+                                                            continuar = leDadosInt(
+                                                                    "Deseja adicionar outro elemento ao pedido?\n1-Sim\n2-Nao") == 1;
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                            }
+
+                                        }
+                                        String descricao = leDados(
+                                                "Introduza uma descricao para a sua encomenda");
+                                        boolean urgente = leDadosInt(
+                                                "A encomenda é urgente?\n1-Sim\n2-Nao") == 1;
+
+                                        Encomendas encomendaUser = new Encomendas(listaUser, descricao,
+                                                urgente);
+
+                                        if (gerirEncomendas.adicionarEncomenda((Cliente) Userlogado,
+                                                encomendaUser)) {
+                                            System.out.println("Encomenda adicionada com sucesso");
+                                            logAction(Userlogado.getLogin(), "Encomenda adicionada");
+
+                                        } else {
+                                            System.out.println("Erro ao adicionar encomenda");
+                                            logAction(Userlogado.getLogin(), "Erro ao adicionar encomenda");
+                                        }
+
+                                        break;
+                                    case 2:
+                                        if (AlterarDadosUser(Userlogado)) {
+                                            System.out.println("Dados alterados com sucesso");
+                                            logAction(Userlogado.getLogin(), "Alterou os dados da conta");
+                                        } else {
+                                            System.out.println("Falha na alteração dos dados");
+                                            logAction(Userlogado.getLogin(),
+                                                    "Falha na alteração dos dados da conta");
+
+                                        }
+                                        break;
+                                    default:
+                                        System.out.println("Opção inválida");
+                                        logAction(Userlogado.getLogin(), "Opcao Invalida");
+
+                                        break;
+                                }
+                            }
+                        }
+                        if (Userlogado instanceof Farmaceutico) {
+                            System.out.println("farmaceutico");
+                            while (opLogado > 0) {
+                                opLogado = leDadosInt(
+                                        "1-Gerir encomendas\n2-Alterar dados da Conta\n3-Introduzir medicamento\n4-Introduzir categoria\n5-Introduzir excipiente\n6-Introduzir componente ativa\n7-Modificar stock de medicamento existente\n0-Encerrar sessao");
+
+                                switch (opLogado) {
+                                    case 0:
+                                        System.out.println("Adeus " + Userlogado.getNome());
+                                        logAction(Userlogado.getLogin(), "Encerrar sessao");
+                                        break;
+
+                                    case 1:
+                                        switch (leDadosInt(
+                                                "1-Iniciar encomenda \n2-Conluir encomenda\n3-Consultar todas as encomendas associadas a si\n4-Adicionar subtarefa a uma encomenda iniciada")) {
+                                            case 1:
+                                                HashMap<Cliente, ArrayList<Encomendas>> encomendas = gerirEncomendas
+                                                        .getEncomendasByStatus(2,
+                                                                gerirEncomendas.getEncomendasByFarmaceutico(
+                                                                        (Farmaceutico) Userlogado));
+                                                if (encomendas == null) {
+                                                    System.out.println("Não exitem encomendas para iniciar");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "getEncomendasByStatus(2), não exitem encomendas para iniciar");
+                                                } else {
+                                                    // print hashmap encomendas
+                                                    for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
+                                                            .entrySet()) {
+                                                        Cliente cliente = entry.getKey();
+                                                        ArrayList<Encomendas> encomendasCliente = entry
+                                                                .getValue();
+                                                        System.out.println("Cliente: " + cliente.getNome());
+                                                        for (Encomendas encomenda : encomendasCliente) {
+                                                            System.out.println("Encomenda: " + encomenda);
                                                         }
-                                                        break;
 
-                                                    default:
-                                                        break;
+                                                    }
+                                                    logAction(Userlogado.getLogin(),
+                                                            "getEncomendasByStatus(2)");
+
+                                                    if (gerirEncomendas
+                                                            .processarEncomenda(
+                                                                    gerirEncomendas.getEncomendaById(
+                                                                            leDadosInt(
+                                                                                    "Introduza o id da encomenda a iniciar")))) {
+                                                        System.out.println("Encomenda iniciada com sucesso");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Encomenda iniciada com sucesso");
+                                                    } else {
+                                                        System.out.println("Erro ao iniciar encomenda");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Erro ao iniciar encomenda");
+                                                    }
                                                 }
-
                                                 break;
                                             case 2:
-                                                if (AlterarDadosUser(Userlogado)) {
-                                                    System.out.println("Dados alterados com sucesso");
+                                                HashMap<Cliente, ArrayList<Encomendas>> encomendasPorConcluir = gerirEncomendas
+                                                        .getEncomendasByStatus(3,
+                                                                gerirEncomendas.getEncomendasByFarmaceutico(
+                                                                        (Farmaceutico) Userlogado));
+                                                if (encomendasPorConcluir.size() == 0) {
+                                                    System.out.println("Não exitem encomendas por concluir");
                                                     logAction(Userlogado.getLogin(),
-                                                            "AlterarDadosUser, dados alterados com sucesso");
+                                                            "getEncomendasByStatus(3), não exitem encomendas por concluir");
                                                 } else {
-                                                    System.out.println("Falha na alteração dos dados");
+                                                    // print hashmap encomendas
                                                     logAction(Userlogado.getLogin(),
-                                                            "AlterarDadosUser, falha na alteração dos dados");
+                                                            "getEncomendasByStatus(3)");
+                                                    for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasPorConcluir
+                                                            .entrySet()) {
+                                                        Cliente cliente = entry.getKey();
+                                                        ArrayList<Encomendas> encomendasCliente = entry
+                                                                .getValue();
+                                                        System.out.println("Cliente: " + cliente.getNome());
+                                                        for (Encomendas encomenda : encomendasCliente) {
+                                                            System.out.println("Encomenda: \n" + encomenda);
+                                                        }
+                                                    }
+
+                                                    Encomendas encomenda = gerirEncomendas.getEncomendaById(
+                                                            leDadosInt(
+                                                                    "Introduza o id da encomenda Concluida"));
+                                                    gerirEncomendas.atribuirTotal(encomenda,
+                                                            leDadosFloat("Introduza o valor total do pedido"));
+
+                                                    gerirEncomendas.atribuirHoras(encomenda,
+                                                            leDadosInt("Introduza as horas gastas: "));
+
+                                                    // Substituir componentes ativas por medicamentos escolhidos
+                                                    // pelo farmacêutico
+                                                    ArrayList<Object> novosItens = new ArrayList<>();
+                                                    for (Object item : encomenda.getLista()) {
+                                                        if (item instanceof ComponenteAtivo) {
+                                                            ComponenteAtivo componenteAtivo = (ComponenteAtivo) item;
+                                                            ArrayList<Medicamentos> medicamentos = gerirMedicamento
+                                                                    .getMedicamentosByComponenteAtiva(
+                                                                            componenteAtivo.getDesignacao());
+                                                            System.out.println(
+                                                                    "Escolha um medicamento para o componente ativo: "
+                                                                            + componenteAtivo.getDesignacao());
+                                                            for (Medicamentos medicamento : medicamentos) {
+                                                                System.out
+                                                                        .println((medicamentos
+                                                                                .indexOf(medicamento))
+                                                                                + "-" + medicamento.getNome());
+                                                            }
+                                                            int escolha = leDadosInt(
+                                                                    "Introduza o número do medicamento escolhido: ");
+                                                            if (escolha >= 0
+                                                                    && escolha < medicamentos.size()) {
+                                                                novosItens.add(medicamentos.get(escolha));
+                                                            }
+                                                        } else {
+                                                            novosItens.add(item);
+                                                        }
+                                                    }
+
+                                                    encomenda.setLista(novosItens);
+                                                    System.err.println(
+                                                            "Todos os componente ativos foram substituidos");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "Substituir componentes ativas por medicamentos");
+                                                    if (gerirEncomendas
+                                                            .processarEncomenda(encomenda)) {
+                                                        System.out.println("Encomenda processada com sucesso");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Encomenda processada com sucesso");
+                                                    } else {
+                                                        System.out.println("Erro ao processar encomenda");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "Erro ao processar encomenda");
+
+                                                    }
 
                                                 }
 
                                                 break;
                                             case 3:
-                                                logAction(Userlogado.getLogin(), "Criar medicamento");
-                                                String marca = leDados("Introduza a marca do medicamento: ");
-                                                String lote = leDados("Introduza o lote do medicamento: ");
-                                                String dosagem = leDados("Introduza a dosagem do medicamento: ");
-                                                int stock = leDadosInt("Introduza o stock do medicamento: ");
-                                                float preco = leDadosFloat("Introduza o preco do medicamento: ");
-                                                int anoFabrico = leDadosInt(
-                                                        "Introduza o ano de fabrico do medicamento: ");
-                                                boolean medicoNecessario = leDadosInt(
-                                                        "Introduza se o medicamento necessita de medico?\n1-Sim\n2-Não") == 1;
-
-                                                boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
-
-                                                HashMap<Integer, Categoria> categorias = gerirMedicamento
-                                                        .getListaCategorias();
-
-                                                // print hashmap
-                                                int n;
-                                                do {
-                                                    n = leDadosInt(
-                                                            "Introduza o numero de categorias do medicamento(max:3)");
-                                                    if (n > 2 || n < 1) {
-                                                        System.out.println("Entrada invalida");
-
-                                                    }
-
-                                                } while (n > 2 || n < 1);
-                                                for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
-                                                    Integer key = entry.getKey();
-                                                    Categoria categoria = entry.getValue();
-                                                    System.err.println(key);
-                                                    System.out.println(categoria);
-                                                }
-
-                                                ArrayList<Categoria> categoriasMedicamento = new ArrayList<Categoria>();
-
-                                                for (int i = 0; i < n; i++) {
-                                                    if (categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
-                                                            leDadosInt("Introduza o codigo da categoria: ")))) {
-                                                        System.out.println(
-                                                                "Categoria adicionada com sucesso ao medicamento");
-                                                        logAction(Userlogado.getLogin(), "categoriasMedicamento.add");
-                                                    } else {
-                                                        System.out
-                                                                .println("Erro ao adicionar categoria ao medicamento");
-                                                        logAction(Userlogado.getLogin(),
-                                                                "Erro categoriasMedicamento.add ");
-                                                        i--;
-                                                    }
-
-                                                }
-
-                                                do {
-                                                    n = leDadosInt(
-                                                            "Introduza o numero de excipientes do medicamento(max:5)");
-                                                    if (n > 5 || n < 1) {
-                                                        System.out.println("Entrada invalida");
-
-                                                    }
-
-                                                } while (n > 5 || n < 1);
-
-                                                ArrayList<Excipiente> excipientes = gerirMedicamento
-                                                        .getListaExcipientes();
-                                                if (excipientes.size() != 0) {
-                                                    for (Excipiente excipiente : excipientes) {
-                                                        System.out.println(excipientes.indexOf(excipiente));
-                                                        System.out.println(excipiente);
-                                                    }
-
-                                                    ArrayList<Excipiente> excipienteMedicamento = new ArrayList<Excipiente>();
-
-                                                    for (int i = 0; i < n; i++) {
-                                                        if (excipienteMedicamento
-                                                                .add(gerirMedicamento.getExcipienteById(
-                                                                        leDadosInt(
-                                                                                "Introduza o index do excipiente: ")))) {
-                                                            System.out.println(
-                                                                    "Excipiente adicionado com sucesso ao medicamento");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "exipienteMedicamento.add");
-                                                        } else {
-                                                            System.out.println(
-                                                                    "Erro ao adicionar excipiente ao medicamento");
-                                                            logAction(Userlogado.getLogin(),
-                                                                    "Erro exipienteMedicamento.add ");
-                                                            i--;
-                                                        }
-                                                    }
-                                                } else {
-                                                    System.out.println("Nao existem excipientes para adicionar");
+                                                HashMap<Cliente, ArrayList<Encomendas>> encomendasFarmaceutico = gerirEncomendas
+                                                        .getEncomendasByFarmaceutico((Farmaceutico) Userlogado);
+                                                if (encomendasFarmaceutico == null) {
+                                                    System.out.println("Nao exitem encomendas associadas a si");
                                                     logAction(Userlogado.getLogin(),
-                                                            "Nao existem excipientes para adicionar");
-
-                                                }
-
-                                                ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
-                                                        .getListaComponenteAtivos();
-                                                ComponenteAtivo componenteAtivoMedicamento = new ComponenteAtivo(null,
-                                                        null, 0);
-
-                                                if (componentesAtivos.size() != 0) {
-                                                    for (ComponenteAtivo componenteAtivo : componentesAtivos) {
-                                                        System.out.println(componentesAtivos.indexOf(componenteAtivo)
-                                                                + "-" + componenteAtivo.toString());
-
-                                                    }
-
-                                                    do {
-                                                        n = leDadosInt(
-                                                                "Introduza o numero de componente ativo");
-                                                        if (n > componentesAtivos.size() || n < 0) {
-                                                            System.out.println("Entrada invalida");
-
+                                                            "getEncomendasByFarmaceutico, nao exitem encomendas associadas a si");
+                                                } else {
+                                                    // print hashmap encomendas
+                                                    logAction(Userlogado.getLogin(),
+                                                            "getEncomendasByFarmaceutico()");
+                                                    for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasFarmaceutico
+                                                            .entrySet()) {
+                                                        Cliente cliente = entry.getKey();
+                                                        ArrayList<Encomendas> encomendasCliente = entry
+                                                                .getValue();
+                                                        System.out.println("Cliente: " + cliente.getNome());
+                                                        for (Encomendas encomenda : encomendasCliente) {
+                                                            System.out.println("Encomenda: \n" + encomenda);
                                                         }
-
-                                                    } while (n > componentesAtivos.size() || n < 0);
-
-                                                    componenteAtivoMedicamento = gerirMedicamento
-                                                            .getComponenteAtivoById(n);
+                                                    }
                                                 }
-
-                                                if (gerirMedicamento.CriarMedicamento(marca, lote,
-                                                        componenteAtivoMedicamento,
-                                                        dosagem,
-                                                        stock, preco, anoFabrico, medicoNecessario, excipientes,
-                                                        categoriasMedicamento, generico)) {
-
-                                                    System.out.println("Medicamento criado com sucesso");
-                                                }
-
-                                                else {
-                                                    System.out.println("Erro na criação do medicamento");
-                                                }
-
                                                 break;
                                             case 4:
-                                                while (true) {
-                                                    if (gerirMedicamento.criarCategoria(
-                                                            leDados("Introduza a designacao da nova categoria: "),
-                                                            leDados("Introduza a classificacao: "),
-                                                            leDadosInt("introduza o codigo: "),
-                                                            leDados("introduza o fornecedor: "))) {
-                                                        System.out.println("Categoria criada com sucesso ");
-                                                        logAction(Userlogado.getLogin(), "criarCategoria");
-                                                        break;
-                                                    } else {
-                                                        System.out.println(
-                                                                "Erro na criação da categoria, verifique se o codigo já está a ser utilizado");
-                                                        logAction(Userlogado.getLogin(), "erro criarCategoria");
-
-                                                    }
-
-                                                }
-
-                                                break;
-
-                                            case 5:
-                                                // String aDesignacao, String aClassificacao, int aQuantidade
-                                                while (true) {
-                                                    if (gerirMedicamento.criarExcipiente(
-                                                            leDados("Introduza o nome do excipiente: "),
-                                                            leDados("Introduza a classificacao: "),
-                                                            leDadosInt("Introduza a quantidade padrao: "))) {
-                                                        System.out.println("Excipiente criado com sucesso ");
-                                                        logAction(Userlogado.getLogin(), "criarExcipiente");
-                                                        break;
-                                                    } else {
-                                                        System.out.println(
-                                                                "Erro na criação do excipiente");
-                                                        logAction(Userlogado.getLogin(), "Erro criarExcipiente");
-
-                                                    }
-                                                }
-
-                                                break;
-
-                                            case 6:
-                                                while (true) {
-                                                    if (gerirMedicamento.criarExcipiente(
-                                                            leDados("Introduza o nome da componente ativa: "),
-                                                            leDados("Introduza a classificacao: "),
-                                                            leDadosInt("Introduza a quantidade padrao: "))) {
-                                                        System.out.println("Excipiente criado com sucesso ");
-                                                        logAction(Userlogado.getLogin(), "criarComponenteAtiva");
-                                                        break;
-                                                    } else {
-                                                        System.out.println(
-                                                                "Erro na criação do excipiente");
-                                                        logAction(Userlogado.getLogin(), "Erro criarComponenteAtiva");
-                                                    }
-                                                }
-
-                                                break;
-
-                                            case 7:
-                                                ArrayList<Medicamentos> medicamentos = gerirMedicamento
-                                                        .getMedicamentosByNomeParcial(
-                                                                leDados("Introduza o nome do medicamento"));
-                                                if (medicamentos.size() == 0) {
-                                                    System.out.println("getMedicamentosByNomeParcial");
+                                                HashMap<Cliente, ArrayList<Encomendas>> encomendasIniciadas = gerirEncomendas
+                                                        .getEncomendasByStatus(3,
+                                                                gerirEncomendas.getEncomendasByFarmaceutico(
+                                                                        (Farmaceutico) Userlogado));
+                                                if (encomendasIniciadas == null) {
+                                                    System.out.println(
+                                                            "Não exitem encomendas a decorrer associadas a si");
                                                     logAction(Userlogado.getLogin(),
-                                                            "Erro getMedicamentosByNomeParcial, getMedicamentosByNomeParcial");
+                                                            "getEncomendasByStatus(getEncomendasByFarmaceutico), nao exitem encomendas associadas a si");
 
                                                 } else {
-                                                    for (Medicamentos medicamento : medicamentos) {
+                                                    // print hashmap encomendas
+                                                    logAction(Userlogado.getLogin(),
+                                                            "getEncomendasByStatus(getEncomendasByFarmaceutico)");
+                                                    for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendasIniciadas
+                                                            .entrySet()) {
+                                                        Cliente cliente = entry.getKey();
+                                                        ArrayList<Encomendas> encomendasCliente = entry
+                                                                .getValue();
+                                                        System.out.println("Cliente: " + cliente.getNome());
+                                                        for (Encomendas encomenda : encomendasCliente) {
+                                                            System.out.println("Encomenda: \n" + encomenda);
+                                                        }
+                                                    }
 
-                                                        System.out.println(medicamentos.indexOf(medicamento) + "-"
-                                                                + medicamento.toString());
+                                                    Encomendas encomenda = gerirEncomendas.getEncomendaById(
+                                                            leDadosInt(
+                                                                    "Introduza o id da encomenda a que deseja adicionar a subtarefa: "));
+                                                    if (encomenda != null) {
+                                                        ArrayList<User> listaFarmaceuticos = gerirUser
+                                                                .getUsersByClassname("Farmaceutico");
+
+                                                        for (User farmaceutico : listaFarmaceuticos) {
+                                                            System.out.println(
+                                                                    listaFarmaceuticos.indexOf(farmaceutico)
+                                                                            + farmaceutico.getNome());
+                                                        }
+
+                                                        Farmaceutico farmaceutico = (Farmaceutico) listaFarmaceuticos
+                                                                .get(leDadosInt(
+                                                                        "Introduza o id do farmaceutico: "));
+
+                                                        encomenda.criarSubTarefa(farmaceutico,
+                                                                leDados("Introduza o nome da subtarefa: "));
+                                                    } else {
+                                                        System.out.println("Encomenda nao existe");
+                                                        logAction(Userlogado.getLogin(),
+                                                                "getEncomendaById, encomenda nao existe");
 
                                                     }
-                                                    logAction(Userlogado.getLogin(), "getMedicamentosByNomeParcial");
 
                                                 }
+                                                break;
 
                                             default:
                                                 break;
                                         }
-                                    }
+
+                                        break;
+                                    case 2:
+                                        if (AlterarDadosUser(Userlogado)) {
+                                            System.out.println("Dados alterados com sucesso");
+                                            logAction(Userlogado.getLogin(),
+                                                    "AlterarDadosUser, dados alterados com sucesso");
+                                        } else {
+                                            System.out.println("Falha na alteração dos dados");
+                                            logAction(Userlogado.getLogin(),
+                                                    "AlterarDadosUser, falha na alteração dos dados");
+
+                                        }
+
+                                        break;
+                                    case 3:
+                                        logAction(Userlogado.getLogin(), "Criar medicamento");
+                                        String marca = leDados("Introduza a marca do medicamento: ");
+                                        String lote = leDados("Introduza o lote do medicamento: ");
+                                        String dosagem = leDados("Introduza a dosagem do medicamento: ");
+                                        int stock = leDadosInt("Introduza o stock do medicamento: ");
+                                        float preco = leDadosFloat("Introduza o preco do medicamento: ");
+                                        int anoFabrico = leDadosInt(
+                                                "Introduza o ano de fabrico do medicamento: ");
+                                        boolean medicoNecessario = leDadosInt(
+                                                "Introduza se o medicamento necessita de medico?\n1-Sim\n2-Não") == 1;
+
+                                        boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
+
+                                        HashMap<Integer, Categoria> categorias = gerirMedicamento
+                                                .getListaCategorias();
+
+                                        // print hashmap
+                                        int n;
+                                        do {
+                                            n = leDadosInt(
+                                                    "Introduza o numero de categorias do medicamento(max:3)");
+                                            if (n > 2 || n < 1) {
+                                                System.out.println("Entrada invalida");
+
+                                            }
+
+                                        } while (n > 2 || n < 1);
+                                        for (HashMap.Entry<Integer, Categoria> entry : categorias.entrySet()) {
+                                            Integer key = entry.getKey();
+                                            Categoria categoria = entry.getValue();
+                                            System.err.println(key);
+                                            System.out.println(categoria);
+                                        }
+
+                                        ArrayList<Categoria> categoriasMedicamento = new ArrayList<Categoria>();
+
+                                        for (int i = 0; i < n; i++) {
+                                            if (categoriasMedicamento.add(gerirMedicamento.getCategoriaById(
+                                                    leDadosInt("Introduza o codigo da categoria: ")))) {
+                                                System.out.println(
+                                                        "Categoria adicionada com sucesso ao medicamento");
+                                                logAction(Userlogado.getLogin(), "categoriasMedicamento.add");
+                                            } else {
+                                                System.out
+                                                        .println("Erro ao adicionar categoria ao medicamento");
+                                                logAction(Userlogado.getLogin(),
+                                                        "Erro categoriasMedicamento.add ");
+                                                i--;
+                                            }
+
+                                        }
+
+                                        do {
+                                            n = leDadosInt(
+                                                    "Introduza o numero de excipientes do medicamento(max:5)");
+                                            if (n > 5 || n < 1) {
+                                                System.out.println("Entrada invalida");
+
+                                            }
+
+                                        } while (n > 5 || n < 1);
+
+                                        ArrayList<Excipiente> excipientes = gerirMedicamento
+                                                .getListaExcipientes();
+                                        if (excipientes.size() != 0) {
+                                            for (Excipiente excipiente : excipientes) {
+                                                System.out.println(excipientes.indexOf(excipiente));
+                                                System.out.println(excipiente);
+                                            }
+
+                                            ArrayList<Excipiente> excipienteMedicamento = new ArrayList<Excipiente>();
+
+                                            for (int i = 0; i < n; i++) {
+                                                if (excipienteMedicamento
+                                                        .add(gerirMedicamento.getExcipienteById(
+                                                                leDadosInt(
+                                                                        "Introduza o index do excipiente: ")))) {
+                                                    System.out.println(
+                                                            "Excipiente adicionado com sucesso ao medicamento");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "exipienteMedicamento.add");
+                                                } else {
+                                                    System.out.println(
+                                                            "Erro ao adicionar excipiente ao medicamento");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "Erro exipienteMedicamento.add ");
+                                                    i--;
+                                                }
+                                            }
+                                        } else {
+                                            System.out.println("Nao existem excipientes para adicionar");
+                                            logAction(Userlogado.getLogin(),
+                                                    "Nao existem excipientes para adicionar");
+
+                                        }
+
+                                        ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
+                                                .getListaComponenteAtivos();
+                                        ComponenteAtivo componenteAtivoMedicamento = new ComponenteAtivo(null,
+                                                null, 0);
+
+                                        if (componentesAtivos.size() != 0) {
+                                            for (ComponenteAtivo componenteAtivo : componentesAtivos) {
+                                                System.out.println(componentesAtivos.indexOf(componenteAtivo)
+                                                        + "-" + componenteAtivo.toString());
+
+                                            }
+
+                                            do {
+                                                n = leDadosInt(
+                                                        "Introduza o numero de componente ativo");
+                                                if (n > componentesAtivos.size() || n < 0) {
+                                                    System.out.println("Entrada invalida");
+
+                                                }
+
+                                            } while (n > componentesAtivos.size() || n < 0);
+
+                                            componenteAtivoMedicamento = gerirMedicamento
+                                                    .getComponenteAtivoById(n);
+                                        }
+
+                                        if (gerirMedicamento.CriarMedicamento(marca, lote,
+                                                componenteAtivoMedicamento,
+                                                dosagem,
+                                                stock, preco, anoFabrico, medicoNecessario, excipientes,
+                                                categoriasMedicamento, generico)) {
+
+                                            System.out.println("Medicamento criado com sucesso");
+                                        }
+
+                                        else {
+                                            System.out.println("Erro na criação do medicamento");
+                                        }
+
+                                        break;
+                                    case 4:
+                                        while (true) {
+                                            if (gerirMedicamento.criarCategoria(
+                                                    leDados("Introduza a designacao da nova categoria: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("introduza o codigo: "),
+                                                    leDados("introduza o fornecedor: "))) {
+                                                System.out.println("Categoria criada com sucesso ");
+                                                logAction(Userlogado.getLogin(), "criarCategoria");
+                                                break;
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação da categoria, verifique se o codigo já está a ser utilizado");
+                                                logAction(Userlogado.getLogin(), "erro criarCategoria");
+
+                                            }
+
+                                        }
+
+                                        break;
+
+                                    case 5:
+                                        // String aDesignacao, String aClassificacao, int aQuantidade
+                                        while (true) {
+                                            if (gerirMedicamento.criarExcipiente(
+                                                    leDados("Introduza o nome do excipiente: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("Introduza a quantidade padrao: "))) {
+                                                System.out.println("Excipiente criado com sucesso ");
+                                                logAction(Userlogado.getLogin(), "criarExcipiente");
+                                                break;
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação do excipiente");
+                                                logAction(Userlogado.getLogin(), "Erro criarExcipiente");
+
+                                            }
+                                        }
+
+                                        break;
+
+                                    case 6:
+                                        while (true) {
+                                            if (gerirMedicamento.criarExcipiente(
+                                                    leDados("Introduza o nome da componente ativa: "),
+                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("Introduza a quantidade padrao: "))) {
+                                                System.out.println("Excipiente criado com sucesso ");
+                                                logAction(Userlogado.getLogin(), "criarComponenteAtiva");
+                                                break;
+                                            } else {
+                                                System.out.println(
+                                                        "Erro na criação do excipiente");
+                                                logAction(Userlogado.getLogin(), "Erro criarComponenteAtiva");
+                                            }
+                                        }
+
+                                        break;
+
+                                    case 7:
+                                        ArrayList<Medicamentos> medicamentos = gerirMedicamento
+                                                .getMedicamentosByNomeParcial(
+                                                        leDados("Introduza o nome do medicamento"));
+                                        if (medicamentos.size() == 0) {
+                                            System.out.println("getMedicamentosByNomeParcial");
+                                            logAction(Userlogado.getLogin(),
+                                                    "Erro getMedicamentosByNomeParcial, getMedicamentosByNomeParcial");
+
+                                        } else {
+                                            for (Medicamentos medicamento : medicamentos) {
+
+                                                System.out.println(medicamentos.indexOf(medicamento) + "-"
+                                                        + medicamento.toString());
+
+                                            }
+                                            logAction(Userlogado.getLogin(), "getMedicamentosByNomeParcial");
+
+                                        }
+
+                                    default:
+                                        break;
                                 }
                             }
                         }
+
                     } else {
                         System.out.println("Login ou password errados!");
                         logAction("Sistema", "Erro login, Login ou password errados");
@@ -1537,6 +1538,7 @@ public class App {
                     System.out.println("Opção inválida");
                     break;
             }
+
         }
 
     }
