@@ -754,7 +754,7 @@ public class App {
                             System.out.println("cliente");
                             while (opLogado > 0) {
                                 opLogado = leDadosInt(
-                                        "1- Solicitar encomenda\n2-Alterar dados da Conta\n3-Consultar os seus servicos\n0-Encerrar sessao");
+                                        "1- Solicitar encomenda\n2-Alterar dados da Conta\n3-Consultar as suas encomendas\n0-Encerrar sessao");
                                 switch (opLogado) {
                                     case 0:
                                         System.out.println("Adeus " + Userlogado.getNome());
