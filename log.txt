@@ -1,3 +1,33 @@
+Sistema Sair
+gestor Encerrar sessao
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Aprovou pedido de registo1
+gestor Fez login
+Sistema Criar Gestor
+Sistema Criar Cliente
+Sistema Criar Gestor
+Sistema Criacao de gestor inicial
+Sistema Sair
+gestor Encerrar sessao
+gestor Erro pedido de registo inexistente2
+gestor Aprovou pedido de registo1
+gestor Fez login
+Sistema Criar Gestor
+Sistema Criar Cliente
+Sistema Criacao de gestor inicial
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+Sistema Criar Cliente
+Sistema Criar Gestor
+Sistema Criacao de gestor inicial
+gestor Aprovou pedido de registo2
+gestor Fez login
+gestor Encerrar sessao
 gestor getusers
 gestor getusers
 gestor getusers

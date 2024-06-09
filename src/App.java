@@ -70,24 +70,31 @@ public class App {
                                         break;
                                     case 1:
 
-                                        HashMap<Integer, User> pedidos = gerirUser.GetPedidosdeRegisto();
+                                        ArrayList<User> pedidos = gerirUser.GetPedidosdeRegisto();
 
                                         // Print HashMap
-                                        for (HashMap.Entry<Integer, User> entry : pedidos.entrySet()) {
-                                            int i = entry.getKey();
-                                            User user = entry.getValue();
-                                            System.out.println(i + "- " + "Nome: " + user.getNome()
-                                                    + ", Tipo de conta: " + user.getClass().getName());
+                                        for (User u : pedidos) {
+                                            System.out.println(pedidos.indexOf(u) + "- " + "Nome: " + u.getNome()
+                                                    + ", Tipo de conta: " + u.getClass().getName());
+                                            
                                         }
+                                            
+                                        
                                         int pedido = leDadosInt("Indique o Pedido que deseja aprovar: ");
-                                        if (pedido > gerirUser.GetPedidosdeRegisto().size() || pedido < 1) {
+                                        if (pedido > pedidos.size() || pedido < 0) {
                                             System.out.println("Pedido inexistente");
                                             logAction(Userlogado.getLogin(),
                                                     "Erro pedido de registo inexistente" + pedido);
                                         } else {
-                                            gerirUser.ativarUser(pedido);
+                                            if (pedidos.get(pedido).setAtivo()) {
+                                                System.out.println("Pedido de registo aprovado com sucesso");
 
-                                            logAction(Userlogado.getLogin(), "Aprovou pedido de registo" + pedido);
+                                                logAction(Userlogado.getLogin(), "Aprovou pedido de registo" + pedido);
+                                            } else {
+                                                System.out.println("Erro ao aprovar pedido de registo");
+                                                logAction(Userlogado.getLogin(),
+                                                        "Erro ao aprovar pedido de registo" + pedido);
+                                            }
                                         }
                                         break;
                                     case 2:
@@ -1520,7 +1527,7 @@ public class App {
                                 }
                                 break;
                             }
-break;
+                            break;
                         default:
                             System.out.println("Tipo de Conta inválida!");
                             logAction("Sistema", "Erro criar Conta, numero invalido");

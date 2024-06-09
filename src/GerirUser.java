@@ -153,28 +153,20 @@ public class GerirUser implements Serializable {
 
     private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Guarda indexes e users
 
-    public HashMap<Integer, User> GetPedidosdeRegisto() {
+    public ArrayList<User> GetPedidosdeRegisto() {
 
-        int i = 0;
+        ArrayList<User>PedidosPorAprovar= new ArrayList<User>();
         for (User u : lista) {
             if (!u.getAtivo()) {
-                i++;
+               
 
-                PedidosPorAprovar.put(i, u); // Guarda index e seu user no hashmap
+                PedidosPorAprovar.add(u); // Guarda index e seu user no hashmap
             }
         }
         return PedidosPorAprovar;
     }
 
-    public boolean ativarUser(int i) {
-        User u = PedidosPorAprovar.get(i); // Procurar user pelo index no hash map
-        if (u != null && !u.getAtivo()) {
-            u.setAtivo(); // Activar user
-            PedidosPorAprovar.remove(i); // Remover o registo do hashmap
-            return true; // sucesso
-        }
-        return false; // nao encontrado ou já estava ativo
-    }
+ 
 
     public ArrayList<User> getUserByUsername(String aUsername) {
         ArrayList<User> resultados = new ArrayList<User>();
