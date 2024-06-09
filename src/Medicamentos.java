@@ -24,11 +24,29 @@ public class Medicamentos implements Comparable<Medicamentos>, Serializable {
   }
 
   public String toString() {
-    return "Nome: " + nome + " Marca: " + marca + " Lote: " + lote + " Componente Ativo: " + componenteAct
-        + " Dosagem: " + dosagem
-        + " Stock: " + stock + " Preco: " + preco + " Ano de Fabrico: " + anoFabrico + " Medico Necessario: "
-        + medicoNecessario + " Medicamento Generico: " + generico;
-  }
+    String result = "Nome: " + nome + "\n" +
+                    "Marca: " + marca + "\n" +
+                    "Lote: " + lote + "\n" +
+                    "Componente Ativo: " + componenteAct + "\n" +
+                    "Dosagem: " + dosagem + "\n" +
+                    "Stock: " + stock + "\n" +
+                    "Preco: " + preco + "\n" +
+                    "Ano de Fabrico: " + anoFabrico + "\n" +
+                    "Medico Necessario: " + medicoNecessario + "\n" +
+                    "Medicamento Generico: " + generico + "\n" +
+                    "Excipientes:\n";
+    
+    for (Excipiente excipiente : Excipientes) {
+        result += excipiente.toString() + "\n";
+    }
+
+    result += "Categorias:\n";
+    for (HashMap.Entry<Integer, Categoria> entry : Categorias.entrySet()) {
+        result += "Key: " + entry.getKey() + ", Value: " + entry.getValue() + "\n";
+    }
+    
+    return result;
+}
 
   Medicamentos(
     String nome,

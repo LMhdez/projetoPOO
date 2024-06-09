@@ -11,8 +11,13 @@ public class User implements Comparable<User>, Serializable{
   }
 
   public String toString() {
-    return "login: " + login + " password: " + password + " nome: " + nome + " email: " + email + " ativo: " + ativo;
-  }
+    return "Login: " + login +
+           ", Password: " + password +
+           ", Nome: " + nome +
+           ", Email: " + email +
+           ", Ativo: " + ativo;
+}
+
 
   User(String aLogin, String aPassword, String aNome, String aEmail, boolean aAtivo) {
 
