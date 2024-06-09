@@ -1520,6 +1520,7 @@ public class App {
                                 }
                                 break;
                             }
+break;
                         default:
                             System.out.println("Tipo de Conta inválida!");
                             logAction("Sistema", "Erro criar Conta, numero invalido");

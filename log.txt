@@ -1,35 +1,45 @@
-farmatodo Encerrar sessao
-farmatodo Fez login
-Sistema Sair
-farmatodo Encerrar sessao
-farmatodo Fez login
-Sistema Erro login, Login ou password errados
-Sistema Sair
-farmatodo Fez login
-Sistema Erro login, Login ou password errados
-farmatodo Fez login
-sleidy Encerrar sessao
-sleidy getusers
-sleidy getusers
-sleidy getusers
-sleidy Fez login
-farmatodo Fez login
-sleidy Encerrar sessao
-sleidy Fez login
-farmatodo Fez login
-Sistema Sair
-sleidy Encerrar sessao
-sleidy getusers
-sleidy getusers
-sleidy getusers
-sleidy Aprovou pedido de registo1
-sleidy Fez login
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+Sistema Erro criar Conta, numero invalido
+Sistema Criar Gestor
+gestor Encerrar sessao
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Aprovou pedido de registo1
+gestor Fez login
 Sistema Criar Farmaceutico
 Sistema Erro criar Farmaceutico
-sleidy Encerrar sessao
-sleidy Aprovou pedido de registo1
-sleidy Fez login
+gestor Encerrar sessao
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+gestor Encerrar sessao
+gestor Aprovou pedido de registo1
+gestor Erro pedido de registo inexistente2
+gestor Aprovou pedido de registo1
+gestor Aprovou pedido de registo1
+gestor Fez login
+gestor Encerrar sessao
+gestor getusers
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
 Sistema Criar Cliente
-sleidy Encerrar sessao
-sleidy Fez login
+gestor Encerrar sessao
+gestor Aprovou pedido de registo1
+gestor Fez login
+Sistema Erro criar Conta, numero invalido
+Sistema Criar Gestor
+Sistema Criar Farmaceutico
 Sistema Criacao de gestor inicial
