@@ -7,7 +7,7 @@ public class User implements Comparable<User>, Serializable{
   protected boolean ativo;
 
   public int compareTo(User u) {
-    return this.nome.compareTo(u.getNome());
+    return this.nome.toLowerCase().compareTo(u.getNome().toLowerCase());
   }
 
   public String toString() {
