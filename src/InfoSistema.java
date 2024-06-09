@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public class InfoSistema implements Serializable {
     private static  int totalExecucoes;
-    private static String ultimoUsuario;
+    private static String ultimoUser;
     
 
     public int getTotalExecucoes() {
@@ -13,11 +13,11 @@ public class InfoSistema implements Serializable {
         InfoSistema.totalExecucoes++;
     }
 
-    public String getUltimoUsuario() {
-        return ultimoUsuario;
+    public String getUltimoUser() {
+        return ultimoUser;
     }
 
-    public void setUltimoUsuario(String ultimoUsuario) {
-        InfoSistema.ultimoUsuario = ultimoUsuario;
+    public void setUltimoUser(String ultimoUser) {
+        InfoSistema.ultimoUser = ultimoUser;
     }
 }

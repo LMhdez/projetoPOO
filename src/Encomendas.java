@@ -68,7 +68,10 @@ public class Encomendas implements Serializable {
         return lista;
     }
     public void setLista(ArrayList<Object> lista) {
+
         this.lista = lista;
+        
+
     }
 
     public boolean setEstatus(int aEstatus) {
