@@ -1479,7 +1479,7 @@ public class App {
                                                 .getMedicamentosByNomeParcial(
                                                         leDados("Introduza o nome do medicamento"));
                                         if (medicamentos.isEmpty()) {
-                                            System.out.println("getMedicamentosByNomeParcial");
+                                            System.out.println("Medicamento inexistente");
                                             logAction(Userlogado.getLogin(),
                                                     "Erro getMedicamentosByNomeParcial, getMedicamentosByNomeParcial");
 
@@ -1491,6 +1491,33 @@ public class App {
 
                                             }
                                             logAction(Userlogado.getLogin(), "getMedicamentosByNomeParcial");
+                                            int index;
+                                            do {
+                                                index = leDadosInt(
+                                                        "Qual e o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+
+                                                if (index >= 0
+                                                        && index < medicamentos.size()) {
+                                                    stock= leDadosInt("Inroduza o novo stock do medicamento");
+                                                   if (medicamentos.get(index).setStock(stock)){
+                                                    System.out.println("Stock alterado com sucesso");
+                                                    logAction(Userlogado.getLogin(), "setStock");
+                                                   }
+                                                   else{
+                                                    System.out.println("Erro ao alterar stock");
+                                                    logAction(Userlogado.getLogin(), "Erro setStock");
+                                                   }
+
+                                                } else {
+                                                    System.out.println(
+                                                            "getMedicamentosByNomeParcial, Medicamento nao encontrado");
+                                                    logAction(Userlogado.getLogin(),
+                                                            "getMedicamentosByNomeParcial, medicamento nao encontrado");
+                                                }
+                                            } while (index >= medicamentos.size());
+
+
+
 
                                         }
 
