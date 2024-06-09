@@ -35,7 +35,7 @@ public class App {
                     logAction("Sistema", "Criacao de gestor inicial");
 
                 } else {
-                    System.out.println("Gestor nao criado!");
+                    System.out.println("Gestor nao criado!, introduza um email válido");
                     logAction("Sistema", "Criacao de gestor inicial falhida");
 
                 }

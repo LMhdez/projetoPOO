@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.regex.*;
 
 public class GerirUser implements Serializable {
 
@@ -34,12 +34,6 @@ public class GerirUser implements Serializable {
         }
         return false;
     }
-
-   
-
-   
-        
-
 
     public ArrayList<User> getUsers() {
         return lista;
@@ -107,66 +101,92 @@ public class GerirUser implements Serializable {
     }
 
     public boolean verificaNIF(String aNIF) {
+        // Verificação original do NIF
         for (User u : lista) {
             if (u instanceof Cliente) {
-                Cliente cliente = (Cliente) u; // Cast para Cliente
+                Cliente cliente = (Cliente) u;
                 if (cliente.getNIF().equals(aNIF)) {
-                    return true;
-                } else if (u instanceof Farmaceutico) {
-                    Farmaceutico farmaceutico = (Farmaceutico) u; // Cast para farmaceutico
-                    if (farmaceutico.getNIF().equals(aNIF)) {
-                        return true;
-                    }
-
+                    return true; // Retornar true se o NIF já existir
+                }
+            } else if (u instanceof Farmaceutico) {
+                Farmaceutico farmaceutico = (Farmaceutico) u;
+                if (farmaceutico.getNIF().equals(aNIF)) {
+                    return true; // Retornar true se o NIF já existir
                 }
             }
         }
-        return false;
+
+        // Regex check
+        String nifRegex = "^\\d{9}$";
+        Pattern pattern = Pattern.compile(nifRegex);
+        Matcher matcher = pattern.matcher(aNIF);
+        return !matcher.matches(); // Retorna true se o NIF for inválido ou já existir
     }
 
     public boolean verificaContato(String aContato) {
+        // Verificação original do número de telefone
         for (User u : lista) {
             if (u instanceof Cliente) {
-                Cliente cliente = (Cliente) u; // Cast para Cliente
+                Cliente cliente = (Cliente) u;
                 if (cliente.getContato().equals(aContato)) {
-                    return true;
-                } else if (u instanceof Farmaceutico) {
-                    Farmaceutico farmaceutico = (Farmaceutico) u; // Cast para farmaceutico
-                    if (farmaceutico.getContato().equals(aContato)) {
-                        return true;
-                    }
-
+                    return true; // Retornar true se o contato já existir
+                }
+            } else if (u instanceof Farmaceutico) {
+                Farmaceutico farmaceutico = (Farmaceutico) u;
+                if (farmaceutico.getContato().equals(aContato)) {
+                    return true; // Retornar true se o contato já existir
                 }
             }
         }
-        return false;
+
+        // Regex check
+        // // ^: Indica o início da string.
+        // \d{9}: Corresponde a exatamente 9 dígitos numéricos.
+        // $: Indica o final da string.
+        String phoneRegex = "^\\d{9}$";
+        Pattern pattern = Pattern.compile(phoneRegex);
+        Matcher matcher = pattern.matcher(aContato);
+        return !matcher.matches(); // Retorna true se o número de telefone for inválido ou já existir
     }
 
     public boolean verificaEmail(String aEmail) {
+        // Verificação original do email
         for (User u : lista) {
             if (u.getEmail().equals(aEmail)) {
-                return true;
+                return true; // Retornar true se o email já existir
             }
         }
-        return false;
-    }
 
-    private HashMap<Integer, User> PedidosPorAprovar = new HashMap<Integer, User>(); // Guarda indexes e users
+        // Regex check
+        // ^: Indica o início da string.
+        // [a-zA-Z0-9_+&*-]+: Corresponde a um ou mais caracteres alfanuméricos,
+        // incluindo alguns símbolos especiais comuns em endereços de e-mail.
+        // (?:\.[a-zA-Z0-9_+&*-]+)*: Um grupo não capturador que corresponde a um ponto
+        // seguido por caracteres alfanuméricos, repetido zero ou mais vezes.
+        // @: Corresponde ao caractere '@', que separa o nome do usuário do domínio no
+        // endereço de e-mail.
+        // (?:[a-zA-Z0-9-]+\.)+: Um grupo não capturador que corresponde a um ou mais
+        // subdomínios separados por pontos.
+        // [a-zA-Z]{2,7}: Corresponde a um domínio, com 2 a 7 caracteres alfabéticos,
+        // representando a extensão do domínio, como ".com" ou ".org".
+        // $: Indica o final da string.
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(aEmail);
+        return !matcher.matches(); // Retorna true se o email for inválido ou já existir
+    }
 
     public ArrayList<User> GetPedidosdeRegisto() {
 
-        ArrayList<User>PedidosPorAprovar= new ArrayList<User>();
+        ArrayList<User> PedidosPorAprovar = new ArrayList<User>();
         for (User u : lista) {
             if (!u.getAtivo()) {
-               
 
                 PedidosPorAprovar.add(u); // Guarda index e seu user no hashmap
             }
         }
         return PedidosPorAprovar;
     }
-
- 
 
     public ArrayList<User> getUserByUsername(String aUsername) {
         ArrayList<User> resultados = new ArrayList<User>();
@@ -177,7 +197,6 @@ public class GerirUser implements Serializable {
         }
         return resultados;
     }
-    
 
     public ArrayList<User> getUserByNome(String aNome) {
         ArrayList<User> resultados = new ArrayList<User>();
@@ -188,8 +207,8 @@ public class GerirUser implements Serializable {
         }
         return resultados;
     }
-    
-    public ArrayList<User>getOrderedUsers(ArrayList<User> aUsers){
+
+    public ArrayList<User> getOrderedUsers(ArrayList<User> aUsers) {
         ArrayList<User> users = new ArrayList<User>();
         for (User u : aUsers) {
             users.add(u);
