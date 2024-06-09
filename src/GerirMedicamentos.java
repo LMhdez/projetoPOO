@@ -42,8 +42,8 @@ public class GerirMedicamentos implements Serializable {
         return listaExcipientes.add(excipiente);
     }
 
-    public boolean criarComponenteAtivo(String aDesignacao, String aClassificacao, int aQuantidade) {
-        ComponenteAtivo componenteAtivo = new ComponenteAtivo(aDesignacao, aClassificacao, aQuantidade);
+    public boolean criarComponenteAtivo(String aDesignacao, int aCodigo, int aQuantidade) {
+        ComponenteAtivo componenteAtivo = new ComponenteAtivo(aDesignacao, aCodigo, aQuantidade);
         
         return listaComponenteAtivos.add(componenteAtivo);
     }

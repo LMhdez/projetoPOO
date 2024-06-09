@@ -2,17 +2,17 @@ import java.io.Serializable;
 
 public class ComponenteAtivo implements Serializable{
     private String designacao;
-    private String classificacao;
+    private int codigo;
     private int quantidade;
 
-    ComponenteAtivo(String aDesignacao, String aClassificacao, int aQuantidade) {
+    ComponenteAtivo(String aDesignacao, int aCodigo, int aQuantidade) {
         this.designacao = aDesignacao;
-        this.classificacao = aClassificacao;
+        this.codigo = aCodigo;
         this.quantidade = aQuantidade;
     }
 
     public String toString() {
-        return "Designacao: " + designacao + " Classificacao: " + classificacao + " Quantidade: " + quantidade;
+        return "Designacao: " + designacao + " Classificacao: " + codigo + " Quantidade: " + quantidade;
     }
     public String getDesignacao() {
         return designacao;

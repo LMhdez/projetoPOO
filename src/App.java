@@ -76,10 +76,9 @@ public class App {
                                         for (User u : pedidos) {
                                             System.out.println(pedidos.indexOf(u) + "- " + "Nome: " + u.getNome()
                                                     + ", Tipo de conta: " + u.getClass().getName());
-                                            
+
                                         }
-                                            
-                                        
+
                                         int pedido = leDadosInt("Indique o Pedido que deseja aprovar: ");
                                         if (pedido > pedidos.size() || pedido < 0) {
                                             System.out.println("Pedido inexistente");
@@ -999,18 +998,19 @@ public class App {
                                         }
                                         break;
                                     case 3:
-                                    //consultar os seus servicos
-                                    ArrayList<Encomendas> encomendas = gerirEncomendas.getEncomendasByCliente((Cliente) Userlogado);
-                                    if(encomendas.size() > 0|| encomendas== null){
-                                        for(Encomendas e : encomendas){
-                                            System.err.println(encomendas.indexOf(e) + e.toString());
+                                        // consultar os seus servicos
+                                        ArrayList<Encomendas> encomendas = gerirEncomendas
+                                                .getEncomendasByCliente((Cliente) Userlogado);
+                                        if (encomendas.size() > 0 || encomendas == null) {
+                                            for (Encomendas e : encomendas) {
+                                                System.err.println(encomendas.indexOf(e) + e.toString());
+                                            }
+                                            logAction(Userlogado.getLogin(), "getEncomendasByCliente");
+                                        } else {
+                                            System.out.println("Nao tem encomendas");
+                                            logAction(Userlogado.getLogin(),
+                                                    "getEncomendasByCliente, nao tem encomendas");
                                         }
-                                        logAction(Userlogado.getLogin(), "getEncomendasByCliente");
-                                    }else{
-                                        System.out.println("Nao tem encomendas");
-                                        logAction(Userlogado.getLogin(), "getEncomendasByCliente, nao tem encomendas");
-                                    }
-
 
                                     default:
                                         System.out.println("Opção inválida");
@@ -1353,7 +1353,7 @@ public class App {
                                         ArrayList<ComponenteAtivo> componentesAtivos = gerirMedicamento
                                                 .getListaComponenteAtivos();
                                         ComponenteAtivo componenteAtivoMedicamento = new ComponenteAtivo(null,
-                                                null, 0);
+                                                0, 0);
 
                                         if (componentesAtivos.size() != 0) {
                                             for (ComponenteAtivo componenteAtivo : componentesAtivos) {
@@ -1416,7 +1416,7 @@ public class App {
                                         while (true) {
                                             if (gerirMedicamento.criarExcipiente(
                                                     leDados("Introduza o nome do excipiente: "),
-                                                    leDados("Introduza a classificacao: "),
+                                                    leDados("Introduza a o codigo: "),
                                                     leDadosInt("Introduza a quantidade padrao: "))) {
                                                 System.out.println("Excipiente criado com sucesso ");
                                                 logAction(Userlogado.getLogin(), "criarExcipiente");
@@ -1433,9 +1433,9 @@ public class App {
 
                                     case 6:
                                         while (true) {
-                                            if (gerirMedicamento.criarExcipiente(
+                                            if (gerirMedicamento.criarComponenteAtivo(
                                                     leDados("Introduza o nome da componente ativa: "),
-                                                    leDados("Introduza a classificacao: "),
+                                                    leDadosInt("Introduza o codigo: "),
                                                     leDadosInt("Introduza a quantidade padrao: "))) {
                                                 System.out.println("Excipiente criado com sucesso ");
                                                 logAction(Userlogado.getLogin(), "criarComponenteAtiva");
