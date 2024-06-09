@@ -27,7 +27,7 @@ public class App {
         if (gerirUser.isEmpty()) {
             while (gerirUser.isEmpty()) {
                 System.out.println(
-                        "Devido à inexistencia de utilizadores é necessario criar um gestor para iniciar a aplicacao");
+                        "Devido a inexistencia de utilizadores e necessario criar um gestor para iniciar a aplicacao");
 
                 if (gerirUser.criarGestor(leDados("Introduza o seu username: "), leDados("Introduza a sua password: "),
                         leDados("Introduza o seu nome: "), leDados("Introduza o seu email: "), true)) {
@@ -35,7 +35,7 @@ public class App {
                     logAction("Sistema", "Criacao de gestor inicial");
 
                 } else {
-                    System.out.println("Gestor nao criado!, introduza um email válido");
+                    System.out.println("Gestor nao criado!, introduza um email valido");
                     logAction("Sistema", "Criacao de gestor inicial falhida");
 
                 }
@@ -136,8 +136,8 @@ public class App {
                                                     }
 
                                                 }else{
-                                                    System.out.println("Não existem encomendas pendentes");
-                                                    logAction(Userlogado.getLogin(), "getEncomendasByStatus, Não existem encomendas pendentes");
+                                                    System.out.println("Nao existem encomendas pendentes");
+                                                    logAction(Userlogado.getLogin(), "getEncomendasByStatus, Nao existem encomendas pendentes");
                                                 }
 
 
@@ -183,8 +183,8 @@ public class App {
 
                                                 }
                                             }else{
-                                                System.out.println("Não existem encomendas concluidas por encerrar");
-                                                logAction(Userlogado.getLogin(), "getEncomendasByStatus(4), Não existem encomendas concluidas por encerrar");
+                                                System.out.println("Nao existem encomendas concluidas por encerrar");
+                                                logAction(Userlogado.getLogin(), "getEncomendasByStatus(4), Nao existem encomendas concluidas por encerrar");
                                             }
                                                 break;
                                                 
@@ -192,6 +192,7 @@ public class App {
                                             default:
                                                 break;
                                         }
+                                        break;
 
                                     case 3:
                                         opLogado = leDadosInt(
@@ -240,7 +241,7 @@ public class App {
 
                                                     System.out.println("Nao existem farmaceuticos");
                                                     logAction(Userlogado.getLogin(),
-                                                            "getfarmaceuticos erro, nao existem farmaceiticos");
+                                                            "getfarmaceuticos erro, nao existem farmaceuticos");
                                                 } else {
                                                     for (User user : users) {
                                                         System.out.println(users.indexOf(user) + "-" + "tipo de conta: "
@@ -353,7 +354,7 @@ public class App {
 
                                             logAction(Userlogado.getLogin(), "alterar dados");
                                         } else {
-                                            System.out.println("Falha na alteração dos dados");
+                                            System.out.println("Falha na alteracao dos dados");
 
                                             logAction(Userlogado.getLogin(), "alterar dados erro");
 
@@ -550,7 +551,7 @@ public class App {
                                                             int index;
                                                             do {
                                                                 index = leDadosInt(
-                                                                        "Qual é o numero do cliente que deseja?\nIntroduza um numero negativo se deseja votar atras");
+                                                                        "Qual e o numero do cliente que deseja?\nIntroduza um numero negativo se deseja votar atras");
                                                                 ArrayList<Encomendas> encomendasList = new ArrayList<Encomendas>();
                                                                 if (index >= 0
                                                                         && index < clientes.size()) {
@@ -586,10 +587,10 @@ public class App {
                                                                 "Cliente");
                                                         if (resultadoClientes.isEmpty()) {
 
-                                                            System.out.println("Cliente não encontrado");
+                                                            System.out.println("Cliente nao encontrado");
 
                                                             logAction(Userlogado.getLogin(),
-                                                                    "getUserByNome erro, Cliente não encontrado");
+                                                                    "getUserByNome erro, Cliente nao encontrado");
                                                         } else {
                                                             for (User cliente : resultadoClientes) {
                                                                 cliente = (Cliente) cliente;
@@ -604,7 +605,7 @@ public class App {
                                                         int index;
                                                         do {
                                                             index = leDadosInt(
-                                                                    "Qual é o numero do cliente que deseja?\nIntroduza um numero negativo se deseja votar atras");
+                                                                    "Qual e o numero do cliente que deseja?\nIntroduza um numero negativo se deseja votar atras");
                                                             if (index >= 0
                                                                     && index < resultadoClientes.size()) {
 
@@ -723,10 +724,10 @@ public class App {
 
                                                 if (encomenda ==null) {
 
-                                                    System.out.println("Encomenda não encontrada");
+                                                    System.out.println("Encomenda nao encontrada");
 
                                                     logAction(Userlogado.getLogin(),
-                                                            "getEncomendaById erro, Encomenda não encontrada");
+                                                            "getEncomendaById erro, Encomenda nao encontrada");
                                                 } else {
                                                     System.out.println("Cliente: "
                                                             + gerirEncomendas.getClienteByEncomenda(encomenda));
@@ -817,7 +818,7 @@ public class App {
                                                                 int index;
                                                                 do {
                                                                     index = leDadosInt(
-                                                                            "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                                            "Qual e o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
 
                                                                     if (index >= 0
                                                                             && index < medicamentos.size()) {
@@ -867,7 +868,7 @@ public class App {
                                                             int index;
                                                             do {
                                                                 index = leDadosInt(
-                                                                        "Qual é o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                                        "Qual e o numero do medicamento que deseja ?\nIntroduza um numero negativo se deseja votar atras");
 
                                                                 if (index >= 0 && index < medicamentos.size()) {
                                                                     if (listaUser
@@ -914,7 +915,7 @@ public class App {
                                                                 int index;
                                                                 do {
                                                                     index = leDadosInt(
-                                                                            "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                                            "Qual e o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
 
                                                                     if (index >= 0
                                                                             && index < componentesAtivos
@@ -966,7 +967,7 @@ public class App {
                                                             int index;
                                                             do {
                                                                 index = leDadosInt(
-                                                                        "Qual é o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
+                                                                        "Qual e o numero do componente que deseja ?\nIntroduza um numero negativo se deseja votar atras");
                                                                 if (index >= 0
                                                                         && index < componentesAtivos.size()) {
                                                                     if (listaUser.add(
@@ -998,7 +999,7 @@ public class App {
                                         String descricao = leDados(
                                                 "Introduza uma descricao para a sua encomenda");
                                         boolean urgente = leDadosInt(
-                                                "A encomenda é urgente?\n1-Sim\n2-Nao") == 1;
+                                                "A encomenda e urgente?\n1-Sim\n2-Nao") == 1;
 
                                         Encomendas encomendaUser = new Encomendas(listaUser, descricao,
                                                 urgente);
@@ -1019,9 +1020,9 @@ public class App {
                                             System.out.println("Dados alterados com sucesso");
                                             logAction(Userlogado.getLogin(), "Alterou os dados da conta");
                                         } else {
-                                            System.out.println("Falha na alteração dos dados");
+                                            System.out.println("Falha na alteracao dos dados");
                                             logAction(Userlogado.getLogin(),
-                                                    "Falha na alteração dos dados da conta");
+                                                    "Falha na alteracao dos dados da conta");
 
                                         }
                                         break;
@@ -1041,7 +1042,7 @@ public class App {
                                         }
 
                                     default:
-                                        System.out.println("Opção inválida");
+                                        System.out.println("Opcao invalida");
                                         logAction(Userlogado.getLogin(), "Opcao Invalida");
 
                                         break;
@@ -1069,9 +1070,9 @@ public class App {
                                                                 gerirEncomendas.getEncomendasByFarmaceutico(
                                                                         (Farmaceutico) Userlogado));
                                                 if (encomendas .isEmpty()) {
-                                                    System.out.println("Não exitem encomendas para iniciar");
+                                                    System.out.println("Nao exitem encomendas para iniciar");
                                                     logAction(Userlogado.getLogin(),
-                                                            "getEncomendasByStatus(2), não exitem encomendas para iniciar");
+                                                            "getEncomendasByStatus(2), nao exitem encomendas para iniciar");
                                                 } else {
                                                     // print hashmap encomendas
                                                     for (HashMap.Entry<Cliente, ArrayList<Encomendas>> entry : encomendas
@@ -1109,9 +1110,9 @@ public class App {
                                                                 gerirEncomendas.getEncomendasByFarmaceutico(
                                                                         (Farmaceutico) Userlogado));
                                                 if (encomendasPorConcluir.isEmpty()) {
-                                                    System.out.println("Não exitem encomendas por concluir");
+                                                    System.out.println("Nao exitem encomendas por concluir");
                                                     logAction(Userlogado.getLogin(),
-                                                            "getEncomendasByStatus(3), não exitem encomendas por concluir");
+                                                            "getEncomendasByStatus(3), nao exitem encomendas por concluir");
                                                 } else {
                                                     // print hashmap encomendas
                                                     logAction(Userlogado.getLogin(),
@@ -1155,7 +1156,7 @@ public class App {
                                                                                 + "-" + medicamento.getNome());
                                                             }
                                                             int escolha = leDadosInt(
-                                                                    "Introduza o número do medicamento escolhido: ");
+                                                                    "Introduza o numero do medicamento escolhido: ");
                                                             if (escolha >= 0
                                                                     && escolha < medicamentos.size()) {
                                                                 novosItens.add(medicamentos.get(escolha));
@@ -1215,7 +1216,7 @@ public class App {
                                                                         (Farmaceutico) Userlogado));
                                                 if (encomendasIniciadas .isEmpty()) {
                                                     System.out.println(
-                                                            "Não exitem encomendas a decorrer associadas a si");
+                                                            "Nao exitem encomendas a decorrer associadas a si");
                                                     logAction(Userlogado.getLogin(),
                                                             "getEncomendasByStatus(getEncomendasByFarmaceutico), nao exitem encomendas associadas a si");
 
@@ -1274,9 +1275,9 @@ public class App {
                                             logAction(Userlogado.getLogin(),
                                                     "AlterarDadosUser, dados alterados com sucesso");
                                         } else {
-                                            System.out.println("Falha na alteração dos dados");
+                                            System.out.println("Falha na alteracao dos dados");
                                             logAction(Userlogado.getLogin(),
-                                                    "AlterarDadosUser, falha na alteração dos dados");
+                                                    "AlterarDadosUser, falha na alteracao dos dados");
 
                                         }
 
@@ -1291,8 +1292,8 @@ public class App {
                                         float preco = leDadosFloat("Introduza o preco do medicamento: ");
                                         int anoFabrico = leDadosInt("Introduza o ano de fabrico do medicamento: ");
                                         boolean medicoNecessario = leDadosInt(
-                                                "Introduza se o medicamento necessita receita medica?\n1-Sim\n2-Não") == 1;
-                                        boolean generico = leDadosInt("generico? 1-Sim\n2-Não") == 1;
+                                                "Introduza se o medicamento necessita receita medica?\n1-Sim\n2-Nao") == 1;
+                                        boolean generico = leDadosInt("generico? 1-Sim\n2-Nao") == 1;
 
                                         HashMap<Integer, Categoria> categorias = gerirMedicamento.getListaCategorias();
                                         HashMap<Integer, Categoria> categoriasMedicamento = new HashMap<Integer, Categoria>();
@@ -1393,7 +1394,7 @@ public class App {
                                                 if (n >= 0 && n < componentesAtivos.size()) {
                                                     componenteAtivoMedicamento = componentesAtivos.get(n);
                                                 } else {
-                                                    System.out.println("Entrada inválida");
+                                                    System.out.println("Entrada invalida");
                                                 }
 
                                             } while (n < 0 || n >= componentesAtivos.size());
@@ -1410,7 +1411,7 @@ public class App {
                                             System.out.println("Medicamento criado com sucesso");
                                             logAction(Userlogado.getLogin(), "CriarMedicamento");
                                         } else {
-                                            System.out.println("Erro na criação do medicamento");
+                                            System.out.println("Erro na criacao do medicamento");
                                         }
                                         break;
                                     case 4:
@@ -1425,7 +1426,7 @@ public class App {
                                                 break;
                                             } else {
                                                 System.out.println(
-                                                        "Erro na criação da categoria, verifique se o codigo já está a ser utilizado");
+                                                        "Erro na criacao da categoria, verifique se o codigo ja esta a ser utilizado");
                                                 logAction(Userlogado.getLogin(), "erro criarCategoria");
 
                                             }
@@ -1446,7 +1447,7 @@ public class App {
                                                 break;
                                             } else {
                                                 System.out.println(
-                                                        "Erro na criação do excipiente");
+                                                        "Erro na criacao do excipiente");
                                                 logAction(Userlogado.getLogin(), "Erro criarExcipiente");
 
                                             }
@@ -1465,7 +1466,7 @@ public class App {
                                                 break;
                                             } else {
                                                 System.out.println(
-                                                        "Erro na criação do excipiente");
+                                                        "Erro na criacao do excipiente");
                                                 logAction(Userlogado.getLogin(), "Erro criarComponenteAtiva");
                                             }
                                         }
@@ -1507,7 +1508,7 @@ public class App {
 
                 case 2:
                     int tipo = leDadosInt(
-                            "Qual é o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
+                            "Qual e o tipo de conta que gostaria de criar?\n1-Farmaceutico\n2-Cliente\n3-Gestor");
 
                     switch (tipo) {
                         case 1:
@@ -1566,7 +1567,7 @@ public class App {
                             }
                             break;
                         default:
-                            System.out.println("Tipo de Conta inválida!");
+                            System.out.println("Tipo de Conta invalida!");
                             logAction("Sistema", "Erro criar Conta, numero invalido");
                             break;
                     }
@@ -1580,7 +1581,7 @@ public class App {
 
                     break;
                 default:
-                    System.out.println("Opção inválida");
+                    System.out.println("Opcao invalida");
                     break;
             }
 
@@ -1636,7 +1637,7 @@ public class App {
             if (dados.getEncomendas() != null || dados.getUsers() != null || !dados.getUsers().isEmpty()) {
                 File file = new File("dados_apl.dat");
                 if (!file.exists()) {
-                    // Se o ficheiro não existe, cria
+                    // Se o ficheiro nao existe, cria
                     try {
                         file.createNewFile();
                         System.out.println("ficheiro dados_apl.dat criado com sucesso.");
@@ -1761,10 +1762,10 @@ public class App {
                 break;
 
             default:
-                System.out.println("Opção inválida");
-                return false; // Adicionado para indicar que a operação falhou
+                System.out.println("Opcao invalida");
+                return false; // Adicionado para indicar que a operacao falhou
         }
-        return true; // Adicionado para indicar que a operação foi bem-sucedida
+        return true; // Adicionado para indicar que a operacao foi bem-sucedida
     }
 
 }
