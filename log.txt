@@ -1,0 +1,11 @@
+Sistema Sair
+gestor Erro Encomenda Inexistente0
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Aprovou pedido de registo0
+gestor Aprovou pedido de registo0
+gestor Fez login
+Sistema Criar Farmaceutico
+Sistema Criar Cliente
+Sistema Criacao de gestor inicial
