@@ -16,7 +16,7 @@ public class Encomendas implements Serializable {
     private String descricao;
     private boolean urgente;
     private int status; // vai variar de 1 a 5
-    private int controloencomendas;
+    private static int controloencomendas;
 
     // Adicionado um formatador para a data
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

@@ -1,3 +1,181 @@
+gestor getEncomendas
+gestor AssociarFarmaceutico()
+gestor getfarmaceuticos
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Erro Encomenda Inexistente0
+gestor getEncomendasByStatus(1)
+gestor Fez login
+cliente encerrar sessao
+cliente Encomenda adicionada
+cliente Medicamento adicionado ao pedido
+cliente erro getMedicamento, numero invalido
+cliente getmedicamentos
+cliente Medicamento adicionado ao pedido
+cliente getmedicamentos
+cliente Criar pedido
+cliente Fez login
+gestor Encerrar sessao
+gestor getMedicamentos
+gestor getEncomendasByStatus, Nao existem encomendas pendentes
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+Sistema Erro criar Cliente
+gestor Encerrar sessao
+gestor Fez login
+gestor Encerrar sessao
+gestor getEncomendas erro, nao existem encomendas
+gestor getEncomendasByStatus, Nao existem encomendas pendentes
+gestor Fez login
+gestor Erro Encomenda Inexistente0
+gestor getEncomendasByStatus(1)
+gestor getEncomendaById
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Erro Encomenda Inexistente0
+gestor getEncomendasByStatus(1)
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Encomenda Aprovada1
+gestor getEncomendasByStatus(1)
+gestor Fez login
+cliente encerrar sessao
+cliente Opcao Invalida
+cliente getEncomendasByCliente
+cliente Encomenda adicionada
+cliente Componente ativo adicionado ao pedido
+cliente getComponentesAtivosByNomeParcial
+cliente Criar pedido
+cliente Encomenda adicionada
+cliente medicamento adicionado a pedido
+cliente getMedicamentosByNomeParcial
+cliente Medicamento adicionado ao pedido
+cliente getmedicamentos
+cliente Criar pedido
+cliente Fez login
+gestor Encerrar sessao
+gestor getEncomendas erro, nao existem encomendas
+gestor getMedicamentosByStock
+gestor getMedicamentosByGenerico
+gestor getMedicamentosByComponenteAtiva
+gestor getfarmaceuticos
+gestor Fez login
+Sistema Erro login, Login ou password errados
+gestor Fez login
+farmaceutico Encerrar sessao
+farmaceutico Fez login
+Sistema Erro login, Login ou password errados
+Sistema Sair
+gestor Encerrar sessao
+gestor getMedicamentosByCategoria
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentos
+gestor Fez login
+gestor getMedicamentos
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+gestor getMedicamentos
+gestor Fez login
+Sistema Sair
+gestor Encerrar sessao
+gestor getMedicamentos
+gestor Fez login
+Sistema Sair
+gestor Encerrar sessao
+gestor getMedicamentos
+gestor Fez login
+gestor getMedicamentos
+gestor Fez login
+Sistema Sair
+gestor Encerrar sessao
+gestor getMedicamentosByComponenteAtiva
+gestor getnomeUser
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentosByCategoria erro, nao existem medicamentos com essa categoria
+gestor getMedicamentosByCategoria
+gestor getMedicamentosByNomeParcial
+gestor getMedicamentos
+gestor getusers
+gestor getusers
+gestor getusers
+gestor Fez login
+Sistema Erro login, Login ou password errados
+farmaceutico Encerrar sessao
+farmaceutico setStock
+farmaceutico getMedicamentosByNomeParcial
+farmaceutico Erro getMedicamentosByNomeParcial, getMedicamentosByNomeParcial
+farmaceutico Fez login
+Sistema Sair
+farmaceutico Encerrar sessao
+farmaceutico CriarMedicamento
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico categoriasMedicamento.put
+farmaceutico categoriasMedicamento.put
+farmaceutico Criar medicamento
+farmaceutico CriarMedicamento
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico categoriasMedicamento.put
+farmaceutico Criar medicamento
+farmaceutico CriarMedicamento
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico categoriasMedicamento.put
+farmaceutico Criar medicamento
+farmaceutico CriarMedicamento
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico exipienteMedicamento.add
+farmaceutico categoriasMedicamento.put
+farmaceutico Criar medicamento
+farmaceutico Fez login
+Sistema Sair
+farmaceutico Encerrar sessao
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarComponenteAtiva
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarExcipiente
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico erro criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico criarCategoria
+farmaceutico Fez login
+farmaceutico criarCategoria
+farmaceutico Fez login
 Sistema Sair
 gestor Erro Encomenda Inexistente0
 gestor getusers
