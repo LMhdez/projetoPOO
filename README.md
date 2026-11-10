@@ -34,4 +34,8 @@ Confirma a versão de Java e os caminhos de dados antes de executar. A aplicaç�
 
 Foi identificado na raiz do repositório um ficheiro denominado `credenciais_acesso.txt`. O conteúdo não foi aberto nem reproduzido nesta auditoria. **Se contiver credenciais reais, considera-as expostas**: revoga/roda imediatamente essas credenciais, remove o ficheiro do branch atual e avalia a remoção do histórico Git. Apagar apenas o ficheiro num commit novo não elimina cópias anteriores do histórico.
 
+A implementação atual também guarda a palavra-passe como texto num campo `String` de `User` e compara diretamente esse valor durante o login. Os objetos de utilizador são serializados em `dados_apl.dat`; por isso, qualquer conta real persistida nesse ficheiro terá a palavra-passe em texto simples. **Não utilizar credenciais reais nesta versão.** A correção exige armazenamento com hashing de palavras-passe e uma migração dos dados existentes.
+
+Os ficheiros `dados_apl.dat`, `info_sistema.dat` e `log.txt` estão versionados. Os seus conteúdos não foram abertos nesta auditoria; não devem conter contas, palavras-passe, NIF, moradas, contactos, encomendas ou logs reais.
+
 Não guardar palavras-passe, dados pessoais ou credenciais reais no repositório. Os ficheiros de dados e logs também devem ser revistos antes de partilhar o projeto publicamente.
