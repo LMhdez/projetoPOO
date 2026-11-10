@@ -1,18 +1,37 @@
-## Getting Started
+# Projeto POO — Gestão de Farmácia
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Aplicação de consola em Java desenvolvida no âmbito de Programação Orientada a Objetos. O código está organizado em classes que representam utilizadores, gestores, clientes, farmacêuticos, medicamentos, componentes, encomendas e operações de gestão.
 
-## Folder Structure
+## Funcionalidades identificadas
 
-The workspace contains two folders by default, where:
+- Autenticação e criação de contas.
+- Criação do gestor inicial quando ainda não existem utilizadores.
+- Gestão de utilizadores e pedidos de registo.
+- Gestão de medicamentos e encomendas.
+- Persistência de dados em ficheiros e registo de atividade.
+- Informação de utilização do sistema.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Estrutura
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- `src/` — código-fonte Java.
+- `bin/` — ficheiros compilados.
+- `.vscode/` — configuração do ambiente Visual Studio Code.
+- Ficheiros `.dat` e `.txt` — dados e registos locais da aplicação.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Compilar e executar
 
-## Dependency Management
+A aplicação usa Java. A partir da raiz, podes compilar as classes-fonte para uma pasta de saída:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```bash
+mkdir -p out
+javac -d out src/*.java
+java -cp out App
+```
+
+Confirma a versão de Java e os caminhos de dados antes de executar. A aplicação pode criar ou alterar ficheiros locais de dados e logs.
+
+## Aviso de segurança — revisão necessária
+
+Foi identificado na raiz do repositório um ficheiro denominado `credenciais_acesso.txt`. O conteúdo não foi aberto nem reproduzido nesta auditoria. **Se contiver credenciais reais, considera-as expostas**: revoga/roda imediatamente essas credenciais, remove o ficheiro do branch atual e avalia a remoção do histórico Git. Apagar apenas o ficheiro num commit novo não elimina cópias anteriores do histórico.
+
+Não guardar palavras-passe, dados pessoais ou credenciais reais no repositório. Os ficheiros de dados e logs também devem ser revistos antes de partilhar o projeto publicamente.
